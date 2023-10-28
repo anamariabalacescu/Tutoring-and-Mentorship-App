@@ -1,0 +1,47 @@
+﻿<Window x:Class="app_login.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:app_login"
+        mc:Ignorable="d"
+        Title="Login" Height="597" Width="400" 
+        WindowStyle="none"
+        AllowsTransparency="true"
+        Foreground="#FF896DD7" 
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen">
+    <Border CornerRadius="52" BorderThickness="10" BorderBrush="LightSkyBlue">
+
+        <Border CornerRadius="35" BorderThickness="20">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="Blue" Offset="0.0"/>
+                    <GradientStop Color="RoyalBlue" Offset="0.35"/>
+                    <GradientStop Color="Aqua" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="AliceBlue" Offset="0.0"/>
+                        <GradientStop Color="RoyalBlue" Offset="0.35"/>
+                        <GradientStop Color="Aqua" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Image HorizontalAlignment="Left" Height="127" Margin="97,92,0,0" VerticalAlignment="Top" Width="136" OpacityMask="White">
+                    <Image.Source>
+                        <BitmapImage UriSource="D:\ATM 3\Ap_bd\proiect\app-login\icon.png" />
+                    </Image.Source>
+                </Image>
+                <TextBox Background="WhiteSmoke" HorizontalAlignment="Left" Height="20" Margin="101,238,0,0" TextWrapping="Wrap" Text="Insert username" VerticalAlignment="Top" Width="119"/>
+                <TextBox Background="WhiteSmoke" HorizontalAlignment="Left" Height="20" Margin="101,278,0,0" TextWrapping="Wrap" Text="Insert password" VerticalAlignment="Top" Width="119"/>
+                <Button Content="Sign in" Background="LightSteelBlue" HorizontalAlignment="Left" Height="20" Margin="134,321,0,0" VerticalAlignment="Top" Width="54"/>
+                <Button Background="Transparent" HorizontalAlignment="Left" Height="20" Margin="50,355,0,0" VerticalAlignment="Top" Width="220" Click="Button_Click">
+                    <TextBlock Text="I don't have an account yet. Sign me up!" TextDecorations="Underline" Foreground="Blue" />
+                </Button>
+            </Grid>
+        </Border>
+    </Border>
+</Window>
