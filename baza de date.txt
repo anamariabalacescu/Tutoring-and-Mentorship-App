@@ -1,0 +1,40 @@
+Create database tutoring
+
+-- Tabela "profesor"
+CREATE TABLE profesor (
+    ID_PROF INT IDENTITY(1,1) PRIMARY KEY,
+    nume VARCHAR(255),
+    prenume VARCHAR(255),
+    profesie_de_baza VARCHAR(255)
+);
+
+
+
+-- Tabela "student"
+CREATE TABLE student (
+    ID_STUDENT INT IDENTITY(1,1) PRIMARY KEY,
+    nume VARCHAR(255),
+    prenume VARCHAR(255),
+    universitate VARCHAR(255)
+);
+
+-- Tabela "materii"
+CREATE TABLE materii (
+    ID_MATERIE INT IDENTITY(1,1) PRIMARY KEY,
+    nume VARCHAR(255),
+    ID_PROF INT,
+    ID_STUDENT INT,
+    timp DATETIME,
+    tip VARCHAR(255),
+    FOREIGN KEY (ID_PROF) REFERENCES profesor(ID_PROF) ON DELETE CASCADE,
+    FOREIGN KEY (ID_STUDENT) REFERENCES student(ID_STUDENT) ON DELETE CASCADE
+);
+
+-- Tabela "program"
+CREATE TABLE program (
+    ID_PROGRAM INT PRIMARY KEY,
+    ID_PROFESOR INT,
+    ID_STUDENT INT,
+    FOREIGN KEY (ID_PROFESOR) REFERENCES profesor(ID_PROF) ON DELETE CASCADE,
+    FOREIGN KEY (ID_STUDENT) REFERENCES student(ID_STUDENT) ON DELETE CASCADE
+);
