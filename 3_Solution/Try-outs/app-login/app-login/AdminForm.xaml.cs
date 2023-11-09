@@ -15,17 +15,25 @@ using System.Windows.Shapes;
 namespace app_login
 {
     /// <summary>
-    /// Interaction logic for Window2.xaml
+    /// Interaction logic for AdminForm.xaml
     /// </summary>
-    public partial class Window2 : Window
+    public partial class AdminForm : Window
     {
-        public Window2()
+        private string userName = "";
+        private string userPass = "";
+        private string sname = "";
+        private string fname = "";
+        private string mail = "";
+        private string code = "";
+
+        public AdminForm()
         {
             InitializeComponent();
         }
 
         private void CloseApp(object sender, MouseButtonEventArgs e)
         {
+
             Application.Current.Shutdown();
         }
 
@@ -47,8 +55,8 @@ namespace app_login
                 else if (selectedRole == "Student")
                 {
                     // Navigate to the StudentWindow
-                    //StudentWindow studentWindow = new StudentWindow();
-                    //studentWindow.Show();
+                    StudentForm studentWindow = new StudentForm();
+                    studentWindow.Show();
                 }
                 else if (selectedRole == "Professor")
                 {
@@ -59,6 +67,44 @@ namespace app_login
                 else
                 {
                     // Handle other cases or show an error message
+                }
+            }
+        }
+
+        private void EraseText(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            textBox.Text = string.Empty;
+        }
+
+        private void InitialText(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                if (textBox == username)
+                {
+                    textBox.Text = "Insert username";
+                }
+                else if (textBox == password)
+                {
+                    textBox.Text = "Insert password";
+                }
+                else if (textBox == email)
+                {
+                    textBox.Text = "Insert email address";
+                }
+                else if (textBox == surname)
+                {
+                    textBox.Text = "Insert Surname";
+                }
+                else if (textBox == firstname)
+                {
+                    textBox.Text = "Insert Firstname";
+                }
+                else if (textBox == codetxt)
+                {
+                    textBox.Text = "Insert university";
                 }
             }
         }

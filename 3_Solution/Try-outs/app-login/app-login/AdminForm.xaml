@@ -1,11 +1,11 @@
-﻿<Window x:Class="app_login.Window1"
+﻿<Window x:Class="app_login.AdminForm"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:app_login"
         mc:Ignorable="d"
-            Title="Login" Height="597" Width="400" 
+        Title="Signup" Height="597" Width="400" 
     WindowStyle="none"
     AllowsTransparency="true"
     Foreground="#FF896DD7" 
@@ -38,12 +38,20 @@
                         <BitmapImage UriSource="D:\ATM 3\Ap_bd\proiect\app-login\icon.png" />
                     </Image.Source>
                 </Image>
+                <TextBox x:Name="username" Background="WhiteSmoke" HorizontalAlignment="Left" Height="20" Margin="102,226,0,0" TextWrapping="Wrap" Text="Insert username" VerticalAlignment="Top" Width="118" GotFocus="EraseText" LostFocus="InitialText"/>
+                <TextBox x:Name="password" Background="WhiteSmoke" HorizontalAlignment="Left" Height="20" Margin="102,267,0,0" TextWrapping="Wrap" Text="Insert password" VerticalAlignment="Top" Width="118" GotFocus="EraseText" LostFocus="InitialText"/>
+                <TextBox x:Name="email" Background="WhiteSmoke" HorizontalAlignment="Left" Height="20" Margin="102,306,0,0" TextWrapping="Wrap" Text="Insert email address" VerticalAlignment="Top" Width="118" GotFocus="EraseText" LostFocus="InitialText"/>
+                <TextBox x:Name="surname" Background="WhiteSmoke" HorizontalAlignment="Left" Height="20" Margin="102,347,0,0" TextWrapping="Wrap" Text="Insert Surname" VerticalAlignment="Top" Width="118" GotFocus="EraseText" LostFocus="InitialText"/>
+                <TextBox x:Name="firstname" Background="WhiteSmoke" HorizontalAlignment="Left" Height="20" Margin="102,386,0,0" TextWrapping="Wrap" Text="Insert Firstname" VerticalAlignment="Top" Width="118" GotFocus="EraseText" LostFocus="InitialText"/>
+                <TextBox x:Name="codetxt" Background="WhiteSmoke" HorizontalAlignment="Left" Height="20" Margin="102,427,0,0" TextWrapping="Wrap" Text="Insert Validation code" VerticalAlignment="Top" Width="118" GotFocus="EraseText" LostFocus="InitialText"/>
                 <ComboBox x:Name="roles" HorizontalAlignment="Left" Height="20" Margin="102,186,0,0" VerticalAlignment="Top" Width="119" SelectedIndex="0" SelectionChanged="roleComboBox_SelectionChanged">
-                    <ComboBoxItem IsEnabled="False" Content="Choose your role"/>
+                    <ComboBoxItem IsEnabled="False" Content="Admin"/>
                     <ComboBoxItem Content="Admin"/>
                     <ComboBoxItem Content="Student"/>
                     <ComboBoxItem Content="Professor"/>
                 </ComboBox>
+                <Button Content="Sign up" Background="LightSteelBlue" HorizontalAlignment="Left" Height="20" Margin="134,485,0,0" VerticalAlignment="Top" Width="54"/>
+                <Canvas/>
             </Grid>
         </Border>
     </Border>

@@ -32,8 +32,8 @@ namespace app_login
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Window1 window1 = new Window1();  // Create an instance of Window1
-            window1.Show();  // Show Window1
+            Window1 register = new Window1();  // Create an instance of Window1
+            register.Show();  // Show Window1
             Close();  // Close the current window
         }
 
@@ -48,5 +48,43 @@ namespace app_login
         {
             Application.Current.Shutdown();
         }
+
+        private void userInput(object sender, TextChangedEventArgs e)
+        {
+            if (sender == user)
+            {
+                string userInputUsername = user.Text;
+            }
+            else if (sender == password)
+            {
+                string userInputPassword = password.Text;
+            }
+        }
+
+        private void ClearText(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Text == "Insert username" || textBox.Text == "Insert password")
+            {
+                textBox.Text = "";
+            }
+        }
+
+        private void RestoreText(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                if (textBox.Name == "user")
+                {
+                    textBox.Text = "Insert username";
+                }
+                else if (textBox.Name == "password")
+                {
+                    textBox.Text = "Insert password";
+                }
+            }
+        }
+
     }
 }

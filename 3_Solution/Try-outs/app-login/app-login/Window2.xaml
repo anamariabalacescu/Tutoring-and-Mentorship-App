@@ -33,22 +33,19 @@ WindowStartupLocation="CenterScreen">
 
                 <Image Source="D:\ATM 3\Ap_bd\proiect\app-login\close.png" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="37,0,0,0" MouseDown="CloseApp"/>
 
-                <Image HorizontalAlignment="Left" Height="127" Margin="97,92,0,0" VerticalAlignment="Top" Width="136" OpacityMask="White">
+                <Image HorizontalAlignment="Left" Height="127" Margin="97,30,0,0" VerticalAlignment="Top" Width="136" OpacityMask="White">
                     <Image.Source>
                         <BitmapImage UriSource="D:\ATM 3\Ap_bd\proiect\app-login\icon.png" />
                     </Image.Source>
                 </Image>
-                <TextBox Background="WhiteSmoke" HorizontalAlignment="Left" Height="20" Margin="101,238,0,0" TextWrapping="Wrap" Text="Insert username" VerticalAlignment="Top" Width="119"/>
-                <TextBox Background="WhiteSmoke" HorizontalAlignment="Left" Height="20" Margin="101,278,0,0" TextWrapping="Wrap" Text="Insert password" VerticalAlignment="Top" Width="119"/>
-                <Button Content="Sign up" Background="LightSteelBlue" HorizontalAlignment="Left" Height="20" Margin="134,399,0,0" VerticalAlignment="Top" Width="54"/>
-                <TextBox Background="WhiteSmoke" HorizontalAlignment="Left" Height="20" Margin="101,321,0,0" TextWrapping="Wrap" Text="Insert email address" VerticalAlignment="Top" Width="119"/>
-                <ComboBox HorizontalAlignment="Left" Height="20" Margin="101,361,0,0" VerticalAlignment="Top" Width="119" SelectedIndex="0">
-                    <ComboBoxItem IsEnabled="False">Choose your role</ComboBoxItem>
-                    <ComboBoxItem>Admin</ComboBoxItem>
-                    <ComboBoxItem>Student</ComboBoxItem>
-                    <ComboBoxItem>Professor</ComboBoxItem>
+
+                <ComboBox x:Name="roles" HorizontalAlignment="Left" Height="20" Margin="102,186,0,0" VerticalAlignment="Top" Width="119" SelectedIndex="0" SelectionChanged="roleComboBox_SelectionChanged">
+                    <ComboBoxItem IsEnabled="False" Content="Choose your role"/>
+                    <ComboBoxItem Content="Admin"/>
+                    <ComboBoxItem Content="Student"/>
+                    <ComboBoxItem Content="Professor"/>
                 </ComboBox>
-                <TextBlock HorizontalAlignment="Left" Height="14" Margin="116,219,0,0" TextWrapping="Wrap" Text="Username already taken." VerticalAlignment="Top" Width="90" FontSize="8" Foreground="Red"/>
+                <TextBlock HorizontalAlignment="Left" Height="14" Margin="116,162,0,0" TextWrapping="Wrap" Text="Username already taken." VerticalAlignment="Top" Width="90" FontSize="8" Foreground="Red"/>
             </Grid>
         </Border>
     </Border>
