@@ -30,6 +30,7 @@
                         <GradientStop Color="Aqua" Offset="1.0"/>
                     </LinearGradientBrush>
                 </Grid.Background>
+
                 <Image HorizontalAlignment="Left" Height="127" Margin="97,92,0,0" VerticalAlignment="Top" Width="136" OpacityMask="White">
                     <Image.Source>
                         <BitmapImage UriSource="D:\ATM 3\Ap_bd\proiect\app-login\icon.png" />
@@ -37,10 +38,11 @@
                 </Image>
                 <TextBox Background="WhiteSmoke" HorizontalAlignment="Left" Height="20" Margin="101,238,0,0" TextWrapping="Wrap" Text="Insert username" VerticalAlignment="Top" Width="119"/>
                 <TextBox Background="WhiteSmoke" HorizontalAlignment="Left" Height="20" Margin="101,278,0,0" TextWrapping="Wrap" Text="Insert password" VerticalAlignment="Top" Width="119"/>
-                <Button Content="Sign in" Background="LightSteelBlue" HorizontalAlignment="Left" Height="20" Margin="134,321,0,0" VerticalAlignment="Top" Width="54"/>
+                <Button Content="Sign in" Background="LightSteelBlue" HorizontalAlignment="Left" Height="20" Margin="134,321,0,0" VerticalAlignment="Top" Width="54" Click="Button_Click_1"/>
                 <Button Background="Transparent" HorizontalAlignment="Left" Height="20" Margin="50,355,0,0" VerticalAlignment="Top" Width="220" Click="Button_Click">
                     <TextBlock Text="I don't have an account yet. Sign me up!" TextDecorations="Underline" Foreground="Blue" />
                 </Button>
+                <Image Source="D:\ATM 3\Ap_bd\proiect\app-login\close.png" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="37,0,0,0" MouseDown="CloseApp"/>
             </Grid>
         </Border>
     </Border>

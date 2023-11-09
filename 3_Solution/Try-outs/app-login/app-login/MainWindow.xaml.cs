@@ -36,5 +36,17 @@ namespace app_login
             window1.Show();  // Show Window1
             Close();  // Close the current window
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Window3 home = new Window3();  // Send to home page - Window3
+            home.Show();  // Show Window3
+            Close();  // Close the current window3
+        }
+
+        private void CloseApp(object sender, MouseButtonEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }

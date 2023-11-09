@@ -49,7 +49,7 @@ namespace app_login {
             
             #line 5 "..\..\App.xaml"
             this.StartupUri = new System.Uri("MainWindow.xaml", System.UriKind.Relative);
-            this.StartupUri = new System.Uri("Window1.xaml", System.UriKind.Relative);
+            
             #line default
             #line hidden
         }

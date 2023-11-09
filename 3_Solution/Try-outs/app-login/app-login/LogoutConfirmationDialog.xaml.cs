@@ -15,18 +15,28 @@ using System.Windows.Shapes;
 namespace app_login
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for LogoutConfirmationDialog.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class LogoutConfirmationDialog : Window
     {
-        public Window1()
+        public bool UserConfirmed { get; private set; }
+
+        public LogoutConfirmationDialog()
         {
             InitializeComponent();
         }
 
-        private void CloseApp(object sender, MouseButtonEventArgs e)
+        private void YesButton_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            UserConfirmed = true;
+            Close();
+        }
+
+        private void NoButton_Click(object sender, RoutedEventArgs e)
+        {
+            UserConfirmed = false;
+            Close();
         }
     }
+
 }

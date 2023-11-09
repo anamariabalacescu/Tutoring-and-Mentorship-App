@@ -1,0 +1,76 @@
+﻿<Window x:Class="app_login.Window3"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:app_login"
+        mc:Ignorable="d"
+        Title="Home" 
+        WindowState="Maximized"
+        WindowStyle="none"
+        AllowsTransparency="true"
+        Foreground="#FF896DD7" 
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen">
+    <DockPanel>
+        <Border CornerRadius="30" BorderThickness="10" BorderBrush="LightSkyBlue">
+            <Border CornerRadius="15" BorderThickness="20">
+                <Border.BorderBrush>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="Blue" Offset="0.0"/>
+                        <GradientStop Color="RoyalBlue" Offset="0.35"/>
+                        <GradientStop Color="Aqua" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+
+                <Grid Height="1080">
+                    <Grid.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="LightSkyBlue" Offset="0.0"/>
+                            <GradientStop Color="SkyBlue" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </Grid.Background>
+
+                    <Menu VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                        <Menu.ItemContainerStyle>
+                            <Style TargetType="MenuItem">
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="Foreground" Value="DarkBlue"/>
+                            </Style>
+                        </Menu.ItemContainerStyle>
+                        <MenuItem>
+                            <MenuItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox Width="200" Height="30" Text=""/>
+                                    <Button Content="Search" Width="80" Height="30"/>
+                                </StackPanel>
+                            </MenuItem.Header>
+                        </MenuItem>
+                        
+                        <MenuItem HorizontalAlignment="Stretch" Header="Home">
+                        </MenuItem>
+                        <MenuItem HorizontalAlignment="Stretch" Header="Subjects">
+                        </MenuItem>
+                        <MenuItem Header="Professors" HorizontalAlignment="Stretch">
+                        </MenuItem>
+                        <MenuItem Header="Your account" Click="MenuItem_Click" HorizontalAlignment="Stretch">
+                            <MenuItem Header="Profile" Click="Profile"/>
+                            <MenuItem Header="Your lessons" Click="Lessons"/>
+                            <MenuItem Header="Settings" Click="Settings"/>
+                            <MenuItem Header="Log out" Click="LogOut"/>
+                        </MenuItem>
+
+                        <!-- Close button (image) on the right -->
+                        <MenuItem HorizontalAlignment="Right">
+                            <MenuItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="D:\ATM 3\Ap_bd\proiect\app-login\close.png" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="888,0,0,0" MouseDown="CloseApp"/>
+                                </StackPanel>
+                            </MenuItem.Header>
+                        </MenuItem>
+                    </Menu>
+                </Grid>
+            </Border>
+        </Border>
+    </DockPanel>
+</Window>
