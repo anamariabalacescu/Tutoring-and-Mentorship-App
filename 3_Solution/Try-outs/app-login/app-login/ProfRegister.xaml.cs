@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.IO.Packaging;
 using System.Linq;
 using System.Text;
@@ -26,9 +28,17 @@ namespace app_login
         private string fname = "";
         private string mail = "";
         private string prof = "";
+        SqlConnection conn;
         public ProfRegister()
         {
             InitializeComponent();
+            InitConn();
+        }
+
+        void InitConn()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["Tutoring"].ToString();
+            conn = new SqlConnection(connectionString);
         }
 
         private void CloseApp(object sender, MouseButtonEventArgs e)
@@ -60,9 +70,7 @@ namespace app_login
                 }
                 else if (selectedRole == "Professor")
                 {
-                    // Navigate to the ProfessorWindow
-                    //ProfRegister professorWindow = new ProfRegister();
-                    //professorWindow.Show();
+                    // Already here
                 }
                 else
                 {
@@ -87,10 +95,6 @@ namespace app_login
                 {
                     textBox.Text = "Insert username";
                 }
-                else if (textBox == password)
-                {
-                    textBox.Text = "Insert password";
-                }
                 else if (textBox == email)
                 {
                     textBox.Text = "Insert email address";
@@ -108,6 +112,98 @@ namespace app_login
                     textBox.Text = "Insert profession";
                 }
             }
+        }
+        private void userInput(object sender, TextChangedEventArgs e)
+        {
+                TextBox textBox = (TextBox)sender;
+
+                if (textBox == username)
+                {
+                    userName = textBox.Text;
+                }
+                else if (textBox == email)
+                {
+                    mail = textBox.Text;
+                }
+                else if (textBox == surname)
+                {
+                    sname = textBox.Text;
+                }
+                else if (textBox == firstname)
+                {
+                    fname = textBox.Text;
+                }
+                else if (textBox == profession)
+                {
+                    prof = textBox.Text;
+                }
+        }
+
+        private void onclick(object sender, RoutedEventArgs e)
+        {
+
+            conn.Open();
+
+            bool count = FormValidationRules.IsValidUsername(userName, conn);
+
+            if (count)
+            {
+                Window2 eroare = new Window2();
+                eroare.Show();
+                //Console.WriteLine("Username already exists");
+            }
+            else
+            {
+                Professor p = new Professor(sname, fname, prof, userName, userPass, mail);
+                bool passValid = FormValidationRules.IsValidPassword(userPass);
+
+                if (passValid)
+                {
+                    bool emailValid = FormValidationRules.IsValidEmail(mail);
+                    if (emailValid)
+                    {
+                        int result = p.insertProfesor(sname, fname, prof, userName, userPass, mail, conn);
+                    }
+                    else
+                    {
+                        Error errorWindow = new Error();
+                        errorWindow.ErrorMessage = "Email is not valid. Please provide a valid email.";
+                        errorWindow.Show();
+                    }
+                }
+                else
+                {
+                    Error errorWindow = new Error();
+                    errorWindow.ErrorMessage = "Weak Password! Minimum 8 characters - 1 upper, 1 lower, 1 digit. Please try again!";
+                    errorWindow.Show();
+                }
+            }
+
+            conn.Close();
+        }
+        private void OnPasswordBoxGotFocus(object sender, RoutedEventArgs e)
+        {
+            placeholderText.Visibility = Visibility.Collapsed;
+        }
+
+        private void OnPasswordBoxLostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(password.Password))
+            {
+                placeholderText.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void OnPlaceholderGotFocus(object sender, RoutedEventArgs e)
+        {
+            placeholderText.Visibility = Visibility.Collapsed;
+            password.Focus();
+        }
+
+        private void userInput(object sender, RoutedEventArgs e)
+        {
+            PasswordBox pb = (PasswordBox)sender;
+            userPass = pb.Password;
         }
     }
 }

@@ -56,7 +56,6 @@ namespace app_login
             {
                 string selectedRole = selectedItem.Content.ToString();
 
-                // Determine which window to navigate to based on the selected role
                 if (selectedRole == "Admin")
                 {
                     // Navigate to the AdminWindow
@@ -65,9 +64,7 @@ namespace app_login
                 }
                 else if (selectedRole == "Student")
                 {
-                    // Navigate to the StudentWindow
-                    //StudentWindow studentWindow = new StudentWindow();
-                    //studentWindow.Show();
+                    // Already here
                 }
                 else if (selectedRole == "Professor")
                 {
@@ -90,47 +87,53 @@ namespace app_login
 
         private void InitialText(object sender, RoutedEventArgs e)
         {
-            TextBox textBox = (TextBox)sender;
-            if (string.IsNullOrWhiteSpace(textBox.Text))
+            if (sender.GetType() is PasswordBox)
             {
-                if (textBox == username)
+                placeholderText.Text = "Insert password";
+            }
+            else
+            {
+                TextBox textBox = (TextBox)sender;
+                if (string.IsNullOrWhiteSpace(textBox.Text))
                 {
-                    textBox.Text = "Insert username";
-                }
-                else if (textBox == password)
-                {
-                    textBox.Text = "Insert password";
-                }
-                else if (textBox == email)
-                {
-                    textBox.Text = "Insert email address";
-                }
-                else if (textBox == surname)
-                {
-                    textBox.Text = "Insert Surname";
-                }
-                else if (textBox == firstname)
-                {
-                    textBox.Text = "Insert Firstname";
-                }
-                else if (textBox == university)
-                {
-                    textBox.Text = "Insert university";
+                    if (textBox == username)
+                    {
+                        textBox.Text = "Insert username";
+                    }
+                    else if (textBox == email)
+                    {
+                        textBox.Text = "Insert email address";
+                    }
+                    else if (textBox == surname)
+                    {
+                        textBox.Text = "Insert Surname";
+                    }
+                    else if (textBox == firstname)
+                    {
+                        textBox.Text = "Insert Firstname";
+                    }
+                    else if (textBox == university)
+                    {
+                        textBox.Text = "Insert university";
+                    }
                 }
             }
         }
 
         private void userInput(object sender, TextChangedEventArgs e)
         {
-            TextBox textBox = (TextBox)sender;
+            if (sender.GetType() is PasswordBox)
+            {
+                PasswordBox pb = (PasswordBox)sender;
+                userPass = pb.Password;
+            }
+            else
+            {
+                TextBox textBox = (TextBox)sender;
 
                 if (textBox == username)
                 {
                     userName = textBox.Text;
-                }
-                else if (textBox == password)
-                {
-                    userPass = textBox.Text;
                 }
                 else if (textBox == email)
                 {
@@ -148,59 +151,75 @@ namespace app_login
                 {
                     uni = textBox.Text;
                 }
+            }
         }
 
         private void onclick(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
-                conn.Open();
 
-                SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT COUNT(*) FROM Students WHERE Username = @Username";
-                cmd.Parameters.AddWithValue("@Username", username.Text);
-
-                int count = (int)cmd.ExecuteScalar();
-
-                if (count > 0)
-                {
+            conn.Open();
+            
+            bool count = FormValidationRules.IsValidUsername(userName, conn);
+            
+            if (count)
+            {
                 Window2 eroare = new Window2();
                 eroare.Show();
                 //Console.WriteLine("Username already exists");
-                }
-                else
-                {
-                    SqlCommand insertCmd = conn.CreateCommand();
-                    insertCmd.CommandText = "INSERT INTO Students (Username) VALUES (@Username)";
-                    insertCmd.Parameters.AddWithValue("@Username", username.Text);
-                    //insertCmd.Parameters.AddWithValue("@Password", password.Text);
-                    //insertCmd.Parameters.AddWithValue("@Nume",.Text);
-                    //insertCmd.Parameters.AddWithValue("@Prenume", username.Text);
-                    int rowsAffected = insertCmd.ExecuteNonQuery();
+            }
+            else
+            {
+                Student std = new Student(sname, fname, uni, userName, userPass, mail);
+                bool passValid = FormValidationRules.IsValidPassword(userPass);
 
-                    if (rowsAffected > 0)
+                if (passValid)
+                {
+                    bool emailValid = FormValidationRules.IsValidEmail(mail);
+                    if (emailValid)
                     {
-                        // Successfully inserted the new user
-                        Console.WriteLine("User inserted successfully");
+                        int result = std.insertStudent(sname, fname, uni, userName, userPass, mail, conn);
                     }
                     else
                     {
-                        // Failed to insert user
-                        Console.WriteLine("Failed to insert user");
+                        Error errorWindow = new Error();
+                        errorWindow.ErrorMessage = "Email is not valid. Please provide a valid email.";
+                        errorWindow.Show();
                     }
                 }
-            /*}
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
+                else
+                {
+                    Error errorWindow = new Error();
+                    errorWindow.ErrorMessage = "Weak Password! Minimum 8 characters - 1 upper, 1 lower, 1 digit. Please try again!";
+                    errorWindow.Show();
+                }
             }
-            finally
-            {
-                conn.Close();
-            }*/
+
             conn.Close();
         }
+        private void OnPasswordBoxGotFocus(object sender, RoutedEventArgs e)
+        {
+            placeholderText.Visibility = Visibility.Collapsed;
+        }
 
+        private void OnPasswordBoxLostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(password.Password))
+            {
+                placeholderText.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void OnPlaceholderGotFocus(object sender, RoutedEventArgs e)
+        {
+            placeholderText.Visibility = Visibility.Collapsed;
+            password.Focus();
+        }
+
+        private void userInput(object sender, RoutedEventArgs e)
+        {
+            PasswordBox pb = (PasswordBox)sender;
+            userPass = pb.Password;
+        }
     }
 
 }

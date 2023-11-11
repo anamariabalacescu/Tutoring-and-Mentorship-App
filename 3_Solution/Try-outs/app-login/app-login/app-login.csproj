@@ -59,15 +59,22 @@
     <Compile Include="AdminForm.xaml.cs">
       <DependentUpon>AdminForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EncryptionMachine.cs" />
+    <Compile Include="Error.xaml.cs">
+      <DependentUpon>Error.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FormValidationRules.cs" />
     <Compile Include="LogoutConfirmationDialog.xaml.cs">
       <DependentUpon>LogoutConfirmationDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Professor.cs" />
     <Compile Include="ProfRegister.xaml.cs">
       <DependentUpon>ProfRegister.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Student.cs" />
     <Compile Include="StudentForm.xaml.cs">
       <DependentUpon>StudentForm.xaml</DependentUpon>
     </Compile>
@@ -87,6 +94,10 @@
       <DependentUpon>YourProfile.xaml</DependentUpon>
     </Compile>
     <Page Include="AdminForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Error.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

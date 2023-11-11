@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\ATM 3\Ap_bd\proiect\app-login\app-login\obj\Debug\
+D:\ATM 3\Ap_bd\proiect\Tutoring-and-Mentorship-App\3_Solution\Try-outs\app-login\app-login\obj\Debug\
 app_login
 none
 false
 DEBUG;TRACE
-D:\ATM 3\Ap_bd\proiect\app-login\app-login\App.xaml
-11412632683
+D:\ATM 3\Ap_bd\proiect\Tutoring-and-Mentorship-App\3_Solution\Try-outs\app-login\app-login\App.xaml
+12538407303
 
-15-152339941
+21196560319
 14-207034072
-AdminForm.xaml;LogoutConfirmationDialog.xaml;MainWindow.xaml;ProfRegister.xaml;Settings.xaml;StudentForm.xaml;Window1.xaml;Window2.xaml;Window3.xaml;YourLessons.xaml;YourProfile.xaml;
+AdminForm.xaml;Error.xaml;LogoutConfirmationDialog.xaml;MainWindow.xaml;ProfRegister.xaml;Settings.xaml;StudentForm.xaml;Window1.xaml;Window2.xaml;Window3.xaml;YourLessons.xaml;YourProfile.xaml;
 
-False
+True
 

@@ -39,11 +39,16 @@
                     </Image.Source>
                 </Image>
                 <TextBox x:Name="username" Background="WhiteSmoke" HorizontalAlignment="Left" Height="20" Margin="102,226,0,0" TextWrapping="Wrap" Text="Insert username" VerticalAlignment="Top" Width="118" GotFocus="EraseText" LostFocus="InitialText" TextChanged="userInput"/>
-                <TextBox x:Name="password" Background="WhiteSmoke" HorizontalAlignment="Left" Height="20" Margin="102,267,0,0" TextWrapping="Wrap" Text="Insert password" VerticalAlignment="Top" Width="118" GotFocus="EraseText" LostFocus="InitialText"/>
-                <TextBox x:Name="email" Background="WhiteSmoke" HorizontalAlignment="Left" Height="20" Margin="102,306,0,0" TextWrapping="Wrap" Text="Insert email address" VerticalAlignment="Top" Width="118" GotFocus="EraseText" LostFocus="InitialText"/>
-                <TextBox x:Name="surname" Background="WhiteSmoke" HorizontalAlignment="Left" Height="20" Margin="102,347,0,0" TextWrapping="Wrap" Text="Insert Surname" VerticalAlignment="Top" Width="118" GotFocus="EraseText" LostFocus="InitialText"/>
-                <TextBox x:Name="firstname" Background="WhiteSmoke" HorizontalAlignment="Left" Height="20" Margin="102,386,0,0" TextWrapping="Wrap" Text="Insert Firstname" VerticalAlignment="Top" Width="118" GotFocus="EraseText" LostFocus="InitialText"/>
-                <TextBox x:Name="university" Background="WhiteSmoke" HorizontalAlignment="Left" Height="20" Margin="102,427,0,0" TextWrapping="Wrap" Text="Insert University" VerticalAlignment="Top" Width="118" GotFocus="EraseText" LostFocus="InitialText"/>
+                <PasswordBox x:Name="password" Width="120" Background="WhiteSmoke" HorizontalAlignment="Left" Height="20"
+                 Margin="102,267,0,0" VerticalAlignment="Top" PasswordChanged="userInput"
+                 GotFocus="OnPasswordBoxGotFocus" LostFocus="OnPasswordBoxLostFocus"/>
+                <TextBox x:Name="placeholderText" Width="120" Background="WhiteSmoke" HorizontalAlignment="Left" Height="20"
+             Margin="102,267,0,0" VerticalAlignment="Top" Foreground="Gray"
+             Text="Insert password" GotFocus="OnPlaceholderGotFocus" />
+                <TextBox x:Name="email" Background="WhiteSmoke" HorizontalAlignment="Left" Height="20" Margin="102,306,0,0" TextWrapping="Wrap" Text="Insert email address" VerticalAlignment="Top" Width="118" GotFocus="EraseText" LostFocus="InitialText" TextChanged="userInput"/>
+                <TextBox x:Name="surname" Background="WhiteSmoke" HorizontalAlignment="Left" Height="20" Margin="102,347,0,0" TextWrapping="Wrap" Text="Insert Surname" VerticalAlignment="Top" Width="118" GotFocus="EraseText" LostFocus="InitialText" TextChanged="userInput"/>
+                <TextBox x:Name="firstname" Background="WhiteSmoke" HorizontalAlignment="Left" Height="20" Margin="102,386,0,0" TextWrapping="Wrap" Text="Insert Firstname" VerticalAlignment="Top" Width="118" GotFocus="EraseText" LostFocus="InitialText" TextChanged="userInput"/>
+                <TextBox x:Name="university" Background="WhiteSmoke" HorizontalAlignment="Left" Height="20" Margin="102,427,0,0" TextWrapping="Wrap" Text="Insert University" VerticalAlignment="Top" Width="118" GotFocus="EraseText" LostFocus="InitialText" TextChanged="userInput"/>
                 <ComboBox x:Name="roles" HorizontalAlignment="Left" Height="20" Margin="102,186,0,0" VerticalAlignment="Top" Width="119" SelectedIndex="0" SelectionChanged="roleComboBox_SelectionChanged">
                     <ComboBoxItem IsEnabled="False" Content="Student"/>
                     <ComboBoxItem Content="Admin"/>

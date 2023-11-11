@@ -37,6 +37,11 @@ namespace app_login
             UserConfirmed = false;
             Close();
         }
+
+        private void NoButton_Click(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 
 }

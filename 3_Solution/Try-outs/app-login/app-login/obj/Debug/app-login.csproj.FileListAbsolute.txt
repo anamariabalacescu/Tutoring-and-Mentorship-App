@@ -33,3 +33,5 @@ D:\ATM 3\Ap_bd\proiect\app-login\app-login\obj\Debug\StudentForm.g.cs
 D:\ATM 3\Ap_bd\proiect\app-login\app-login\obj\Debug\StudentForm.baml
 D:\ATM 3\Ap_bd\proiect\app-login\app-login\obj\Debug\AdminForm.g.cs
 D:\ATM 3\Ap_bd\proiect\app-login\app-login\obj\Debug\AdminForm.baml
+D:\ATM 3\Ap_bd\proiect\app-login\app-login\obj\Debug\Error.g.cs
+D:\ATM 3\Ap_bd\proiect\app-login\app-login\obj\Debug\Error.baml
