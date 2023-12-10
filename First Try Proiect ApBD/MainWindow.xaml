@@ -1,0 +1,45 @@
+﻿<Window x:Class="First_Try_Proiect_ApBD.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:First_Try_Proiect_ApBD"
+        mc:Ignorable="d"
+        Closing="MainWindow_Closed"
+        Title="MainWindow" 
+        Background="Transparent"
+        WindowState="Maximized" Height="895" Width="1534">
+    <Grid x:Name="Webcam" Margin="0,0,0,197">
+        <Border CornerRadius="30" BorderThickness="10" BorderBrush="LightSkyBlue" Grid.ColumnSpan="2" Margin="-6,0,0,-198">
+            <Border CornerRadius="15" BorderThickness="20">
+                <Border.BorderBrush>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="Blue" Offset="0.0"/>
+                        <GradientStop Color="RoyalBlue" Offset="0.35"/>
+                        <GradientStop Color="Aqua" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+                <Grid>
+                    <Grid Margin="-4,-4,0,-5">
+                        <Grid.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="AliceBlue" Offset="0.0"/>
+                                <GradientStop Color="RoyalBlue" Offset="0.35"/>
+                                <GradientStop Color="Aqua" Offset="1.0"/>
+                            </LinearGradientBrush>
+                        </Grid.Background>
+                        <Grid Margin="-10,0,0,-10">
+                            <ComboBox x:Name="cboCamera1" HorizontalAlignment="Left" Height="60" Margin="176,48,0,0" VerticalAlignment="Top" Width="500" FontSize="20"/>
+                            <Label Content="Camera:" HorizontalAlignment="Left" Height="35" Margin="73,57,0,0" VerticalAlignment="Top" Width="88" FontSize="20" RenderTransformOrigin="0.222,0.578"/>
+                            <Button x:Name="BtnStart" Content="Start" HorizontalAlignment="Left" Height="60" Margin="825,678,0,0" VerticalAlignment="Top" Width="200" Click="BtnStart_Click" />
+                            <Button x:Name="BtnSTOP" Content="Stop" HorizontalAlignment="Left" Margin="1200,678,0,0" VerticalAlignment="Top" Height="60" Width="200" Click="BtnStop_Click" />
+                            <Image x:Name="pic1" Margin="775,125,60,225"/>
+                            <Image x:Name="pic2" Margin="60,125,775,225"/>
+                            <Image x:Name="mic" Source="F:\\C Copy\\source\\repos\\ApBD\\First Try Proiect ApBD\\mic_muted.png" HorizontalAlignment="Left" Height="46" Margin="765,62,0,0" VerticalAlignment="Top" Width="50" MouseLeftButtonDown="Mic_MouseLeftButtonDown" IsHitTestVisible="True"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Border>
+    </Grid>
+</Window>

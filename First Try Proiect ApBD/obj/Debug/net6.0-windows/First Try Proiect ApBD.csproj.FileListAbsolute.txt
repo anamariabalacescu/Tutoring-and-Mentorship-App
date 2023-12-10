@@ -1,0 +1,105 @@
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\First Try Proiect ApBD.csproj.AssemblyReference.cache
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\MainWindow.g.cs
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\App.g.cs
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\First Try Proiect ApBD_MarkupCompile.cache
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\First Try Proiect ApBD_MarkupCompile.lref
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\First Try Proiect ApBD.exe
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\First Try Proiect ApBD.deps.json
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\First Try Proiect ApBD.runtimeconfig.json
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\First Try Proiect ApBD.dll
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\First Try Proiect ApBD.pdb
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\AForge.dll
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\AForge.Video.dll
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\AForge.Video.DirectShow.dll
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.Win32.SystemEvents.dll
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\System.Drawing.Common.dll
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\MainWindow.baml
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\First Try Proiect ApBD.g.resources
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\First Try Proiect ApBD.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\First Try Proiect ApBD.AssemblyInfoInputs.cache
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\First Try Proiect ApBD.AssemblyInfo.cs
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\First Try Proiect ApBD.csproj.CoreCompileInputs.cache
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\First Try Proiect ApBD.csproj.CopyComplete
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\First Try Proiect ApBD.dll
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\refint\First Try Proiect ApBD.dll
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\First Try Proiect ApBD.pdb
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\First Try Proiect ApBD.genruntimeconfig.cache
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\ref\First Try Proiect ApBD.dll
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.AspNetCore.Connections.Abstractions.dll
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.AspNetCore.Http.Connections.Client.dll
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.AspNetCore.Http.Connections.Common.dll
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.AspNetCore.SignalR.Client.dll
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.AspNetCore.SignalR.Client.Core.dll
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.AspNetCore.SignalR.Common.dll
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.AspNetCore.SignalR.Protocols.Json.dll
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.Extensions.Features.dll
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.Extensions.Logging.dll
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.Extensions.Options.dll
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.Extensions.Primitives.dll
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\System.IO.Pipelines.dll
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\System.Text.Encodings.Web.dll
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\System.Text.Json.dll
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\System.Threading.Channels.dll
+C:\Users\Ali Kiwe\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\First Try Proiect ApBD.csproj.AssemblyReference.cache
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\Feedback.g.cs
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\MainWindow.g.cs
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\App.g.cs
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\First Try Proiect ApBD_MarkupCompile.cache
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\First Try Proiect ApBD_MarkupCompile.lref
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\First Try Proiect ApBD.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\refint\First Try Proiect ApBD.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\First Try Proiect ApBD.pdb
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\First Try Proiect ApBD.exe
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\First Try Proiect ApBD.deps.json
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\First Try Proiect ApBD.runtimeconfig.json
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\First Try Proiect ApBD.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\First Try Proiect ApBD.pdb
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\AForge.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\AForge.Video.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\AForge.Video.DirectShow.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.AspNetCore.Connections.Abstractions.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.AspNetCore.Http.Connections.Client.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.AspNetCore.Http.Connections.Common.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.AspNetCore.SignalR.Client.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.AspNetCore.SignalR.Client.Core.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.AspNetCore.SignalR.Common.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.AspNetCore.SignalR.Protocols.Json.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.Extensions.DependencyInjection.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.Extensions.Features.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.Extensions.Logging.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.Extensions.Options.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.Extensions.Primitives.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\Microsoft.Win32.SystemEvents.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\System.Drawing.Common.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\System.IO.Pipelines.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\System.Text.Encodings.Web.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\System.Text.Json.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\System.Threading.Channels.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\Feedback.baml
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\MainWindow.baml
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\First Try Proiect ApBD.g.resources
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\First Try Proiect ApBD.GeneratedMSBuildEditorConfig.editorconfig
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\First Try Proiect ApBD.AssemblyInfoInputs.cache
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\First Try Proiect ApBD.AssemblyInfo.cs
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\First Try Proiect ApBD.csproj.CoreCompileInputs.cache
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\First Try Proiect ApBD.csproj.CopyComplete
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\First Try Proiect ApBD.genruntimeconfig.cache
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\obj\Debug\net6.0-windows\ref\First Try Proiect ApBD.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\NAudio.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\NAudio.Asio.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\NAudio.Core.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\NAudio.Midi.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\NAudio.Wasapi.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\NAudio.WinForms.dll
+F:\C Copy\source\repos\ApBD\First Try Proiect ApBD\bin\Debug\net6.0-windows\NAudio.WinMM.dll
