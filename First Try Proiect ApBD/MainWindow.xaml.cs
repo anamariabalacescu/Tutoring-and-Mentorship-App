@@ -30,8 +30,11 @@ namespace First_Try_Proiect_ApBD
         private bool isMicrophoneMuted = true;
         private WaveInEvent waveIn;
         private TcpClient otherPeerAudioClient;
+        private bool isImage1 = true;
+        private BufferedWaveProvider waveProvider;
+        private WaveOut waveOut;
+        private readonly string otherPeerIpAddress = "10.10.23.240"; // Adresa IP a celuilalt peer
 
-        private string otherPeerIpAddress = "10.10.23.240"; // Adresa IP a celuilalt peer
         public MainWindow()
         {
             InitializeComponent();
@@ -40,9 +43,6 @@ namespace First_Try_Proiect_ApBD
             _ = ListenForConnectionsAsync();
         }
 
-        private BufferedWaveProvider waveProvider;
-        private WaveOut waveOut;
-        
         private void WaveIn_DataAvailable(object sender, WaveInEventArgs e)
         {
             try
@@ -115,7 +115,6 @@ namespace First_Try_Proiect_ApBD
             }
         }
 
-
         private async Task ListenForConnectionsAsync()
         {
             try
@@ -177,7 +176,6 @@ namespace First_Try_Proiect_ApBD
             }
         }
 
-
         private void StartReceiving()
         {
             if (!isReceiving)
@@ -186,24 +184,24 @@ namespace First_Try_Proiect_ApBD
                 Task.Run(ReceiveImageFromPeerAsync);
             }
         }
+       
         private void StopReceiving()
         {
             isReceiving = false;
 
-            // Închide conexiunea și eliberează resursele pentru datele video
             if (peerClient != null)
             {
                 stream?.Close();
                 peerClient.Close();
             }
 
-            // Închide conexiunea și eliberează resursele pentru datele audio
             if (otherPeerAudioClient != null)
             {
                 otherPeerAudioClient.Close();
             }
         }
 
+        /*
         private async Task SendImageToOtherPeerAsync(BitmapSource bitmapSource)
         {
             try
@@ -225,7 +223,6 @@ namespace First_Try_Proiect_ApBD
                 Console.WriteLine("Eroare la trimiterea imaginii către celălalt peer: " + e.Message);
             }
         }
-
 
         private async Task ReceiveImageFromOtherPeerAsync()
         {
@@ -257,7 +254,95 @@ namespace First_Try_Proiect_ApBD
                 Console.WriteLine("Eroare la primirea imaginii de la celălalt peer: " + e.Message);
             }
         }
+        */
 
+        private async Task SendImageToOtherPeerAsync(BitmapSource bitmapSource)
+        {
+            try
+            {
+                JpegBitmapEncoder encoder = new();
+                encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
+
+                using MemoryStream memoryStream = new();
+                encoder.Save(memoryStream);
+                byte[] imageData = memoryStream.ToArray();
+
+                // Trimite indicatorul pentru lungimea imaginii
+                byte[] lengthIndicator = Encoding.UTF8.GetBytes("1/");
+                await otherPeerClient.GetStream().WriteAsync(lengthIndicator);
+
+                // Trimite lungimea imaginii
+                byte[] imageLengthBytes = BitConverter.GetBytes(imageData.Length);
+                await otherPeerClient.GetStream().WriteAsync(imageLengthBytes);
+
+                // Trimite indicatorul pentru datele imaginii
+                byte[] dataIndicator = Encoding.UTF8.GetBytes("2/");
+                await otherPeerClient.GetStream().WriteAsync(dataIndicator);
+
+                // Trimite datele imaginii
+                await otherPeerClient.GetStream().WriteAsync(imageData);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Eroare la trimiterea imaginii către celălalt peer: " + e.Message);
+            }
+        }
+
+        private async Task ReceiveImageFromOtherPeerAsync()
+        {
+            try
+            {
+                while (isReceiving)
+                {
+                    // Primiți indicatorul pentru lungime
+                    byte[] lengthIndicator = new byte[2];
+                    await otherPeerClient.GetStream().ReadAsync(lengthIndicator);
+
+                    string lengthIndicatorStr = Encoding.UTF8.GetString(lengthIndicator);
+                    if (lengthIndicatorStr != "1/")
+                    {
+                        Console.WriteLine("Eroare la primirea indicatorului pentru lungime.");
+                        return;
+                    }
+
+                    // Primiți lungimea imaginii
+                    byte[] imageLengthBytes = new byte[sizeof(int)];
+                    await otherPeerClient.GetStream().ReadAsync(imageLengthBytes);
+
+                    int imageLength = BitConverter.ToInt32(imageLengthBytes, 0);
+
+                    // Primiți indicatorul pentru date
+                    byte[] dataIndicator = new byte[2];
+                    await otherPeerClient.GetStream().ReadAsync(dataIndicator);
+
+                    string dataIndicatorStr = Encoding.UTF8.GetString(dataIndicator);
+                    if (dataIndicatorStr != "2/")
+                    {
+                        Console.WriteLine("Eroare la primirea indicatorului pentru date.");
+                        return;
+                    }
+
+                    // Primiți datele imaginii
+                    byte[] imageData = new byte[imageLength];
+                    await otherPeerClient.GetStream().ReadAsync(imageData.AsMemory(0, imageLength));
+
+                    using MemoryStream memoryStream = new MemoryStream(imageData);
+                    BitmapImage bitmapImage = new();
+                    bitmapImage.BeginInit();
+                    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmapImage.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
+                    bitmapImage.StreamSource = memoryStream;
+                    bitmapImage.EndInit();
+
+                    // Actualizează pic2 cu imaginea primită de la celălalt peer
+                    pic2.Source = bitmapImage;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Eroare la primirea imaginii de la celălalt peer: " + e.Message);
+            }
+        }
 
         private async void MainWindow_Load(object sender, RoutedEventArgs e)
         {
@@ -344,6 +429,7 @@ namespace First_Try_Proiect_ApBD
             receivingTask = Task.Run(ReceiveLoop);
             sendingTask = Task.Run(SendLoop);
         }
+       
         private void BtnStart_Click(object sender, RoutedEventArgs e)
         {
             if (cboCamera1.SelectedIndex >= 0)
@@ -355,6 +441,7 @@ namespace First_Try_Proiect_ApBD
                 StartSending();
             }
         }
+       
         private void StartSending()
         {
 
@@ -364,6 +451,7 @@ namespace First_Try_Proiect_ApBD
                 Task.Run(SendImageToPeerAsync);
             }
         }
+       
         private void VideoCaptureDevice_NewFrame(object sender, NewFrameEventArgs e)
         {
             Application.Current.Dispatcher.Invoke(() =>
@@ -375,6 +463,7 @@ namespace First_Try_Proiect_ApBD
                 }
             });
         }
+       
         private async void SendImageToPeerAsync()
         {
             if (otherPeerClient != null && otherPeerClient.Connected)
@@ -382,7 +471,6 @@ namespace First_Try_Proiect_ApBD
                 await SendImageToOtherPeerAsync(pic1.Source as BitmapSource);
             }
         }
-
 
         private void StopSending()
         {
@@ -400,7 +488,6 @@ namespace First_Try_Proiect_ApBD
             }
         }
         
-
         private void Stop(object sender, RoutedEventArgs e)
         {
             videoCaptureDevice.SignalToStop();
@@ -415,9 +502,6 @@ namespace First_Try_Proiect_ApBD
             pic1.Source = null;
             //pic2.Source = null;
         }
-
-
-        private bool isImage1 = true;
 
         private void Mic_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {

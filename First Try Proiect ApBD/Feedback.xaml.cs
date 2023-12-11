@@ -75,6 +75,7 @@ namespace First_Try_Proiect_ApBD
         {
             MessageBox.Show("Feedback sent.", "Feedback Sent");
             ResetStars();
+            Close();
         }
 
         private void Star_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
