@@ -60,6 +60,7 @@
     <Compile Include="AdminForm.xaml.cs">
       <DependentUpon>AdminForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdminModel.cs" />
     <Compile Include="EncryptionMachine.cs" />
     <Compile Include="Error.xaml.cs">
       <DependentUpon>Error.xaml</DependentUpon>

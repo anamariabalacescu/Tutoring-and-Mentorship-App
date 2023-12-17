@@ -102,7 +102,7 @@ namespace app_login
                 }
                 else if (textBox == codetxt)
                 {
-                    textBox.Text = "Insert university";
+                    textBox.Text = "Insert Validation";
                 }
             }
         }
@@ -134,6 +134,90 @@ namespace app_login
             MainWindow mw = new MainWindow();
             mw.Show();
             Close();
+        }
+
+        private void onclick(object sender, MouseButtonEventArgs e)
+        {
+            bool count = FormValidationRules.IsValidUsername(userName);
+
+            if (count)
+            {
+                Window2 eroare = new Window2();
+                eroare.Show();
+                //Console.WriteLine("Username already exists");
+            }
+            else
+            {
+                if (code == "@dm1n!")
+                {
+                    bool passValid = FormValidationRules.IsValidPassword(userPass);
+
+                    if (passValid)
+                    {
+                        bool emailValid = FormValidationRules.IsValidEmail(mail);
+                        if (emailValid)
+                        {
+                            UserModel u = new UserModel(userName, userPass, mail, "admin");
+                            int id_a = u.UserInsert(userName, userPass, mail);
+
+                            AdminModel adm = new AdminModel(sname, fname, id_a);
+                            int result = adm.insertAdmin(sname, fname, id_a);
+
+                            if (result < 0)
+                            {
+                                Error error = new Error();
+                                error.ErrorMessage = "Couldn't register Admin";
+                                error.Show();
+                            }
+
+                        }
+                        else
+                        {
+                            Error errorWindow = new Error();
+                            errorWindow.ErrorMessage = "Email is not valid. Please provide a valid email.";
+                            errorWindow.Show();
+                        }
+                    }
+                    else
+                    {
+                        Error errorWindow = new Error();
+                        errorWindow.ErrorMessage = "Weak Password! Minimum 8 characters - 1 upper, 1 lower, 1 digit. Please try again!";
+                        errorWindow.Show();
+                    }
+                }
+                else
+                {
+                    Error errWindow = new Error();
+                    errWindow.ErrorMessage = "Code validation failed";
+                    errWindow.Show();
+                }
+            }
+        }
+
+        private void userInput(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+
+            if (textBox == username)
+            {
+                userName = textBox.Text;
+            }
+            else if (textBox == email)
+            {
+                mail = textBox.Text;
+            }
+            else if (textBox == surname)
+            {
+                sname = textBox.Text;
+            }
+            else if (textBox == firstname)
+            {
+                fname = textBox.Text;
+            }
+            else if (textBox == codetxt)
+            {
+                code = textBox.Text;
+            }
         }
     }
 }

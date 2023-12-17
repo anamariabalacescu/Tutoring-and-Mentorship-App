@@ -21,7 +21,7 @@ namespace app_login
             iduser = id;
         }
 
-        private Admin toAdmin() => new Admin() { Nume = this.nume, Prenume = this.prenume, ID_User = this.iduser};
+        private Admin toAdmin() => new Admin() { Nume = this.nume, Prenume = this.prenume, ID_User = this.iduser };
 
         public int insertAdmin(string sname, string fname, int id)
         {
@@ -29,7 +29,6 @@ namespace app_login
             {
                 // Assuming you have an EncryptionMachine class for password encryption
                 // string encrPass = EncryptionMachine.Encrypt(pass);
-                string encPAss = EncryptionMachine.Encrypt(pass);
                 AdminModel newAdmin = new AdminModel(sname, fname, id);
 
                 try
