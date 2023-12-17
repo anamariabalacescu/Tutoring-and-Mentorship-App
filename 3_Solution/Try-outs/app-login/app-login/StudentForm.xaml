@@ -56,6 +56,7 @@
                     <ComboBoxItem Content="Professor"/>
                 </ComboBox>
                 <Button x:Name="signup" Content="Sign up" Background="LightSteelBlue" HorizontalAlignment="Left" Height="20" Margin="134,485,0,0" VerticalAlignment="Top" Width="54" Click="onclick"/>
+                <Image Source="D:\ATM 3\Ap_bd\proiect\app-login\home.png" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="20" MouseDown="goHome"/>
             </Grid>
         </Border>
     </Border>

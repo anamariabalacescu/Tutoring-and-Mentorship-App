@@ -7,47 +7,57 @@ using System.Threading.Tasks;
 
 namespace app_login
 {
-    internal class Student
+    public  class StudentModel
     {
+        public int id { get; set; }
         public string nume { get; set; }
         public string prenume { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
         public string universitate { get; set; }
-        public string email { get; set; }
-        public Student() { }
-        public Student(string sname, string fname, string uni, string userName, string userPass, string mail)
+        public StudentModel() { }
+        public StudentModel(int id_std, string sname, string fname, string uni)
         {
+            id = id_std;
             nume = sname;
             prenume = fname;
             universitate = uni;
-            username = userName;
-            password = userPass;
-            email = mail;
         }
-        public int insertStudent(string sname, string fname, string univ, string user, string pass, string email, SqlConnection conn)
-        {
-            SqlCommand insertCmd = conn.CreateCommand();
-            string encrPass = EncryptionMachine.Encrypt(pass);
-            insertCmd.CommandText = $"INSERT INTO Students (Nume, Prenume, Universitate, Username, StdPassword, Email) VALUES ('{sname}','{fname}','{univ}','{user}','{encrPass}','{email}');";
-            //insertCmd.Parameters.AddWithValue("@Username", username.Text);
-            //insertCmd.Parameters.AddWithValue("@Password", password.Text);
-            //insertCmd.Parameters.AddWithValue("@Nume", surname.Text);
-            //insertCmd.Parameters.AddWithValue("@Prenume", firstname.Text);.
-            int rowsAffected = insertCmd.ExecuteNonQuery();
 
-            if (rowsAffected > 0)
+        private Student toStudent() => new Student() { Nume = this.nume, Prenume = this.prenume,Universitate = this.universitate, ID_User=id  };
+
+        public int InsertStudent(int id, string sname, string fname, string univ)
+        {
+            using (TutoringDataContext tut = new TutoringDataContext())
             {
-                return 1;
-                // Successfully inserted the new user
-                //Console.WriteLine("User inserted successfully");
-            }
-            else
-            {
-                return 0;
-                // Failed to insert user
-                //Console.WriteLine("Failed to insert user");
+                // Assuming you have an EncryptionMachine class for password encryption
+                // string encrPass = EncryptionMachine.Encrypt(pass);
+                StudentModel newStudent = new StudentModel(id, sname, fname, univ);
+
+                try
+                {
+                    // Insert the newStudentModel into the StudentModels table
+                    tut.Students.InsertOnSubmit(newStudent.toStudent());
+                    tut.SubmitChanges();
+
+                    // Check if the insertion was successful
+                    if (newStudent.toStudent().ID_Std > 0)
+                    {
+                        return 1; // Successfully inserted the new student
+                    }
+                    else
+                    {
+                        return 0; // Failed to insert student
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Handle exceptions, log, or throw as needed
+                    Error er = new Error();
+                    er.ErrorMessage = ex.Message;
+                    er.Show();
+                    return 0; // Return 0 to indicate failure
+                }
             }
         }
+
     }
 }

@@ -61,6 +61,7 @@ namespace app_login
                     // Navigate to the AdminWindow
                     AdminForm adminWindow = new AdminForm();
                     adminWindow.Show();
+                    Close();
                 }
                 else if (selectedRole == "Student")
                 {
@@ -71,6 +72,7 @@ namespace app_login
                     // Navigate to the ProfessorWindow
                     ProfRegister professorWindow = new ProfRegister();
                     professorWindow.Show();
+                    Close();
                 }
                 else
                 {
@@ -87,70 +89,55 @@ namespace app_login
 
         private void InitialText(object sender, RoutedEventArgs e)
         {
-            if (sender.GetType() is PasswordBox)
+            TextBox textBox = (TextBox)sender;
+            if (string.IsNullOrWhiteSpace(textBox.Text))
             {
-                placeholderText.Text = "Insert password";
-            }
-            else
-            {
-                TextBox textBox = (TextBox)sender;
-                if (string.IsNullOrWhiteSpace(textBox.Text))
+                if (textBox == username)
                 {
-                    if (textBox == username)
-                    {
-                        textBox.Text = "Insert username";
-                    }
-                    else if (textBox == email)
-                    {
-                        textBox.Text = "Insert email address";
-                    }
-                    else if (textBox == surname)
-                    {
-                        textBox.Text = "Insert Surname";
-                    }
-                    else if (textBox == firstname)
-                    {
-                        textBox.Text = "Insert Firstname";
-                    }
-                    else if (textBox == university)
-                    {
-                        textBox.Text = "Insert university";
-                    }
+                    textBox.Text = "Insert username";
+                }
+                else if (textBox == email)
+                {
+                    textBox.Text = "Insert email address";
+                }
+                else if (textBox == surname)
+                {
+                    textBox.Text = "Insert Surname";
+                }
+                else if (textBox == firstname)
+                {
+                    textBox.Text = "Insert Firstname";
+                }
+                else if (textBox == university)
+                {
+                    textBox.Text = "Insert university";
                 }
             }
         }
 
         private void userInput(object sender, TextChangedEventArgs e)
         {
-            if (sender.GetType() is PasswordBox)
-            {
-                PasswordBox pb = (PasswordBox)sender;
-                userPass = pb.Password;
-            }
-            else
-            {
-                TextBox textBox = (TextBox)sender;
+            TextBox textBox = (TextBox)sender;
 
-                if (textBox == username)
-                {
-                    userName = textBox.Text;
-                }
-                else if (textBox == email)
-                {
-                    mail = textBox.Text;
-                }
-                else if (textBox == surname)
-                {
-                    sname = textBox.Text;
-                }
-                else if (textBox == firstname)
-                {
-                    fname = textBox.Text;
-                }
-                else if (textBox == university)
-                {
-                    uni = textBox.Text;
-                }
+            if (textBox == username)
+            {
+                userName = textBox.Text;
+            }
+            else if (textBox == email)
+            {
+                mail = textBox.Text;
+            }
+            else if (textBox == surname)
+            {
+                sname = textBox.Text;
+            }
+            else if (textBox == firstname)
+            {
+                fname = textBox.Text;
+            }
+            else if (textBox == university)
+            {
+                uni = textBox.Text;
             }
         }
 
@@ -159,7 +146,7 @@ namespace app_login
 
             conn.Open();
             
-            bool count = FormValidationRules.IsValidUsername(userName, conn);
+            bool count = FormValidationRules.IsValidUsername(userName);
             
             if (count)
             {
@@ -169,7 +156,6 @@ namespace app_login
             }
             else
             {
-                Student std = new Student(sname, fname, uni, userName, userPass, mail);
                 bool passValid = FormValidationRules.IsValidPassword(userPass);
 
                 if (passValid)
@@ -177,7 +163,18 @@ namespace app_login
                     bool emailValid = FormValidationRules.IsValidEmail(mail);
                     if (emailValid)
                     {
-                        int result = std.insertStudent(sname, fname, uni, userName, userPass, mail, conn);
+                        UserModel u = new UserModel(userName, userPass, mail, "student");
+                        int id_std = u.UserInsert(userName, userPass, mail);
+
+                        StudentModel std = new StudentModel(id_std,sname, fname, uni);
+                        int result = std.InsertStudent(id_std, sname, fname, uni);
+
+                        if (result < 0)
+                        {
+                            Error error = new Error();
+                            error.ErrorMessage = "Couldn't register Student";
+                            error.Show();
+                        }
                     }
                     else
                     {
@@ -219,6 +216,13 @@ namespace app_login
         {
             PasswordBox pb = (PasswordBox)sender;
             userPass = pb.Password;
+        }
+
+        private void goHome(object sender, MouseButtonEventArgs e)
+        {
+            MainWindow mw = new MainWindow();
+            mw.Show();
+            Close();
         }
     }
 

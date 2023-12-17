@@ -43,24 +43,34 @@ namespace app_login
                     // Navigate to the AdminWindow
                     AdminForm adminWindow = new AdminForm();
                     adminWindow.Show();
+                    Close();
                 }
                 else if (selectedRole == "Student")
                 {
                     // Navigate to the StudentWindow
                     StudentForm studentWindow = new StudentForm();
                     studentWindow.Show();
+                    Close();
                 }
                 else if (selectedRole == "Professor")
                 {
                     // Navigate to the ProfessorWindow
                     ProfRegister professorWindow = new ProfRegister();
                     professorWindow.Show();
+                    Close();
                 }
                 else
                 {
                     // Handle other cases or show an error message
                 }
             }
+        }
+
+        private void goHome(object sender, MouseButtonEventArgs e)
+        {
+            MainWindow mw = new MainWindow();
+            mw.Show();
+            Close();
         }
     }
 }

@@ -20,16 +20,17 @@ namespace app_login
                 aesAlg.Key = Encoding.UTF8.GetBytes(key.PadRight(16)); // Padding key if its length is less than 16 bytes
                 aesAlg.Mode = CipherMode.CBC;
 
-                // Generate a random IV
+                // Use a fixed IV with a length equal to the block size
                 byte[] iv = new byte[aesAlg.BlockSize / 8];
-                using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
+                for (int i = 0; i < iv.Length; i++)
                 {
-                    rng.GetBytes(iv);
+                    iv[i] = 0; // You can replace this with your logic to generate a fixed IV
                 }
 
                 // Encrypt using AES-CBC mode
                 ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, iv);
                 byte[] encryptedBytes = null;
+
                 using (var msEncrypt = new System.IO.MemoryStream())
                 {
                     using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
@@ -52,6 +53,7 @@ namespace app_login
                 return cipherText;
             }
         }
+
 
         public static string Decrypt(string cipherText)
         {

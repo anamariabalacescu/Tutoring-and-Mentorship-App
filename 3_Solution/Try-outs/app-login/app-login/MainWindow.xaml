@@ -37,7 +37,12 @@
                     </Image.Source>
                 </Image>
                 <TextBox x:Name="user" Background="WhiteSmoke" HorizontalAlignment="Left" Height="20" Margin="101,238,0,0" TextWrapping="Wrap" Text="Insert username" VerticalAlignment="Top" Width="119" GotFocus="ClearText" LostFocus="RestoreText" TextChanged="userInput"/>
-                <TextBox x:Name="password" Background="WhiteSmoke" HorizontalAlignment="Left" Height="20" Margin="101,278,0,0" TextWrapping="Wrap" Text="Insert password" VerticalAlignment="Top" Width="119" GotFocus="ClearText" LostFocus="RestoreText" TextChanged="userInput"/>
+                <PasswordBox x:Name="password" Width="120" Background="WhiteSmoke" HorizontalAlignment="Left" Height="20"
+                 Margin="101,278,0,0" VerticalAlignment="Top" PasswordChanged="userInput"
+                 GotFocus="OnPasswordBoxGotFocus" LostFocus="OnPasswordBoxLostFocus"/>
+                <TextBox x:Name="placeholderText" Width="120" Background="WhiteSmoke" HorizontalAlignment="Left" Height="20"
+                Margin="101,278,0,0" VerticalAlignment="Top" Foreground="Gray"
+                Text="Insert password" GotFocus="OnPlaceholderGotFocus" />
                 <Button Content="Sign in" Background="LightSteelBlue" HorizontalAlignment="Left" Height="20" Margin="134,321,0,0" VerticalAlignment="Top" Width="54" Click="Button_Click_1"/>
                 <Button Background="Transparent" HorizontalAlignment="Left" Height="20" Margin="50,355,0,0" VerticalAlignment="Top" Width="220" Click="Button_Click">
                     <TextBlock Text="I don't have an account yet. Sign me up!" TextDecorations="Underline" Foreground="Blue" />

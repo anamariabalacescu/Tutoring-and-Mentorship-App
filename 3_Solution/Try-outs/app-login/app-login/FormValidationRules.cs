@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Data.SqlClient;
+using System.IO.Packaging;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -38,15 +40,25 @@ namespace app_login
 
             return true;
         }
-
-        public static bool IsValidUsername(string username, SqlConnection conn)
+        public static bool IsValidUser(string user, string pass)
         {
-            SqlCommand cmd = conn.CreateCommand();
-            cmd.CommandText = "SELECT COUNT(*) FROM Students WHERE Username = @Username";
-            cmd.Parameters.AddWithValue("@Username", username);
+            if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(pass))
+                return false;
 
-            int count = (int)cmd.ExecuteScalar();
-            
+            using (TutoringDataContext tut = new TutoringDataContext())
+            {
+                // Check if there is a user with the provided username and password
+                bool isValidUser = tut.Users.Any(u => u.Username == user && u.UserPassword == pass);
+
+                return isValidUser;
+            }
+        }
+        public static bool IsValidUsername(string username)
+        {
+            TutoringDataContext tut = new TutoringDataContext();
+
+            var count = tut.Users.Count(s => s.Username == username);
+
             return count > 0;
         }
     }

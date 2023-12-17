@@ -20,6 +20,8 @@ namespace app_login
     /// </summary>
     public partial class MainWindow : Window
     {
+        private string username {  set; get; }
+        private string userPass { set; get; }
         public MainWindow()
         {
             InitializeComponent();
@@ -39,9 +41,18 @@ namespace app_login
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Window3 home = new Window3();  // Send to home page - Window3
-            home.Show();  // Show Window3
-            Close();  // Close the current window3
+            string encrpass = EncryptionMachine.Encrypt(userPass);
+            if (FormValidationRules.IsValidUser(user.Text, encrpass)) {
+                Window3 home = new Window3();  // Send to home page - Window3
+                home.Show();  // Show Window3
+                Close();  // Close the current window3
+            }
+            else
+            {
+                Error we = new Error();
+                we.ErrorMessage = "Username does not exist / Wrong password\n";
+                we.Show();
+            }
         }
 
         private void CloseApp(object sender, MouseButtonEventArgs e)
@@ -54,10 +65,6 @@ namespace app_login
             if (sender == user)
             {
                 string userInputUsername = user.Text;
-            }
-            else if (sender == password)
-            {
-                string userInputPassword = password.Text;
             }
         }
 
@@ -85,6 +92,29 @@ namespace app_login
                 }
             }
         }
+        private void OnPasswordBoxGotFocus(object sender, RoutedEventArgs e)
+        {
+            placeholderText.Visibility = Visibility.Collapsed;
+        }
 
+        private void OnPasswordBoxLostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(password.Password))
+            {
+                placeholderText.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void OnPlaceholderGotFocus(object sender, RoutedEventArgs e)
+        {
+            placeholderText.Visibility = Visibility.Collapsed;
+            password.Focus();
+        }
+
+        private void userInput(object sender, RoutedEventArgs e)
+        {
+            PasswordBox pb = (PasswordBox)sender;
+            userPass = pb.Password;
+        }
     }
 }

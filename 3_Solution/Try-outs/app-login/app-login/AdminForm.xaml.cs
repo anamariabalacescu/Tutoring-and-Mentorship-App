@@ -57,12 +57,14 @@ namespace app_login
                     // Navigate to the StudentWindow
                     StudentForm studentWindow = new StudentForm();
                     studentWindow.Show();
+                    Close();
                 }
                 else if (selectedRole == "Professor")
                 {
                     // Navigate to the ProfessorWindow
                     ProfRegister professorWindow = new ProfRegister();
                     professorWindow.Show();
+                    Close();
                 }
                 else
                 {
@@ -86,10 +88,6 @@ namespace app_login
                 {
                     textBox.Text = "Insert username";
                 }
-                else if (textBox == password)
-                {
-                    textBox.Text = "Insert password";
-                }
                 else if (textBox == email)
                 {
                     textBox.Text = "Insert email address";
@@ -107,6 +105,35 @@ namespace app_login
                     textBox.Text = "Insert university";
                 }
             }
+        }
+        private void OnPasswordBoxGotFocus(object sender, RoutedEventArgs e)
+        {
+            placeholderText.Visibility = Visibility.Collapsed;
+        }
+        private void OnPasswordBoxLostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(password.Password))
+            {
+                placeholderText.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void OnPlaceholderGotFocus(object sender, RoutedEventArgs e)
+        {
+            placeholderText.Visibility = Visibility.Collapsed;
+            password.Focus();
+        }
+
+        private void userInput(object sender, RoutedEventArgs e)
+        {
+            PasswordBox pb = (PasswordBox)sender;
+            userPass = pb.Password;
+        }
+        private void goHome(object sender, MouseButtonEventArgs e)
+        {
+            MainWindow mw = new MainWindow();
+            mw.Show();
+            Close();
         }
     }
 }

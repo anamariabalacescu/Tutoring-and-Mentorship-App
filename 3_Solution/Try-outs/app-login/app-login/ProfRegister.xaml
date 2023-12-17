@@ -38,6 +38,7 @@
                         <BitmapImage UriSource="D:\ATM 3\Ap_bd\proiect\app-login\icon.png" />
                     </Image.Source>
                 </Image>
+                <Image Source="D:\ATM 3\Ap_bd\proiect\app-login\home.png" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="20" MouseDown="goHome"/>
                 <TextBox x:Name="username" Background="WhiteSmoke" HorizontalAlignment="Left" Height="20" Margin="102,226,0,0" TextWrapping="Wrap" Text="Insert username" VerticalAlignment="Top" Width="118" GotFocus="EraseText" LostFocus="InitialText" TextChanged="userInput"/>
                 <PasswordBox x:Name="password" Width="120" Background="WhiteSmoke" HorizontalAlignment="Left" Height="20"
                 Margin="102,267,0,0" VerticalAlignment="Top" PasswordChanged="userInput"

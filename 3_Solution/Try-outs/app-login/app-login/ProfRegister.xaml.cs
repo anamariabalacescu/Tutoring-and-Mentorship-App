@@ -32,13 +32,7 @@ namespace app_login
         public ProfRegister()
         {
             InitializeComponent();
-            InitConn();
-        }
-
-        void InitConn()
-        {
-            string connectionString = ConfigurationManager.ConnectionStrings["Tutoring"].ToString();
-            conn = new SqlConnection(connectionString);
+            //InitConn();
         }
 
         private void CloseApp(object sender, MouseButtonEventArgs e)
@@ -61,12 +55,14 @@ namespace app_login
                     // Navigate to the AdminWindow
                     AdminForm adminWindow = new AdminForm();
                     adminWindow.Show();
+                    Close();
                 }
                 else if (selectedRole == "Student")
                 {
                     // Navigate to the StudentWindow
                     StudentForm studentWindow = new StudentForm();
                     studentWindow.Show();
+                    Close();
                 }
                 else if (selectedRole == "Professor")
                 {
@@ -142,9 +138,7 @@ namespace app_login
         private void onclick(object sender, RoutedEventArgs e)
         {
 
-            conn.Open();
-
-            bool count = FormValidationRules.IsValidUsername(userName, conn);
+            bool count = FormValidationRules.IsValidUsername(userName);
 
             if (count)
             {
@@ -154,7 +148,6 @@ namespace app_login
             }
             else
             {
-                Professor p = new Professor(sname, fname, prof, userName, userPass, mail);
                 bool passValid = FormValidationRules.IsValidPassword(userPass);
 
                 if (passValid)
@@ -162,7 +155,19 @@ namespace app_login
                     bool emailValid = FormValidationRules.IsValidEmail(mail);
                     if (emailValid)
                     {
-                        int result = p.insertProfesor(sname, fname, prof, userName, userPass, mail, conn);
+                        UserModel u = new UserModel(userName, userPass, mail, "profesor");
+                        int id_p = u.UserInsert(userName, userPass, mail);
+
+                        ProfessorModel p = new ProfessorModel(id_p,sname, fname, prof);
+                        int result = p.InsertProfesor(id_p, sname, fname, prof);
+
+                        if(result < 0)
+                        {
+                            Error error = new Error();
+                            error.ErrorMessage = "Couldn't register Professor";
+                            error.Show();
+                        }
+
                     }
                     else
                     {
@@ -178,8 +183,6 @@ namespace app_login
                     errorWindow.Show();
                 }
             }
-
-            conn.Close();
         }
         private void OnPasswordBoxGotFocus(object sender, RoutedEventArgs e)
         {
@@ -204,6 +207,12 @@ namespace app_login
         {
             PasswordBox pb = (PasswordBox)sender;
             userPass = pb.Password;
+        }
+        private void goHome(object sender, MouseButtonEventArgs e)
+        {
+            MainWindow mw = new MainWindow();
+            mw.Show();
+            Close();
         }
     }
 }

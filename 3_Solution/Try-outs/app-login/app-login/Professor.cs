@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Linq;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -7,47 +8,60 @@ using System.Threading.Tasks;
 
 namespace app_login
 {
-    internal class Professor
+    internal class ProfessorModel
     {
+        public int id {  get; set; }
         public string nume { get; set; }
         public string prenume { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
         public string profesie { get; set; }
-        public string email { get; set; }
 
-        public Professor() { }
-        public Professor(string sname, string fname, string prof, string userName, string userPass, string mail)
+        public ProfessorModel() { }
+        public ProfessorModel(int id_prof, string sname, string fname, string prof)
         {
+            id = id_prof;
             nume = sname;
             prenume = fname;
             profesie = prof;
-            username = userName;
-            password = userPass;
-            email = mail;
         }
-        public int insertProfesor(string sname, string fname, string prof, string user, string pass, string mail, SqlConnection conn)
+        private Profesor toProfesor() => new Profesor() { ID_User = this.id, Nume = this.nume, Prenume = this.prenume, Profesie_de_baza = this.profesie };
+        public int InsertProfesor(int id_prof, string sname, string fname, string prof)
         {
-            SqlCommand insertCmd = conn.CreateCommand();
-            string encrPass = EncryptionMachine.Encrypt(pass);
-            insertCmd.CommandText = $"INSERT INTO Profesors (Nume, Prenume, Profesie_de_baza, Username, ProfPassword, Email) VALUES ('{sname}','{fname}','{prof}','{user}','{encrPass}','{mail}');";
-            //insertCmd.Parameters.AddWithValue("@Username", username.Text);
-            //insertCmd.Parameters.AddWithValue("@Password", password.Text);
-            //insertCmd.Parameters.AddWithValue("@Nume", surname.Text);
-            //insertCmd.Parameters.AddWithValue("@Prenume", firstname.Text);.
-            int rowsAffected = insertCmd.ExecuteNonQuery();
+            using (TutoringDataContext tut = new TutoringDataContext())
+            {
+                try
+                {
+                    ProfessorModel newProfesor = new ProfessorModel
+                    {
+                        id = id_prof,
+                        nume = sname,
+                        prenume = fname,
+                        profesie = prof
+                    };
 
-            if (rowsAffected > 0)
-            {
-                return 1;
-                // Successfully inserted the new user
-                //Console.WriteLine("User inserted successfully");
-            }
-            else
-            {
-                return 0;
-                // Failed to insert user
-                //Console.WriteLine("Failed to insert user");
+                    // Insert the newProfesor into the Profesors table
+                    tut.Profesors.InsertOnSubmit(newProfesor.toProfesor());
+                    tut.SubmitChanges();
+
+                    // Check if the insertion was successful
+                    ChangeSet changes = tut.GetChangeSet();
+
+                    // Check if any entities were inserted
+                    if (changes.Inserts.Count > 0)
+                    {
+                        return 1; // Successfully inserted the new professor
+                    }
+                    else
+                    {
+                        return 0; // No entities were inserted
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Handle exceptions, log, or throw as needed
+                    Error er = new Error();
+                    er.ErrorMessage = "Cannot insert into table.\n";
+                    return 0; // Return 0 to indicate failure
+                }
             }
         }
     }
