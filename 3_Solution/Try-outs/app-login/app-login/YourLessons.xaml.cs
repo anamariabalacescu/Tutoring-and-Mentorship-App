@@ -19,6 +19,8 @@ namespace app_login
     /// </summary>
     public partial class YourLessons : Window
     {
+        private int id_user { get; set; }
+        public void setId(int id) { this.id_user = id; }
         public YourLessons()
         {
             InitializeComponent();

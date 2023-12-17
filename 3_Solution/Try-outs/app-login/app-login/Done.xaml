@@ -1,0 +1,43 @@
+﻿<Window x:Class="app_login.Done"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:app_login"
+        mc:Ignorable="d"
+               Title="Succes" Height="200" Width="400"
+                WindowStyle="none"
+        AllowsTransparency="true"
+        Foreground="#FF896DD7" 
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen">
+    <Border CornerRadius="20" BorderThickness="10" BorderBrush="LightBlue">
+
+        <Border CornerRadius="5" BorderThickness="5">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#0c4a00" Offset="0.0"/>
+                    <GradientStop Color="#bdffb0" Offset="0.35"/>
+                    <GradientStop Color="#0c4a00" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#e6f0ff" Offset="0.0"/>
+                        <GradientStop Color="#bdffb0" Offset="2.0"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Image HorizontalAlignment="Left" Height="47" Margin="16,45,0,0" VerticalAlignment="Top" Width="59" RenderTransformOrigin="0.512,0.445">
+                    <Image.Source>
+                        <BitmapImage UriSource="D:\ATM 3\Ap_bd\proiect\app-login\yes.png"/>
+                    </Image.Source>
+                </Image>
+                <TextBlock HorizontalAlignment="Left" Height="51" Margin="65,51,0,0" TextWrapping="Wrap" Text="{Binding SuccessMessage}" VerticalAlignment="Top" Width="280"/>
+                <Button x:Name="home" Content="Home" Background="#aeff9e" Foreground ="#0c4a00" HorizontalAlignment="Left" Height="21" Margin="88,117,0,0" VerticalAlignment="Top" Width="52" Click="onClick"/>
+                <Button x:Name="exit" Content="Exit" Background="#aeff9e" Foreground ="DarkRed"  HorizontalAlignment="Left" Height="21" Margin="228,117,0,0" VerticalAlignment="Top" Width="52" Click="onClick"/>
+            </Grid>
+        </Border>
+    </Border>
+</Window>

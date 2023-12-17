@@ -27,11 +27,6 @@ namespace app_login
             InitializeComponent();
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Window1 register = new Window1();  // Create an instance of Window1
@@ -44,6 +39,11 @@ namespace app_login
             string encrpass = EncryptionMachine.Encrypt(userPass);
             if (FormValidationRules.IsValidUser(user.Text, encrpass)) {
                 Window3 home = new Window3();  // Send to home page - Window3
+
+                TutoringDataContext tu = new TutoringDataContext();
+                var usr = tu.Users.Where(x => x.Username == username).FirstOrDefault();
+                home.setId(usr.ID_User);
+                
                 home.Show();  // Show Window3
                 Close();  // Close the current window3
             }
@@ -64,7 +64,7 @@ namespace app_login
         {
             if (sender == user)
             {
-                string userInputUsername = user.Text;
+                username = user.Text;
             }
         }
 

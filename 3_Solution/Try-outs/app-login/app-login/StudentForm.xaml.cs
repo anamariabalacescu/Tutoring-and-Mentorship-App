@@ -34,14 +34,14 @@ namespace app_login
         public StudentForm()
         {
             InitializeComponent();
-            InitConn();
+            //InitConn();
         }
 
-        void InitConn()
-        {
-            string connectionString = ConfigurationManager.ConnectionStrings["Tutoring"].ToString();
-            conn = new SqlConnection(connectionString);
-        }
+        //void InitConn()
+        //{
+        //    string connectionString = ConfigurationManager.ConnectionStrings["Tutoring"].ToString();
+        //    conn = new SqlConnection(connectionString);
+        //}
         private void CloseApp(object sender, MouseButtonEventArgs e)
         {
 
@@ -143,8 +143,6 @@ namespace app_login
 
         private void onclick(object sender, RoutedEventArgs e)
         {
-
-            conn.Open();
             
             bool count = FormValidationRules.IsValidUsername(userName);
             
@@ -174,6 +172,10 @@ namespace app_login
                             Error error = new Error();
                             error.ErrorMessage = "Couldn't register Student";
                             error.Show();
+                        } else{
+                            Done done = new Done();
+                            done.SuccessMessage = "Student registered!";
+                            done.Show();
                         }
                     }
                     else
@@ -190,8 +192,6 @@ namespace app_login
                     errorWindow.Show();
                 }
             }
-
-            conn.Close();
         }
         private void OnPasswordBoxGotFocus(object sender, RoutedEventArgs e)
         {

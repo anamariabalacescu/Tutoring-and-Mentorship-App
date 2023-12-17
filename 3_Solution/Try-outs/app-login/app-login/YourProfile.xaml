@@ -90,6 +90,7 @@
                         <!-- Your content for the second column here -->
                     </StackPanel>
                 </Grid>
+                <TreeView x:Name="UserData" Background="Transparent" HorizontalAlignment="Left" Height="773" Margin="651,127,0,0" Grid.Row="1" VerticalAlignment="Top" Width="779" Loaded="onLoaded"/>
             </Grid>
         </Border>
     </Border>

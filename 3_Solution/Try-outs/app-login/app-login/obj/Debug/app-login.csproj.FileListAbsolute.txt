@@ -72,3 +72,5 @@ D:\ATM 3\Ap_bd\proiect\Tutoring-and-Mentorship-App\3_Solution\Try-outs\app-login
 D:\ATM 3\Ap_bd\proiect\Tutoring-and-Mentorship-App\3_Solution\Try-outs\app-login\app-login\obj\Debug\app-login.csproj.CoreCompileInputs.cache
 D:\ATM 3\Ap_bd\proiect\Tutoring-and-Mentorship-App\3_Solution\Try-outs\app-login\app-login\obj\Debug\app-login.exe
 D:\ATM 3\Ap_bd\proiect\Tutoring-and-Mentorship-App\3_Solution\Try-outs\app-login\app-login\obj\Debug\app-login.pdb
+D:\ATM 3\Ap_bd\proiect\app-login\app-login\obj\Debug\Done.g.cs
+D:\ATM 3\Ap_bd\proiect\app-login\app-login\obj\Debug\Done.baml

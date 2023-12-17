@@ -168,8 +168,11 @@ namespace app_login
                                 Error error = new Error();
                                 error.ErrorMessage = "Couldn't register Admin";
                                 error.Show();
+                            } else{
+                                Done done = new Done();
+                                done.SuccessMessage = "Student registered!";
+                                done.Show();
                             }
-
                         }
                         else
                         {

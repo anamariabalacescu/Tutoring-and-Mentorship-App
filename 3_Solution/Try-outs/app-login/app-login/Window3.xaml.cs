@@ -19,10 +19,13 @@ namespace app_login
     /// </summary>
     public partial class Window3 : Window
     {
+        private int id_user { get; set; }
         public Window3()
         {
             InitializeComponent();
         }
+
+        public void setId(int id) { this.id_user = id; }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
@@ -45,6 +48,7 @@ namespace app_login
         private void Profile(object sender, RoutedEventArgs e)
         {
             var profile = new YourProfile();
+            profile.setId(this.id_user);
             profile.Show();
             Close();
         }
@@ -53,6 +57,7 @@ namespace app_login
         {
             var les = new YourLessons();
             les.Show();
+            les.setId(this.id_user);
             Close();
         }
 
@@ -60,6 +65,7 @@ namespace app_login
         {
             var settings = new Settings();
             settings.Show();
+            settings.setId(this.id_user);
             Close();
         }
 

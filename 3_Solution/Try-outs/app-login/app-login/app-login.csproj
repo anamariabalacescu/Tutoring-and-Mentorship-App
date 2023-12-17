@@ -61,11 +61,15 @@
       <DependentUpon>AdminForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="AdminModel.cs" />
+    <Compile Include="Done.xaml.cs">
+      <DependentUpon>Done.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EncryptionMachine.cs" />
     <Compile Include="Error.xaml.cs">
       <DependentUpon>Error.xaml</DependentUpon>
     </Compile>
     <Compile Include="FormValidationRules.cs" />
+    <Compile Include="GeneralCmds.cs" />
     <Compile Include="LogoutConfirmationDialog.xaml.cs">
       <DependentUpon>LogoutConfirmationDialog.xaml</DependentUpon>
     </Compile>
@@ -102,6 +106,10 @@
       <DependentUpon>YourProfile.xaml</DependentUpon>
     </Compile>
     <Page Include="AdminForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Done.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

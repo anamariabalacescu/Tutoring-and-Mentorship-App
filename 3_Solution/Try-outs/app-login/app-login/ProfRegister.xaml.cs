@@ -111,28 +111,28 @@ namespace app_login
         }
         private void userInput(object sender, TextChangedEventArgs e)
         {
-                TextBox textBox = (TextBox)sender;
+            TextBox textBox = (TextBox)sender;
 
-                if (textBox == username)
-                {
-                    userName = textBox.Text;
-                }
-                else if (textBox == email)
-                {
-                    mail = textBox.Text;
-                }
-                else if (textBox == surname)
-                {
-                    sname = textBox.Text;
-                }
-                else if (textBox == firstname)
-                {
-                    fname = textBox.Text;
-                }
-                else if (textBox == profession)
-                {
-                    prof = textBox.Text;
-                }
+            if (textBox == username)
+            {
+                userName = textBox.Text;
+            }
+            else if (textBox == email)
+            {
+                mail = textBox.Text;
+            }
+            else if (textBox == surname)
+            {
+                sname = textBox.Text;
+            }
+            else if (textBox == firstname)
+            {
+                fname = textBox.Text;
+            }
+            else if (textBox == profession)
+            {
+                prof = textBox.Text;
+            }
         }
 
         private void onclick(object sender, RoutedEventArgs e)
@@ -166,8 +166,11 @@ namespace app_login
                             Error error = new Error();
                             error.ErrorMessage = "Couldn't register Professor";
                             error.Show();
+                        } else{
+                            Done done = new Done();
+                            done.SuccessMessage = "Student registered!";
+                            done.Show();
                         }
-
                     }
                     else
                     {
