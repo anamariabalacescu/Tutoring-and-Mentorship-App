@@ -25,10 +25,14 @@ namespace app_login
         {
             InitializeComponent();
         }
-
+        public int GetID()
+        {
+            return id_user;
+        }
         private void Profile(object sender, RoutedEventArgs e)
         {
             var prof = new YourProfile();
+            prof.setId(this.id_user);
             prof.Show();
             Close();
         }
@@ -36,6 +40,7 @@ namespace app_login
         private void Settings(object sender, RoutedEventArgs e)
         {
             var settings = new Settings(); 
+            settings.setId(this.id_user);
             settings.Show();
             Close();
         }

@@ -62,5 +62,27 @@ namespace app_login
         {
             Application.Current.Shutdown();
         }
+
+        private void pass_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePwd changePwd = new ChangePwd();
+            changePwd.SetID(id_user);
+            Settings_type.Content = changePwd;
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeEmail changeEmail = new ChangeEmail();
+            changeEmail.SetID(id_user);
+            Settings_type.Content = changeEmail;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            ChangeUser changeUser = new ChangeUser();
+            changeUser.SetID(id_user);
+            Settings_type.Content = changeUser;
+        }
     }
 }

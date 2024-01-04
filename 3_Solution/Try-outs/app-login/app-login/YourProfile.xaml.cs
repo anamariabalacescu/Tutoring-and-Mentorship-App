@@ -29,6 +29,7 @@ namespace app_login
         private void Lessons(object sender, RoutedEventArgs e)
         {
             var les = new YourLessons();
+            les.setId(this.id_user);
             les.Show();
             Close();
         }
@@ -36,6 +37,7 @@ namespace app_login
         private void Settings(object sender, RoutedEventArgs e)
         {
             var set = new Settings();
+            set.setId(this.id_user);
             set.Show();
             Close();
         }

@@ -1,6 +1,7 @@
 ﻿
 
 FD:\ATM 3\Ap_bd\proiect\app-login\app-login\AdminForm.xaml;;
+FD:\ATM 3\Ap_bd\proiect\app-login\app-login\Done.xaml;;
 FD:\ATM 3\Ap_bd\proiect\app-login\app-login\Error.xaml;;
 FD:\ATM 3\Ap_bd\proiect\app-login\app-login\LogoutConfirmationDialog.xaml;;
 FD:\ATM 3\Ap_bd\proiect\app-login\app-login\MainWindow.xaml;;
@@ -12,5 +13,8 @@ FD:\ATM 3\Ap_bd\proiect\app-login\app-login\Window2.xaml;;
 FD:\ATM 3\Ap_bd\proiect\app-login\app-login\Window3.xaml;;
 FD:\ATM 3\Ap_bd\proiect\app-login\app-login\YourLessons.xaml;;
 FD:\ATM 3\Ap_bd\proiect\app-login\app-login\YourProfile.xaml;;
-FD:\ATM 3\Ap_bd\proiect\app-login\app-login\Done.xaml;;
+FD:\ATM 3\Ap_bd\proiect\app-login\app-login\ChangePwd.xaml;;
+FD:\ATM 3\Ap_bd\proiect\app-login\app-login\ChangeEmail.xaml;;
+FD:\ATM 3\Ap_bd\proiect\app-login\app-login\ChangeUser.xaml;;
+FD:\ATM 3\Ap_bd\proiect\app-login\app-login\DataStd.xaml;;
 

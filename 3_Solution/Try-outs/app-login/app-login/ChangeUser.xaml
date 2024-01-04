@@ -1,0 +1,26 @@
+﻿<Page x:Class="app_login.ChangeUser"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:app_login"
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="400"
+      Title="ChangePwd">
+
+    <Grid>
+
+        <Label Content="Current Username:" HorizontalAlignment="Left" Margin="10,28,0,0" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Times New Roman" FontSize="20"/>
+        <Label Content="New Username:" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Times New Roman" FontSize="20"/>
+        <Label Content="Password:" HorizontalAlignment="Left" Margin="10,96,0,0" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Times New Roman" FontSize="20"/>
+        <Button Content="Save changes" Background="#FFC8D2DA" HorizontalAlignment="Center" Margin="0,181,0,0" VerticalAlignment="Top" Width="108" Height="28" Click="Button_Click"/>
+        <TextBox x:Name="email" Width="172" Background="WhiteSmoke" HorizontalAlignment="Left" Height="25"
+                Margin="200,33,0,0" VerticalAlignment="Top" TextAlignment="Center" TextChanged="TextChanged"/>
+        <TextBox x:Name="newEmail" Width="172" Background="WhiteSmoke" HorizontalAlignment="Left" Height="25"
+                Margin="200,66,0,0" VerticalAlignment="Top" TextAlignment="Center" TextChanged="TextChanged"/>
+        <PasswordBox x:Name="pass" PasswordChanged="input" HorizontalAlignment="Left" Margin="200,99,0,0" VerticalAlignment="Top" Width="172" Height="25"  GotFocus="OnPasswordBoxGotFocus" LostFocus="OnPasswordBoxLostFocus"/>
+        <TextBox x:Name="placeholderNew2" Width="172" Background="WhiteSmoke" HorizontalAlignment="Left" Height="25"
+                Margin="200,99,0,0" VerticalAlignment="Top" Foreground="Gray"
+                Text="Insert password for verification" TextAlignment="Center" GotFocus="OnPlaceholderGotFocus" />
+    </Grid>
+</Page>

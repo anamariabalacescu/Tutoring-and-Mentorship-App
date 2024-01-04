@@ -74,3 +74,13 @@ D:\ATM 3\Ap_bd\proiect\Tutoring-and-Mentorship-App\3_Solution\Try-outs\app-login
 D:\ATM 3\Ap_bd\proiect\Tutoring-and-Mentorship-App\3_Solution\Try-outs\app-login\app-login\obj\Debug\app-login.pdb
 D:\ATM 3\Ap_bd\proiect\app-login\app-login\obj\Debug\Done.g.cs
 D:\ATM 3\Ap_bd\proiect\app-login\app-login\obj\Debug\Done.baml
+D:\ATM 3\Ap_bd\proiect\Tutoring-and-Mentorship-App\3_Solution\Try-outs\app-login\app-login\obj\Debug\Done.g.cs
+D:\ATM 3\Ap_bd\proiect\Tutoring-and-Mentorship-App\3_Solution\Try-outs\app-login\app-login\obj\Debug\Done.baml
+D:\ATM 3\Ap_bd\proiect\app-login\app-login\obj\Debug\ChangePwd.g.cs
+D:\ATM 3\Ap_bd\proiect\app-login\app-login\obj\Debug\ChangePwd.baml
+D:\ATM 3\Ap_bd\proiect\app-login\app-login\obj\Debug\ChangeEmail.g.cs
+D:\ATM 3\Ap_bd\proiect\app-login\app-login\obj\Debug\ChangeEmail.baml
+D:\ATM 3\Ap_bd\proiect\app-login\app-login\obj\Debug\ChangeUser.g.cs
+D:\ATM 3\Ap_bd\proiect\app-login\app-login\obj\Debug\DataStd.g.cs
+D:\ATM 3\Ap_bd\proiect\app-login\app-login\obj\Debug\ChangeUser.baml
+D:\ATM 3\Ap_bd\proiect\app-login\app-login\obj\Debug\DataStd.baml

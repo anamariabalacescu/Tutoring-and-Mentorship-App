@@ -57,8 +57,8 @@
                     </MenuItem>
                     <MenuItem Header="Your account">
                         <MenuItem Header="Profile"/>
-                        <MenuItem Header="Your lessons"/>
-                        <MenuItem Header="Settings"/>
+                        <MenuItem Header="Your lessons" Click="Lessons"/>
+                        <MenuItem Header="Settings" Click="Settings"/>
                         <MenuItem Header="Log out" Click="LogOut"/>
                     </MenuItem>
                     <MenuItem HorizontalAlignment="Right">
@@ -90,7 +90,7 @@
                         <!-- Your content for the second column here -->
                     </StackPanel>
                 </Grid>
-                <TreeView x:Name="UserData" Background="Transparent" HorizontalAlignment="Left" Height="773" Margin="651,127,0,0" Grid.Row="1" VerticalAlignment="Top" Width="779" Loaded="onLoaded"/>
+                <TreeView x:Name="UserData" Background="Transparent" HorizontalAlignment="Left" Height="773" Margin="651,127,0,0" Grid.Row="1" VerticalAlignment="Top" Width="779" Loaded="onLoaded" FontSize="20" FontFamily="Times New Roman"/>
             </Grid>
         </Border>
     </Border>

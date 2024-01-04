@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Markup;
 
 namespace app_login
@@ -78,6 +79,13 @@ namespace app_login
         {
             var user = tu.Students.Where(s => s.ID_User == id).FirstOrDefault();
             return user.Universitate;
+        }
+        public bool userExists(string username)
+        {
+            TutoringDataContext tut = new TutoringDataContext();
+
+            // Check if any user has the same username
+            return tut.Users.Any(u => u.Username == username);
         }
 
     }

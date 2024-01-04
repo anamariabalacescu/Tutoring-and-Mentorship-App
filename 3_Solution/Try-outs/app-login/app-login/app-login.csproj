@@ -61,6 +61,18 @@
       <DependentUpon>AdminForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="AdminModel.cs" />
+    <Compile Include="ChangeEmail.xaml.cs">
+      <DependentUpon>ChangeEmail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ChangePwd.xaml.cs">
+      <DependentUpon>ChangePwd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeUser.xaml.cs">
+      <DependentUpon>ChangeUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DataStd.xaml.cs">
+      <DependentUpon>DataStd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Done.xaml.cs">
       <DependentUpon>Done.xaml</DependentUpon>
     </Compile>
@@ -106,6 +118,22 @@
       <DependentUpon>YourProfile.xaml</DependentUpon>
     </Compile>
     <Page Include="AdminForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ChangeEmail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ChangePwd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ChangeUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataStd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

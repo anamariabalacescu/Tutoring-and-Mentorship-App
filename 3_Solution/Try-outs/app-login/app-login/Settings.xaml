@@ -90,6 +90,11 @@
                         <!-- Your content for the second column here -->
                     </StackPanel>
                 </Grid>
+
+                <Frame x:Name="Settings_type" Grid.Row="1" Margin="600,40,50,40"/>
+                <Button x:Name="pass" Content="Change Password" HorizontalAlignment="Left" Margin="617,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="106" Background="WhiteSmoke" Click="pass_Click"/>
+                <Button Content="Change E-mail" HorizontalAlignment="Left" Margin="791,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="106" Background="WhiteSmoke" Click="Button_Click"/>
+                <Button Content="Change Username" HorizontalAlignment="Left" Margin="964,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="106" Background="WhiteSmoke" Click="Button_Click_1"/>
             </Grid>
         </Border>
     </Border>
