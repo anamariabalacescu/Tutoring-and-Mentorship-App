@@ -89,6 +89,9 @@
     <Compile Include="ProfRegister.xaml.cs">
       <DependentUpon>ProfRegister.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SchedulingsPage.xaml.cs">
+      <DependentUpon>SchedulingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
@@ -162,6 +165,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ProfRegister.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SchedulingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -47,6 +47,7 @@
       <Column Name="ID_Prof" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ID_Std" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ID_Subj" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Member="Scheduled_Date" Type="System.String" CanBeNull="false" />
       <Association Name="Profesor_Scheduling" Member="Profesor" ThisKey="ID_Prof" OtherKey="ID_Prof" Type="Profesor" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="Student_Scheduling" Member="Student" ThisKey="ID_Std" OtherKey="ID_Std" Type="Student" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="Subject_Scheduling" Member="Subject" ThisKey="ID_Subj" OtherKey="ID_Subj" Type="Subject" IsForeignKey="true" DeleteRule="CASCADE" />

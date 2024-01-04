@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:app_login"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="400"
-      Title="ChangePwd">
+      Title="ChangeEmail">
 
     <Grid>
 

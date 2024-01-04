@@ -84,3 +84,5 @@ D:\ATM 3\Ap_bd\proiect\app-login\app-login\obj\Debug\ChangeUser.g.cs
 D:\ATM 3\Ap_bd\proiect\app-login\app-login\obj\Debug\DataStd.g.cs
 D:\ATM 3\Ap_bd\proiect\app-login\app-login\obj\Debug\ChangeUser.baml
 D:\ATM 3\Ap_bd\proiect\app-login\app-login\obj\Debug\DataStd.baml
+D:\ATM 3\Ap_bd\proiect\app-login\app-login\obj\Debug\SchedulingsPage.g.cs
+D:\ATM 3\Ap_bd\proiect\app-login\app-login\obj\Debug\SchedulingsPage.baml

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using System.Windows.Input;
 using System.Windows.Markup;
 
 namespace app_login
@@ -82,11 +83,30 @@ namespace app_login
         }
         public bool userExists(string username)
         {
-            TutoringDataContext tut = new TutoringDataContext();
-
             // Check if any user has the same username
-            return tut.Users.Any(u => u.Username == username);
+            return tu.Users.Any(u => u.Username == username);
         }
+        public int getStdID(int id_usr)
+        {
+            var std = tu.Students.FirstOrDefault(s => s.ID_User == id_usr);
 
+            if (std != null)
+            {
+                return std.ID_Std;
+            }
+            else 
+                return -1;
+        }
+        public int getProfID(int id_usr)
+        {
+            var prof = tu.Profesors.FirstOrDefault(s => s.ID_User == id_usr);
+
+            if (prof != null)
+            {
+                return prof.ID_Prof;
+            }
+            else
+                return -1;
+        }
     }
 }

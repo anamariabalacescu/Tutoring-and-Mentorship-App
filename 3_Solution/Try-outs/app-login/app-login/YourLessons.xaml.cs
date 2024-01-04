@@ -62,5 +62,21 @@ namespace app_login
         {
             Application.Current.Shutdown();
         }
+
+        private void allLessons_Click(object sender, RoutedEventArgs e)
+        {
+            SchedulingsPage sp = new SchedulingsPage(id_user);
+            Lessons_cmd.Content = sp;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -46,7 +46,7 @@
                                 </StackPanel>
                             </MenuItem.Header>
                         </MenuItem>
-                        
+
                         <MenuItem HorizontalAlignment="Stretch" Header="Home">
                         </MenuItem>
                         <MenuItem HorizontalAlignment="Stretch" Header="Subjects">
@@ -69,6 +69,11 @@
                             </MenuItem.Header>
                         </MenuItem>
                     </Menu>
+                    <DataGrid x:Name="topProfs" Width="600" Height="300" Margin="30,97,955,683" AutoGenerateColumns="False"/>
+
+                    <DataGrid x:Name="topSubjs" Width="600" Height="300" Margin="30,448,955,332" AutoGenerateColumns="False"/>
+                    <Label Content="TOP 10 Professors" HorizontalAlignment="Left" Margin="30,61,0,0" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Times New Roman" FontSize="24" Width="215"/>
+                    <Label Content="TOP 10 Subjects" HorizontalAlignment="Left" Margin="30,413,0,0" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Times New Roman" FontSize="24" Width="215"/>
                 </Grid>
             </Border>
         </Border>

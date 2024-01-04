@@ -860,6 +860,8 @@ namespace app_login
 		
 		private System.Nullable<int> _ID_Subj;
 		
+		private string _Scheduled_Date;
+		
 		private EntityRef<Profesor> _Profesor;
 		
 		private EntityRef<Student> _Student;
@@ -878,6 +880,8 @@ namespace app_login
     partial void OnID_StdChanged();
     partial void OnID_SubjChanging(System.Nullable<int> value);
     partial void OnID_SubjChanged();
+    partial void OnScheduled_DateChanging(string value);
+    partial void OnScheduled_DateChanged();
     #endregion
 		
 		public Scheduling()
@@ -976,6 +980,26 @@ namespace app_login
 					this._ID_Subj = value;
 					this.SendPropertyChanged("ID_Subj");
 					this.OnID_SubjChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Scheduled_Date", CanBeNull=false)]
+		public string Scheduled_Date
+		{
+			get
+			{
+				return this._Scheduled_Date;
+			}
+			set
+			{
+				if ((this._Scheduled_Date != value))
+				{
+					this.OnScheduled_DateChanging(value);
+					this.SendPropertyChanging();
+					this._Scheduled_Date = value;
+					this.SendPropertyChanged("Scheduled_Date");
+					this.OnScheduled_DateChanged();
 				}
 			}
 		}

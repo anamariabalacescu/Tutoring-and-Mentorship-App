@@ -89,7 +89,12 @@
                     <StackPanel Grid.Column="1">
                         <!-- Your content for the second column here -->
                     </StackPanel>
+                    
                 </Grid>
+                <Frame x:Name="Lessons_cmd" Grid.Row="1" Margin="600,40,50,40"/>
+                <Button x:Name="allLessons" Content="Show schedule" HorizontalAlignment="Left" Margin="617,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="106" Background="WhiteSmoke" Click="allLessons_Click"/>
+                <Button Content="See progress" HorizontalAlignment="Left" Margin="791,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="106" Background="WhiteSmoke" Click="Button_Click"/>
+                <Button Content="Add Lesson" HorizontalAlignment="Left" Margin="964,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="106" Background="WhiteSmoke" Click="Button_Click_1"/>
             </Grid>
         </Border>
     </Border>

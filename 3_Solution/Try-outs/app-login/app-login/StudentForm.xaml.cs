@@ -30,7 +30,6 @@ namespace app_login
         private string mail = "";
         private string uni = "";
 
-        SqlConnection conn;
         public StudentForm()
         {
             InitializeComponent();
