@@ -1,0 +1,7 @@
+C:\Users\Ali Kiwe\source\repos\ApBAZE-P\Program\obj\Debug\Program.csproj.AssemblyReference.cache
+C:\Users\Ali Kiwe\source\repos\ApBAZE-P\Program\obj\Debug\Program.csproj.CoreCompileInputs.cache
+C:\Users\Ali Kiwe\source\repos\ApBAZE-P\Program\bin\Debug\Program.exe.config
+C:\Users\Ali Kiwe\source\repos\ApBAZE-P\Program\bin\Debug\Program.exe
+C:\Users\Ali Kiwe\source\repos\ApBAZE-P\Program\bin\Debug\Program.pdb
+C:\Users\Ali Kiwe\source\repos\ApBAZE-P\Program\obj\Debug\Program.exe
+C:\Users\Ali Kiwe\source\repos\ApBAZE-P\Program\obj\Debug\Program.pdb
