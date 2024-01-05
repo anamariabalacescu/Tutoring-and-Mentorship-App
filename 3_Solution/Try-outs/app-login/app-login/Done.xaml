@@ -31,7 +31,7 @@
                 </Grid.Background>
                 <Image HorizontalAlignment="Left" Height="47" Margin="16,45,0,0" VerticalAlignment="Top" Width="59" RenderTransformOrigin="0.512,0.445">
                     <Image.Source>
-                        <BitmapImage UriSource="D:\ATM 3\Ap_bd\proiect\app-login\yes.png"/>
+                        <BitmapImage UriSource="C:\Users\Ali Kiwe\Documents\GitHub\Tutoring-and-Mentorship-App\3_Solution\Try-outs\app-login\yes.png"/>
                     </Image.Source>
                 </Image>
                 <TextBlock HorizontalAlignment="Left" Height="51" Margin="65,51,0,0" TextWrapping="Wrap" Text="{Binding SuccessMessage}" VerticalAlignment="Top" Width="280"/>

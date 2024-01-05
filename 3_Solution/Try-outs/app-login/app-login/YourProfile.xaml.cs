@@ -26,6 +26,14 @@ namespace app_login
             InitializeComponent();
         }
 
+        private void Video_Lesson(object sender, RoutedEventArgs e)
+        {
+            var vid_les = new VideoLesson();
+            vid_les.setId(this.id_user);
+            vid_les.Show();
+            Close();
+        }
+
         private void Lessons(object sender, RoutedEventArgs e)
         {
             var les = new YourLessons();

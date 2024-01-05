@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\ATM 3\Ap_bd\proiect\app-login\app-login\obj\Debug\
+C:\Users\Ali Kiwe\Documents\GitHub\Tutoring-and-Mentorship-App\3_Solution\Try-outs\app-login\app-login\obj\Debug\
 app_login
 none
 false
 DEBUG;TRACE
-D:\ATM 3\Ap_bd\proiect\app-login\app-login\App.xaml
-18628325638
+C:\Users\Ali Kiwe\Documents\GitHub\Tutoring-and-Mentorship-App\3_Solution\Try-outs\app-login\app-login\App.xaml
+20-1489527512
 
-31-1086420033
-15-1732740729
-AdminForm.xaml;ChangeEmail.xaml;ChangePwd.xaml;ChangeUser.xaml;DataStd.xaml;Done.xaml;Error.xaml;LogoutConfirmationDialog.xaml;MainWindow.xaml;ProfRegister.xaml;SchedulingsPage.xaml;Settings.xaml;StudentForm.xaml;Window1.xaml;Window2.xaml;Window3.xaml;YourLessons.xaml;YourProfile.xaml;
+341913206010
+1621876361009
+AdminForm.xaml;ChangeEmail.xaml;ChangePwd.xaml;ChangeUser.xaml;DataStd.xaml;Done.xaml;Error.xaml;Feedback.xaml;LogoutConfirmationDialog.xaml;MainWindow.xaml;ProfRegister.xaml;SchedulingsPage.xaml;Settings.xaml;StudentForm.xaml;VideoLesson.xaml;Window1.xaml;Window2.xaml;Window3.xaml;YourLessons.xaml;YourProfile.xaml;
 
 False
 

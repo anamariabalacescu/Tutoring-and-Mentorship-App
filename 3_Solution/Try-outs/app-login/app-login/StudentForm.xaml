@@ -31,11 +31,11 @@
                     </LinearGradientBrush>
                 </Grid.Background>
 
-                <Image Source="D:\ATM 3\Ap_bd\proiect\app-login\close.png" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="37,0,0,0" MouseDown="CloseApp"/>
+                <Image Source="C:\Users\Ali Kiwe\Documents\GitHub\Tutoring-and-Mentorship-App\3_Solution\Try-outs\app-login\close.png" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="37,0,0,0" MouseDown="CloseApp"/>
 
                 <Image HorizontalAlignment="Left" Height="127" Margin="97,30,0,0" VerticalAlignment="Top" Width="136" OpacityMask="White">
                     <Image.Source>
-                        <BitmapImage UriSource="D:\ATM 3\Ap_bd\proiect\app-login\icon.png" />
+                        <BitmapImage UriSource="C:\Users\Ali Kiwe\Documents\GitHub\Tutoring-and-Mentorship-App\3_Solution\Try-outs\app-login\icon.png" />
                     </Image.Source>
                 </Image>
                 <TextBox x:Name="username" Background="WhiteSmoke" HorizontalAlignment="Left" Height="20" Margin="102,226,0,0" TextWrapping="Wrap" Text="Insert username" VerticalAlignment="Top" Width="118" GotFocus="EraseText" LostFocus="InitialText" TextChanged="userInput"/>
@@ -56,7 +56,7 @@
                     <ComboBoxItem Content="Professor"/>
                 </ComboBox>
                 <Button x:Name="signup" Content="Sign up" Background="LightSteelBlue" HorizontalAlignment="Left" Height="20" Margin="134,485,0,0" VerticalAlignment="Top" Width="54" Click="onclick"/>
-                <Image Source="D:\ATM 3\Ap_bd\proiect\app-login\home.png" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="20" MouseDown="goHome"/>
+                <Image Source="C:\Users\Ali Kiwe\Documents\GitHub\Tutoring-and-Mentorship-App\3_Solution\Try-outs\app-login\home.png" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="20" MouseDown="goHome"/>
             </Grid>
         </Border>
     </Border>

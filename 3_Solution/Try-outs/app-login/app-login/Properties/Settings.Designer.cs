@@ -26,8 +26,7 @@ namespace app_login.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-SMPOF1T\\SQLEXPRESS;Initial Catalog=Tutoring;Integrated Securi" +
-            "ty=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.;Initial Catalog=Tutoring;Integrated Security=True")]
         public string TutoringConnectionString {
             get {
                 return ((string)(this["TutoringConnectionString"]));

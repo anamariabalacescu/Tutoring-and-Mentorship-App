@@ -1,0 +1,28 @@
+﻿<Window x:Class="app_login.Feedback"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:app_login"
+        mc:Ignorable="d"
+        Title="Feedback" Height="450" Width="800">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="AliceBlue" Offset="0.0"/>
+                <GradientStop Color="RoyalBlue" Offset="0.35"/>
+                <GradientStop Color="Aqua" Offset="1.0"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Canvas Name="StarCanvas" Background="Transparent">
+            <Polygon x:Name="star1" Points="50,0 60,40 100,40 65,65 75,100 50,75 25,100 35,65 0,40 40,40" Fill="White" Stroke="Black" Canvas.Left="147" Canvas.Top="166" MouseEnter="Star_MouseEnter" MouseLeave="Star_MouseLeave" MouseLeftButtonDown="Star_MouseLeftButtonDown" />
+            <Polygon x:Name="star2" Points="150,0 160,40 200,40 165,65 175,100 150,75 125,100 135,65 100,40 140,40" Fill="White" Stroke="Black" Canvas.Left="148" Canvas.Top="166" MouseEnter="Star_MouseEnter" MouseLeave="Star_MouseLeave" MouseLeftButtonDown="Star_MouseLeftButtonDown"/>
+            <Polygon x:Name="star3" Points="250,0 260,40 300,40 265,65 275,100 250,75 225,100 235,65 200,40 240,40" Fill="White" Stroke="Black" Canvas.Left="149" Canvas.Top="166" MouseEnter="Star_MouseEnter" MouseLeave="Star_MouseLeave" MouseLeftButtonDown="Star_MouseLeftButtonDown"/>
+            <Polygon x:Name="star4" Points="350,0 360,40 400,40 365,65 375,100 350,75 325,100 335,65 300,40 340,40" Fill="White" Stroke="Black" Canvas.Left="149" Canvas.Top="166" MouseEnter="Star_MouseEnter" MouseLeave="Star_MouseLeave" MouseLeftButtonDown="Star_MouseLeftButtonDown"/>
+            <Polygon x:Name="star5" Points="450,0 460,40 500,40 465,65 475,100 450,75 425,100 435,65 400,40 440,40" Fill="White" Stroke="Black" Canvas.Left="149" Canvas.Top="166" MouseEnter="Star_MouseEnter" MouseLeave="Star_MouseLeave" MouseLeftButtonDown="Star_MouseLeftButtonDown"/>
+        </Canvas>
+        <Button Name="Btn_SEND" Content="Send Feedback" Click="SendButton_Click" Margin="435,320,160,70"/>
+        <Button x:Name="Btn_DONT" Content="Don't Send Feedback" Click="DontSendButton_Click" Margin="160,320,455,70"/>
+
+    </Grid>
+</Window>

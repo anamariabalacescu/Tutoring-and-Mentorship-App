@@ -34,12 +34,12 @@
                 <TextBlock HorizontalAlignment="Center" Height="33" Margin="0,40,0,0" TextWrapping="Wrap" Text="Do you want to sign out?" VerticalAlignment="Top" Width="142" Foreground="Red" FontWeight="Bold"/>
                 <Image HorizontalAlignment="Left" Height="40" Margin="91,90,0,0" VerticalAlignment="Top" Width="40" RenderTransformOrigin="1.43,0.485" MouseDown="NoButton_Click">
                     <Image.Source>
-                        <BitmapImage UriSource="D:\ATM 3\Ap_bd\proiect\app-login\n.png"/>
+                        <BitmapImage UriSource="C:\Users\Ali Kiwe\Documents\GitHub\Tutoring-and-Mentorship-App\3_Solution\Try-outs\app-login\n.png"/>
                     </Image.Source>
                 </Image>
                 <Image HorizontalAlignment="Left" Height="40" Margin="240,90,0,0" VerticalAlignment="Top" Width="40" MouseDown="YesButton_Click">
                     <Image.Source>
-                        <BitmapImage UriSource="D:\ATM 3\Ap_bd\proiect\app-login\yes.png" />
+                        <BitmapImage UriSource="C:\Users\Ali Kiwe\Documents\GitHub\Tutoring-and-Mentorship-App\3_Solution\Try-outs\app-login\yes.png" />
                     </Image.Source>
                 </Image>
             </Grid>
