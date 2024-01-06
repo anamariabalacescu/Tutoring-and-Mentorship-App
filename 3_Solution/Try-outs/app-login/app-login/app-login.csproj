@@ -269,12 +269,18 @@
     </Compile>
     <Compile Include="FormValidationRules.cs" />
     <Compile Include="GeneralCmds.cs" />
+    <Compile Include="Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LogoutConfirmationDialog.xaml.cs">
       <DependentUpon>LogoutConfirmationDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Professor.cs" />
     <Compile Include="ProfRegister.xaml.cs">
       <DependentUpon>ProfRegister.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Profs.xaml.cs">
+      <DependentUpon>Profs.xaml</DependentUpon>
     </Compile>
     <Compile Include="SchedulingsPage.xaml.cs">
       <DependentUpon>SchedulingsPage.xaml</DependentUpon>
@@ -285,6 +291,9 @@
     <Compile Include="Student.cs" />
     <Compile Include="StudentForm.xaml.cs">
       <DependentUpon>StudentForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Subjects.xaml.cs">
+      <DependentUpon>Subjects.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tutoring.designer.cs">
       <AutoGen>True</AutoGen>
@@ -342,6 +351,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LogoutConfirmationDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -362,6 +375,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Profs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SchedulingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -371,6 +388,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StudentForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Subjects.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

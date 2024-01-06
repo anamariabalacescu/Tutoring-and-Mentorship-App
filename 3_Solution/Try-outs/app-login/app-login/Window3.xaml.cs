@@ -21,13 +21,15 @@ namespace app_login
     public partial class Window3 : Window
     {
         private int id_user { get; set; }
+        public void setId(int id) { this.id_user = id; }
         public Window3()
         {
             InitializeComponent();
+            DataContext = this;
             LoadData();
         }
 
-        public void setId(int id) { this.id_user = id; }
+        
         private void LoadData()
         {
             TutoringDataContext tut = new TutoringDataContext();
@@ -72,7 +74,8 @@ namespace app_login
 
                 // Bind the list to the DataGrid
             topProfs.ItemsSource = professorList;
-            
+            topProfs.Items.Refresh();
+
             //for subjects we do the same
 
             var topSubjects = tut.Schedulings
@@ -157,6 +160,35 @@ namespace app_login
         private void CloseApp(object sender, MouseButtonEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void Close(object sender, MouseButtonEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void Profs(object sender, RoutedEventArgs e)
+        {
+            var profs = new Profs();
+            profs.Show();
+            profs.setId(this.id_user);
+            Close();
+        }
+
+        private void Home(object sender, RoutedEventArgs e)
+        {
+            var home = new Window3();
+            home.Show();
+            home.setId(this.id_user);
+            Close();
+        }
+
+        private void Subjects(object sender, RoutedEventArgs e)
+        {
+            var subj = new Subjects();
+            subj.Show();
+            subj.setId(this.id_user);
+            Close();
         }
     }
 }

@@ -168,7 +168,7 @@ namespace app_login
                             error.Show();
                         } else{
                             Done done = new Done();
-                            done.SuccessMessage = "Student registered!";
+                            done.SuccessMessage = "Proffesor registered!";
                             done.Show();
                         }
                     }

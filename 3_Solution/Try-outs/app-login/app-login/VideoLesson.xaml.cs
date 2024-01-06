@@ -14,9 +14,6 @@ using System.Net;
 
 namespace app_login
 {
-    /// <summary>
-    /// Interaction logic for VideoLesson.xaml
-    /// </summary>
     public partial class VideoLesson : Window
     {
         private int id_user { get; set; }
@@ -39,6 +36,7 @@ namespace app_login
         private BufferedWaveProvider waveProvider;
         private TcpClient otherPeerAudioClient;
         private WaveOut waveOut;
+
         public VideoLesson()
         {
             InitializeComponent();
@@ -288,13 +286,25 @@ namespace app_login
                     StartMicrophone();
                 }
 
-                // Inversează starea
+                // Inverseaza starea
                 isImage1 = !isImage1;
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Eroare la gestionarea evenimentului de clic: " + ex.Message);
             }
+        }
+
+        private void CloseApp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            StopSending();
+            Stop();
+            StopMicrophone();
+
+            var profile = new YourProfile();
+            profile.setId(this.id_user);
+            profile.Show();
+            Close();
         }
     }
 

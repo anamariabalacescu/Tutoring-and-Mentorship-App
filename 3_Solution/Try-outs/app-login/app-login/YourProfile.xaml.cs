@@ -115,5 +115,47 @@ namespace app_login
             //root.Children.Add(stack);
             //grid.Children.Add(root);
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Profile(object sender, RoutedEventArgs e)
+        {
+            var profile = new YourProfile();
+            profile.setId(this.id_user);
+            profile.Show();
+            Close();
+        }
+
+        private void Close(object sender, MouseButtonEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void Profs(object sender, RoutedEventArgs e)
+        {
+            var profs = new Profs();
+            profs.Show();
+            profs.setId(this.id_user);
+            Close();
+        }
+
+        private void Home(object sender, RoutedEventArgs e)
+        {
+            var home = new Window3();
+            home.Show();
+            home.setId(this.id_user);
+            Close();
+        }
+
+        private void Subjects(object sender, RoutedEventArgs e)
+        {
+            var subj = new Subjects();
+            subj.Show();
+            subj.setId(this.id_user);
+            Close();
+        }
     }
 }

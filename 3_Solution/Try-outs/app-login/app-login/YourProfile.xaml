@@ -49,11 +49,11 @@
                             </StackPanel>
                         </MenuItem.Header>
                     </MenuItem>
-                    <MenuItem HorizontalAlignment="Right" Header="Home">
+                    <MenuItem HorizontalAlignment="Right" Header="Home" Click="Home">
                     </MenuItem>
-                    <MenuItem HorizontalAlignment="Right" Header="Subjects">
+                    <MenuItem HorizontalAlignment="Right" Header="Subjects" Click="Subjects">
                     </MenuItem>
-                    <MenuItem Header="Professors">
+                    <MenuItem Header="Professors" Click="Profs">
                     </MenuItem>
                     <MenuItem Header="Video Lesson" Click="Video_Lesson">
                     </MenuItem>

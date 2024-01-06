@@ -29,6 +29,7 @@
                             <GradientStop Color="SkyBlue" Offset="1.0"/>
                         </LinearGradientBrush>
                     </Grid.Background>
+                    <Image Source="C:\Users\Ali Kiwe\Documents\GitHub\Tutoring-and-Mentorship-App\3_Solution\Try-outs\app-login\close.png" Width="30" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="37,0,0,0" MouseDown="CloseApp"/>
                     <ComboBox x:Name="cboCamera1" HorizontalAlignment="Left" Height="60" Margin="176,48,0,0" VerticalAlignment="Top" Width="500" FontSize="20"/>
                     <Label Content="Camera:" HorizontalAlignment="Left" Height="35" Margin="73,57,0,0" VerticalAlignment="Top" Width="88" FontSize="20" RenderTransformOrigin="0.222,0.578"/>
                     <Button x:Name="BtnStart" Content="Start" HorizontalAlignment="Left" Height="60" Margin="110,975,0,0" VerticalAlignment="Top" Width="200" Click="BtnStart_Click" FontSize="30" />
