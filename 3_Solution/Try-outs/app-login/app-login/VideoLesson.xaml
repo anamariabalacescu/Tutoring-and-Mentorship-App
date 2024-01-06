@@ -6,38 +6,38 @@
         xmlns:local="clr-namespace:app_login"
         mc:Ignorable="d"
         Title="VideoLesson"
-        WindowState="Maximized"
     WindowStyle="none"
     AllowsTransparency="true"
     Foreground="#FF896DD7" 
     Background="Transparent"
     WindowStartupLocation="CenterScreen">
-    <Border CornerRadius="30" BorderThickness="10" BorderBrush="LightSkyBlue">
+    <Viewbox>
+        <Border CornerRadius="30" BorderThickness="10" BorderBrush="LightSkyBlue">
 
-        <Border CornerRadius="15" BorderThickness="20">
-            <Border.BorderBrush>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="Blue" Offset="0.0"/>
-                    <GradientStop Color="RoyalBlue" Offset="0.35"/>
-                    <GradientStop Color="Aqua" Offset="1.0"/>
-                </LinearGradientBrush>
-            </Border.BorderBrush>
-
-            <Grid Height="1080" Width="1920">
-                <Grid.Background>
+            <Border CornerRadius="15" BorderThickness="20">
+                <Border.BorderBrush>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Color="LightSkyBlue" Offset="0.0"/>
-                        <GradientStop Color="SkyBlue" Offset="1.0"/>
+                        <GradientStop Color="Blue" Offset="0.0"/>
+                        <GradientStop Color="RoyalBlue" Offset="0.35"/>
+                        <GradientStop Color="Aqua" Offset="1.0"/>
                     </LinearGradientBrush>
-                </Grid.Background>
-                <ComboBox x:Name="cboCamera1" HorizontalAlignment="Left" Height="60" Margin="176,48,0,0" VerticalAlignment="Top" Width="500" FontSize="20"/>
-                <Label Content="Camera:" HorizontalAlignment="Left" Height="35" Margin="73,57,0,0" VerticalAlignment="Top" Width="88" FontSize="20" RenderTransformOrigin="0.222,0.578"/>
-                <Button x:Name="BtnStart" Content="Start" HorizontalAlignment="Left" Height="60" Margin="110,975,0,0" VerticalAlignment="Top" Width="200" Click="BtnStart_Click" FontSize="30" />
-                <Button x:Name="BtnSTOP" Content="Stop" HorizontalAlignment="Left" Margin="680,975,0,0" VerticalAlignment="Top" Height="60" Width="200" Click="BtnStop_Click" FontSize="30" />
-                <Image x:Name="pic1" Margin="1000,125,60,125"/>
-                <Image x:Name="pic2" Margin="60,125,1000,125"/>
-                <Image x:Name="mic" Source="F:\\C Copy\\source\\repos\\ApBD\\First Try Proiect ApBD\\mic_muted.png" HorizontalAlignment="Left" Height="46" Margin="765,62,0,0" VerticalAlignment="Top" Width="50" MouseLeftButtonDown="Mic_MouseLeftButtonDown" IsHitTestVisible="True"/>
-            </Grid>
+                </Border.BorderBrush>
+                <Grid Height="1080" Width="1920">
+                    <Grid.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="LightSkyBlue" Offset="0.0"/>
+                            <GradientStop Color="SkyBlue" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <ComboBox x:Name="cboCamera1" HorizontalAlignment="Left" Height="60" Margin="176,48,0,0" VerticalAlignment="Top" Width="500" FontSize="20"/>
+                    <Label Content="Camera:" HorizontalAlignment="Left" Height="35" Margin="73,57,0,0" VerticalAlignment="Top" Width="88" FontSize="20" RenderTransformOrigin="0.222,0.578"/>
+                    <Button x:Name="BtnStart" Content="Start" HorizontalAlignment="Left" Height="60" Margin="110,975,0,0" VerticalAlignment="Top" Width="200" Click="BtnStart_Click" FontSize="30" />
+                    <Button x:Name="BtnSTOP" Content="Stop" HorizontalAlignment="Left" Margin="680,975,0,0" VerticalAlignment="Top" Height="60" Width="200" Click="BtnStop_Click" FontSize="30" />
+                    <Image x:Name="pic1" Margin="1000,125,60,125"/>
+                    <Image x:Name="pic2" Margin="60,125,1000,125"/>
+                    <Image x:Name="mic" Source="C:\Users\Ali Kiwe\Documents\GitHub\Tutoring-and-Mentorship-App\3_Solution\Try-outs\app-login\app-login\mic_muted.png" HorizontalAlignment="Left" Height="46" Margin="765,62,0,0" VerticalAlignment="Top" Width="50" MouseLeftButtonDown="Mic_MouseLeftButtonDown" IsHitTestVisible="True"/>
+                </Grid>
+            </Border>
         </Border>
-    </Border>
+    </Viewbox>
 </Window>

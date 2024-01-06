@@ -279,12 +279,12 @@ namespace app_login
             {
                 if (isImage1)
                 {
-                    mic.Source = new BitmapImage(new Uri("F:\\C Copy\\source\\repos\\ApBD\\First Try Proiect ApBD\\mic_muted.png", UriKind.Absolute));
+                    mic.Source = new BitmapImage(new Uri("C:\\Users\\Ali Kiwe\\Documents\\GitHub\\Tutoring-and-Mentorship-App\\3_Solution\\Try-outs\\app-login\\app-login\\mic_muted.png", UriKind.Absolute));
                     StopMicrophone();
                 }
                 else
                 {
-                    mic.Source = new BitmapImage(new Uri("F:\\C Copy\\source\\repos\\ApBD\\First Try Proiect ApBD\\mic_unmuted.png", UriKind.Absolute));
+                    mic.Source = new BitmapImage(new Uri("C:\\Users\\Ali Kiwe\\Documents\\GitHub\\Tutoring-and-Mentorship-App\\3_Solution\\Try-outs\\app-login\\app-login\\mic_unmuted.png", UriKind.Absolute));
                     StartMicrophone();
                 }
 

@@ -244,6 +244,7 @@
       <DependentUpon>AdminForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="AdminModel.cs" />
+    <Compile Include="AudioClient.cs" />
     <Compile Include="ChangeEmail.xaml.cs">
       <DependentUpon>ChangeEmail.xaml</DependentUpon>
     </Compile>

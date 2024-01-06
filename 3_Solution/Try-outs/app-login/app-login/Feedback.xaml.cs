@@ -19,6 +19,9 @@ namespace app_login
     /// </summary>
     public partial class Feedback : Window
     {
+        private int id_user { get; set; }
+        public void setId(int id) { this.id_user = id; }
+
         public Feedback()
         {
             InitializeComponent();
@@ -75,6 +78,10 @@ namespace app_login
         {
             MessageBox.Show("Feedback sent.", "Feedback Sent");
             ResetStars();
+
+            var vid_les = new VideoLesson();
+            vid_les.setId(this.id_user);
+            vid_les.Show();
             Close();
         }
 
