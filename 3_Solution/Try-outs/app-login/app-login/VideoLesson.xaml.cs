@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
-using System.Drawing;
 using AForge.Video;
 using AForge.Video.DirectShow;
 using NAudio.Wave;
@@ -12,6 +10,8 @@ using System.IO;
 using System.Net.Sockets;
 using System.Net;
 using System.Linq;
+using System.Windows.Media;
+using System.Text;
 
 namespace app_login
 {
@@ -42,6 +42,7 @@ namespace app_login
         {
             InitializeComponent();
             Loaded += MainWindow_Load;
+            Closed += MainWindow_Closed;
         }
 
         private void WaveIn_DataAvailable(object sender, WaveInEventArgs e)
@@ -198,15 +199,15 @@ namespace app_login
 
         private async void BtnStart_Click(object sender, RoutedEventArgs e)
         {
-            if (videoSource != null && cboCamera1.SelectedIndex >= 0)
+            if (cboCamera1.SelectedIndex >= 0)
             {
                 videoSource = new VideoCaptureDevice(filterInfoCollection[cboCamera1.SelectedIndex].MonikerString);
                 videoSource.NewFrame += VideoCaptureDevice_NewFrame;
                 videoSource.Start();
 
-                await ConnectToOtherPeerAsync(destinatarIpAddress, destinatarPort);
+                //await ConnectToOtherPeerAsync(destinatarIpAddress, destinatarPort);
 
-                StartSending();
+                //StartSending();
             }
         }
 
@@ -229,22 +230,28 @@ namespace app_login
             }
         }
 
+        public static ImageSource BitmapToImageSource(System.Drawing.Bitmap bitmap)
+        {
+            var memory = new System.IO.MemoryStream();
+            bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Bmp);
+            memory.Position = 0;
+
+            var bitmapImage = new BitmapImage();
+            bitmapImage.BeginInit();
+            bitmapImage.StreamSource = memory;
+            bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+            bitmapImage.EndInit();
+
+            return bitmapImage;
+        }
 
         private void VideoCaptureDevice_NewFrame(object sender, NewFrameEventArgs e)
         {
-            Dispatcher.Invoke(() => pic1.Source = ToBitmapSource(e.Frame));
-        }
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                pic1.Source = BitmapToImageSource((System.Drawing.Bitmap)e.Frame.Clone());
 
-        private BitmapSource ToBitmapSource(Bitmap bitmap)
-        {
-            IntPtr hBitmap = bitmap.GetHbitmap();
-            BitmapSource bitmapSource = Imaging.CreateBitmapSourceFromHBitmap(
-                hBitmap,
-                IntPtr.Zero,
-                Int32Rect.Empty,
-                BitmapSizeOptions.FromEmptyOptions());
-
-            return bitmapSource;
+            }); 
         }
 
         private void StopSending()
@@ -271,6 +278,7 @@ namespace app_login
         {
             StopSending();
             Stop();
+            pic1.Source = null;
         }
 
         private void Mic_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

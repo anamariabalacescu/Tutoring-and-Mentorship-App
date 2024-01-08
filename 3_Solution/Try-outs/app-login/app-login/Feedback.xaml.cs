@@ -50,15 +50,15 @@ namespace app_login
         {
             var star = sender as Polygon;
 
-            // Verifică dacă steaua curentă este și steaua selectată
+            // Verifica daca steaua curenta este si steaua selectata
             if (star != selectedStar)
             {
                 star.Fill = Brushes.White;
 
-                // Obține index-ul stelei curente
+                // Obtine index-ul stelei curente
                 int currentIndex = Convert.ToInt32(star.Name.Substring(4));
 
-                // Parcurge toate stelele și colorează-le dacă sunt mai la stânga decât steaua curentă
+                // Parcurge toate stelele si coloreaza-le daca sunt mai la stanga decat steaua curenta
                 for (int i = 1; i < currentIndex; i++)
                 {
                     var previousStar = FindName($"star{i}") as Polygon;
