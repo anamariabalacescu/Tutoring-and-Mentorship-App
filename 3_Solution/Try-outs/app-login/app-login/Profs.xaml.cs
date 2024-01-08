@@ -80,7 +80,7 @@ namespace app_login
 
         private void Home(object sender, RoutedEventArgs e)
         {
-            var home = new Home();
+            var home = new Window3();
             home.Show();
             home.setId(this.id_user);
             Close();

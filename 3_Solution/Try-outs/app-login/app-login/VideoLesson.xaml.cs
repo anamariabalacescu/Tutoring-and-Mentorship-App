@@ -11,6 +11,7 @@ using NAudio.Wave;
 using System.IO;
 using System.Net.Sockets;
 using System.Net;
+using System.Linq;
 
 namespace app_login
 {
@@ -40,6 +41,7 @@ namespace app_login
         public VideoLesson()
         {
             InitializeComponent();
+            Loaded += MainWindow_Load;
         }
 
         private void WaveIn_DataAvailable(object sender, WaveInEventArgs e)
@@ -301,13 +303,12 @@ namespace app_login
             Stop();
             StopMicrophone();
 
-            var profile = new YourProfile();
-            profile.setId(this.id_user);
-            profile.Show();
+
+            var feedback = new Feedback();
+            feedback.setId(this.id_user);
+            feedback.Show();
             Close();
         }
     }
-
-
 }
 
