@@ -24,7 +24,22 @@ namespace app_login
         public Subjects()
         {
             InitializeComponent();
+            DataContext = this;
+            LoadData();
         }
+
+        private void LoadData()
+        {
+            TutoringDataContext tut = new TutoringDataContext();
+
+            // Fetch all entries from the Subjects table
+            var allSubjects = tut.Subjects.ToList();
+
+            // Bind the list to the DataGrid
+            subj.ItemsSource = allSubjects;
+            subj.Items.Refresh();
+        }
+
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {

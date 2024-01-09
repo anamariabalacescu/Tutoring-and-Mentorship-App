@@ -69,6 +69,13 @@
                                 </MenuItem.Header>
                             </MenuItem>
                         </Menu>
+                        <DataGrid x:Name="subj" Margin="30,97,850,330" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID_Subj" Binding="{Binding ID_Subj}" FontSize="20" />
+                                <DataGridTextColumn Header="Nume" Binding="{Binding nume}" FontSize="20" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Label Content="ALL SUBJECTS" HorizontalAlignment="Left" Margin="30,61,0,0" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Times New Roman" FontSize="24" Width="215"/>
                     </Grid>
                 </Border>
             </Border>
