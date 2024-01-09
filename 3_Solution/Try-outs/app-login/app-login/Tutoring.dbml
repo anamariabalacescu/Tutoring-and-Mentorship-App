@@ -24,21 +24,9 @@
       <Column Name="Prenume" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Column Name="Profesie_de_baza" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Column Name="ID_User" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Profesor_Scheduling" Member="Schedulings" ThisKey="ID_Prof" OtherKey="ID_Prof" Type="Scheduling" />
       <Association Name="Profesor_Taught_subject" Member="Taught_subjects" ThisKey="ID_Prof" OtherKey="ID_Prof" Type="Taught_subject" />
+      <Association Name="Profesor_Scheduling" Member="Schedulings" ThisKey="ID_Prof" OtherKey="ID_Prof" Type="Scheduling" />
       <Association Name="User_Profesor" Member="User" ThisKey="ID_User" OtherKey="ID_User" Type="User" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Schedulings" Member="Schedulings">
-    <Type Name="Scheduling">
-      <Column Name="ID_Meeting" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ID_Prof" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ID_Std" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ID_Subj" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Scheduled_Date" Type="System.String" CanBeNull="false" />
-      <Association Name="Profesor_Scheduling" Member="Profesor" ThisKey="ID_Prof" OtherKey="ID_Prof" Type="Profesor" IsForeignKey="true" DeleteRule="CASCADE" />
-      <Association Name="Student_Scheduling" Member="Student" ThisKey="ID_Std" OtherKey="ID_Std" Type="Student" IsForeignKey="true" DeleteRule="CASCADE" />
-      <Association Name="Subject_Scheduling" Member="Subject" ThisKey="ID_Subj" OtherKey="ID_Subj" Type="Subject" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.Students" Member="Students">
@@ -58,8 +46,8 @@
       <Column Name="ID_Subj" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="nume" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Association Name="Subject_Enrolled_Subject" Member="Enrolled_Subjects" ThisKey="ID_Subj" OtherKey="ID_Subj" Type="Enrolled_Subject" />
-      <Association Name="Subject_Scheduling" Member="Schedulings" ThisKey="ID_Subj" OtherKey="ID_Subj" Type="Scheduling" />
       <Association Name="Subject_Taught_subject" Member="Taught_subjects" ThisKey="ID_Subj" OtherKey="ID_Subj" Type="Taught_subject" />
+      <Association Name="Subject_Scheduling" Member="Schedulings" ThisKey="ID_Subj" OtherKey="ID_Subj" Type="Scheduling" />
     </Type>
   </Table>
   <Table Name="dbo.Taught_subjects" Member="Taught_subjects">
@@ -81,6 +69,21 @@
       <Association Name="User_Admin" Member="Admins" ThisKey="ID_User" OtherKey="ID_User" Type="Admin" />
       <Association Name="User_Profesor" Member="Profesors" ThisKey="ID_User" OtherKey="ID_User" Type="Profesor" />
       <Association Name="User_Student" Member="Students" ThisKey="ID_User" OtherKey="ID_User" Type="Student" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Schedulings" Member="Schedulings">
+    <Type Name="Scheduling">
+      <Column Name="ID_Meeting" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_Prof" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ID_Std" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ID_Subj" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Programare" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="StatusProgramare" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ProgresSTD" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EVALProf" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Profesor_Scheduling" Member="Profesor" ThisKey="ID_Prof" OtherKey="ID_Prof" Type="Profesor" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Student_Scheduling" Member="Student" ThisKey="ID_Std" OtherKey="ID_Std" Type="Student" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Subject_Scheduling" Member="Subject" ThisKey="ID_Subj" OtherKey="ID_Subj" Type="Subject" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
 </Database>

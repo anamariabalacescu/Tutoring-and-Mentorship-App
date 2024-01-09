@@ -31,8 +31,14 @@
                     </LinearGradientBrush>
                 </Grid.Background>
                 <Label Content="Subject:" FontSize="20" HorizontalAlignment="Left" Margin="40,55,0,0" VerticalAlignment="Top" Height="40" Width="135"/>
-                <Label Content="Professor:" FontSize="20" HorizontalAlignment="Left" Margin="40,85,0,0" VerticalAlignment="Top" Height="40" Width="135"/>
+                <Label x:Name="label_prof" Content="Professor:" FontSize="20" HorizontalAlignment="Left" Margin="40,85,0,0" VerticalAlignment="Top" Height="40" Width="135"/>
                 <Label Content="Scheduled Time:" FontSize="20" HorizontalAlignment="Left" Margin="40,115,0,0" VerticalAlignment="Top" Height="40" Width="160"/>
+                <ComboBox x:Name="cboSUBJ" HorizontalAlignment="Left" Margin="270,63,0,0" VerticalAlignment="Top" Width="120">
+                    <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
+                </ComboBox>
+                <ComboBox x:Name="cboPROF" HorizontalAlignment="Left" Margin="269,93,0,0" VerticalAlignment="Top" Width="120"/>
+                <Calendar x:Name="calendar" HorizontalAlignment="Left" Margin="210,120,0,0" VerticalAlignment="Top"/>
+                <Button Content="Add Lesson" HorizontalAlignment="Left" Margin="225,445,0,0" VerticalAlignment="Top" Height="35" Width="120" Click="Button_Click"/>
             </Grid>
         </Border>
     </Border>

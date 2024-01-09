@@ -53,7 +53,7 @@ namespace app_login
         public string getStatus(int id)
         {
             var user = tu.Users.Where(u => u.ID_User == id).FirstOrDefault();
-            return user.Status;
+            return user.UserStatus;
         }
         public string getFirstname(int id)
         {
