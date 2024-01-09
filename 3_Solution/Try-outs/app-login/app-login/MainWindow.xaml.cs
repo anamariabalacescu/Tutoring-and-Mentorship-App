@@ -38,14 +38,26 @@ namespace app_login
         {
             string encrpass = EncryptionMachine.Encrypt(userPass);
             if (FormValidationRules.IsValidUser(user.Text, encrpass)) {
-                Window3 home = new Window3();  // Send to home page - Window3
 
                 TutoringDataContext tu = new TutoringDataContext();
-                var usr = tu.Users.Where(x => x.Username == username).FirstOrDefault();
-                home.setId(usr.ID_User);
-                
-                home.Show();  // Show Window3
-                Close();  // Close the current window3
+                string stat = tu.Users.Where(x => x.Username == username).FirstOrDefault().UserStatus;
+
+                if (stat != "inactive")
+                {
+                    Window3 home = new Window3();  // Send to home page - Window3
+
+                    var usr = tu.Users.Where(x => x.Username == username).FirstOrDefault();
+                    home.setId(usr.ID_User);
+
+                    home.Show();  // Show Window3
+                    Close();  // Close the current window3
+                }
+                else
+                {
+                    Error er = new Error();
+                    er.ErrorMessage = "User is inactive!";
+                    er.Show();
+                }
             }
             else
             {

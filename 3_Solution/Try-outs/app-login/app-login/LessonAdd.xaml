@@ -5,8 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:app_login"
         mc:Ignorable="d"
-        Title="LessonAdd" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="AddLesson" Height="600" Width="600" 
+        WindowStyle="none"
+        AllowsTransparency="true"
+        Foreground="#FF896DD7" 
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen">
+    <Border CornerRadius="52" BorderThickness="10" BorderBrush="LightSkyBlue">
+
+        <Border CornerRadius="35" BorderThickness="20">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="Blue" Offset="0.0"/>
+                    <GradientStop Color="RoyalBlue" Offset="0.35"/>
+                    <GradientStop Color="Aqua" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="AliceBlue" Offset="0.0"/>
+                        <GradientStop Color="RoyalBlue" Offset="0.35"/>
+                        <GradientStop Color="Aqua" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Label Content="Subject:" FontSize="20" HorizontalAlignment="Left" Margin="40,55,0,0" VerticalAlignment="Top" Height="40" Width="135"/>
+                <Label Content="Professor:" FontSize="20" HorizontalAlignment="Left" Margin="40,85,0,0" VerticalAlignment="Top" Height="40" Width="135"/>
+                <Label Content="Scheduled Time:" FontSize="20" HorizontalAlignment="Left" Margin="40,115,0,0" VerticalAlignment="Top" Height="40" Width="160"/>
+            </Grid>
+        </Border>
+    </Border>
 </Window>
+

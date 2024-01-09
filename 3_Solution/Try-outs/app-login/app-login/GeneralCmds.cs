@@ -50,6 +50,11 @@ namespace app_login
             }
             return nume;
         }
+        public string getStatus(int id)
+        {
+            var user = tu.Users.Where(u => u.ID_User == id).FirstOrDefault();
+            return user.Status;
+        }
         public string getFirstname(int id)
         {
             string type = getUserType(id);
