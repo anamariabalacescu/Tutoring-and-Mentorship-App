@@ -269,6 +269,9 @@
     </Compile>
     <Compile Include="FormValidationRules.cs" />
     <Compile Include="GeneralCmds.cs" />
+    <Compile Include="LessonAdd.xaml.cs">
+      <DependentUpon>LessonAdd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LogoutConfirmationDialog.xaml.cs">
       <DependentUpon>LogoutConfirmationDialog.xaml</DependentUpon>
     </Compile>
@@ -345,6 +348,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Feedback.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LessonAdd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

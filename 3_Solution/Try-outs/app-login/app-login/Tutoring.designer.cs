@@ -33,9 +33,6 @@ namespace app_login
     partial void InsertAdmin(Admin instance);
     partial void UpdateAdmin(Admin instance);
     partial void DeleteAdmin(Admin instance);
-    partial void InsertUser(User instance);
-    partial void UpdateUser(User instance);
-    partial void DeleteUser(User instance);
     partial void InsertProfesor(Profesor instance);
     partial void UpdateProfesor(Profesor instance);
     partial void DeleteProfesor(Profesor instance);
@@ -48,6 +45,9 @@ namespace app_login
     partial void InsertSubject(Subject instance);
     partial void UpdateSubject(Subject instance);
     partial void DeleteSubject(Subject instance);
+    partial void InsertUser(User instance);
+    partial void UpdateUser(User instance);
+    partial void DeleteUser(User instance);
     #endregion
 		
 		public TutoringDataContext() : 
@@ -85,14 +85,6 @@ namespace app_login
 			get
 			{
 				return this.GetTable<Admin>();
-			}
-		}
-		
-		public System.Data.Linq.Table<User> Users
-		{
-			get
-			{
-				return this.GetTable<User>();
 			}
 		}
 		
@@ -141,6 +133,14 @@ namespace app_login
 			get
 			{
 				return this.GetTable<Taught_subject>();
+			}
+		}
+		
+		public System.Data.Linq.Table<User> Users
+		{
+			get
+			{
+				return this.GetTable<User>();
 			}
 		}
 	}
@@ -192,10 +192,6 @@ namespace app_login
 			{
 				if ((this._ID_Admin != value))
 				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnID_AdminChanging(value);
 					this.SendPropertyChanging();
 					this._ID_Admin = value;
@@ -256,6 +252,10 @@ namespace app_login
 			{
 				if ((this._ID_User != value))
 				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnID_UserChanging(value);
 					this.SendPropertyChanging();
 					this._ID_User = value;
@@ -265,7 +265,7 @@ namespace app_login
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Admin", Storage="_User", ThisKey="ID_Admin", OtherKey="ID_User", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Admin", Storage="_User", ThisKey="ID_User", OtherKey="ID_User", IsForeignKey=true)]
 		public User User
 		{
 			get
@@ -282,273 +282,19 @@ namespace app_login
 					if ((previousValue != null))
 					{
 						this._User.Entity = null;
-						previousValue.Admin = null;
+						previousValue.Admins.Remove(this);
 					}
 					this._User.Entity = value;
 					if ((value != null))
 					{
-						value.Admin = this;
-						this._ID_Admin = value.ID_User;
+						value.Admins.Add(this);
+						this._ID_User = value.ID_User;
 					}
 					else
 					{
-						this._ID_Admin = default(int);
+						this._ID_User = default(int);
 					}
 					this.SendPropertyChanged("User");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
-	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID_User;
-		
-		private string _Username;
-		
-		private string _UserPassword;
-		
-		private string _UserType;
-		
-		private string _Email;
-		
-		private EntityRef<Admin> _Admin;
-		
-		private EntityRef<Profesor> _Profesor;
-		
-		private EntityRef<Student> _Student;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnID_UserChanging(int value);
-    partial void OnID_UserChanged();
-    partial void OnUsernameChanging(string value);
-    partial void OnUsernameChanged();
-    partial void OnUserPasswordChanging(string value);
-    partial void OnUserPasswordChanged();
-    partial void OnUserTypeChanging(string value);
-    partial void OnUserTypeChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    #endregion
-		
-		public User()
-		{
-			this._Admin = default(EntityRef<Admin>);
-			this._Profesor = default(EntityRef<Profesor>);
-			this._Student = default(EntityRef<Student>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_User", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID_User
-		{
-			get
-			{
-				return this._ID_User;
-			}
-			set
-			{
-				if ((this._ID_User != value))
-				{
-					this.OnID_UserChanging(value);
-					this.SendPropertyChanging();
-					this._ID_User = value;
-					this.SendPropertyChanged("ID_User");
-					this.OnID_UserChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
-		public string Username
-		{
-			get
-			{
-				return this._Username;
-			}
-			set
-			{
-				if ((this._Username != value))
-				{
-					this.OnUsernameChanging(value);
-					this.SendPropertyChanging();
-					this._Username = value;
-					this.SendPropertyChanged("Username");
-					this.OnUsernameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserPassword", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
-		public string UserPassword
-		{
-			get
-			{
-				return this._UserPassword;
-			}
-			set
-			{
-				if ((this._UserPassword != value))
-				{
-					this.OnUserPasswordChanging(value);
-					this.SendPropertyChanging();
-					this._UserPassword = value;
-					this.SendPropertyChanged("UserPassword");
-					this.OnUserPasswordChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserType", DbType="VarChar(50)")]
-		public string UserType
-		{
-			get
-			{
-				return this._UserType;
-			}
-			set
-			{
-				if ((this._UserType != value))
-				{
-					this.OnUserTypeChanging(value);
-					this.SendPropertyChanging();
-					this._UserType = value;
-					this.SendPropertyChanged("UserType");
-					this.OnUserTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Admin", Storage="_Admin", ThisKey="ID_User", OtherKey="ID_Admin", IsUnique=true, IsForeignKey=false)]
-		public Admin Admin
-		{
-			get
-			{
-				return this._Admin.Entity;
-			}
-			set
-			{
-				Admin previousValue = this._Admin.Entity;
-				if (((previousValue != value) 
-							|| (this._Admin.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Admin.Entity = null;
-						previousValue.User = null;
-					}
-					this._Admin.Entity = value;
-					if ((value != null))
-					{
-						value.User = this;
-					}
-					this.SendPropertyChanged("Admin");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Profesor", Storage="_Profesor", ThisKey="ID_User", OtherKey="ID_Prof", IsUnique=true, IsForeignKey=false)]
-		public Profesor Profesor
-		{
-			get
-			{
-				return this._Profesor.Entity;
-			}
-			set
-			{
-				Profesor previousValue = this._Profesor.Entity;
-				if (((previousValue != value) 
-							|| (this._Profesor.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Profesor.Entity = null;
-						previousValue.User = null;
-					}
-					this._Profesor.Entity = value;
-					if ((value != null))
-					{
-						value.User = this;
-					}
-					this.SendPropertyChanged("Profesor");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Student", Storage="_Student", ThisKey="ID_User", OtherKey="ID_Std", IsUnique=true, IsForeignKey=false)]
-		public Student Student
-		{
-			get
-			{
-				return this._Student.Entity;
-			}
-			set
-			{
-				Student previousValue = this._Student.Entity;
-				if (((previousValue != value) 
-							|| (this._Student.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Student.Entity = null;
-						previousValue.User = null;
-					}
-					this._Student.Entity = value;
-					if ((value != null))
-					{
-						value.User = this;
-					}
-					this.SendPropertyChanged("Student");
 				}
 			}
 		}
@@ -673,10 +419,6 @@ namespace app_login
 			{
 				if ((this._ID_Prof != value))
 				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnID_ProfChanging(value);
 					this.SendPropertyChanging();
 					this._ID_Prof = value;
@@ -757,6 +499,10 @@ namespace app_login
 			{
 				if ((this._ID_User != value))
 				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnID_UserChanging(value);
 					this.SendPropertyChanging();
 					this._ID_User = value;
@@ -779,7 +525,7 @@ namespace app_login
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Profesor", Storage="_User", ThisKey="ID_Prof", OtherKey="ID_User", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Profesor", Storage="_User", ThisKey="ID_User", OtherKey="ID_User", IsForeignKey=true)]
 		public User User
 		{
 			get
@@ -796,17 +542,17 @@ namespace app_login
 					if ((previousValue != null))
 					{
 						this._User.Entity = null;
-						previousValue.Profesor = null;
+						previousValue.Profesors.Remove(this);
 					}
 					this._User.Entity = value;
 					if ((value != null))
 					{
-						value.Profesor = this;
-						this._ID_Prof = value.ID_User;
+						value.Profesors.Add(this);
+						this._ID_User = value.ID_User;
 					}
 					else
 					{
-						this._ID_Prof = default(int);
+						this._ID_User = default(int);
 					}
 					this.SendPropertyChanged("User");
 				}
@@ -1181,10 +927,6 @@ namespace app_login
 			{
 				if ((this._ID_Std != value))
 				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnID_StdChanging(value);
 					this.SendPropertyChanging();
 					this._ID_Std = value;
@@ -1265,6 +1007,10 @@ namespace app_login
 			{
 				if ((this._ID_User != value))
 				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnID_UserChanging(value);
 					this.SendPropertyChanging();
 					this._ID_User = value;
@@ -1287,7 +1033,7 @@ namespace app_login
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Student", Storage="_User", ThisKey="ID_Std", OtherKey="ID_User", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Student", Storage="_User", ThisKey="ID_User", OtherKey="ID_User", IsForeignKey=true)]
 		public User User
 		{
 			get
@@ -1304,17 +1050,17 @@ namespace app_login
 					if ((previousValue != null))
 					{
 						this._User.Entity = null;
-						previousValue.Student = null;
+						previousValue.Students.Remove(this);
 					}
 					this._User.Entity = value;
 					if ((value != null))
 					{
-						value.Student = this;
-						this._ID_Std = value.ID_User;
+						value.Students.Add(this);
+						this._ID_User = value.ID_User;
 					}
 					else
 					{
-						this._ID_Std = default(int);
+						this._ID_User = default(int);
 					}
 					this.SendPropertyChanged("User");
 				}
@@ -1510,6 +1256,272 @@ namespace app_login
 					this._ID_Subj = value;
 				}
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
+	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID_User;
+		
+		private string _Username;
+		
+		private string _UserPassword;
+		
+		private string _UserType;
+		
+		private string _Email;
+		
+		private string _UserStatus;
+		
+		private EntitySet<Admin> _Admins;
+		
+		private EntitySet<Profesor> _Profesors;
+		
+		private EntitySet<Student> _Students;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnID_UserChanging(int value);
+    partial void OnID_UserChanged();
+    partial void OnUsernameChanging(string value);
+    partial void OnUsernameChanged();
+    partial void OnUserPasswordChanging(string value);
+    partial void OnUserPasswordChanged();
+    partial void OnUserTypeChanging(string value);
+    partial void OnUserTypeChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnUserStatusChanging(string value);
+    partial void OnUserStatusChanged();
+    #endregion
+		
+		public User()
+		{
+			this._Admins = new EntitySet<Admin>(new Action<Admin>(this.attach_Admins), new Action<Admin>(this.detach_Admins));
+			this._Profesors = new EntitySet<Profesor>(new Action<Profesor>(this.attach_Profesors), new Action<Profesor>(this.detach_Profesors));
+			this._Students = new EntitySet<Student>(new Action<Student>(this.attach_Students), new Action<Student>(this.detach_Students));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_User", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID_User
+		{
+			get
+			{
+				return this._ID_User;
+			}
+			set
+			{
+				if ((this._ID_User != value))
+				{
+					this.OnID_UserChanging(value);
+					this.SendPropertyChanging();
+					this._ID_User = value;
+					this.SendPropertyChanged("ID_User");
+					this.OnID_UserChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string Username
+		{
+			get
+			{
+				return this._Username;
+			}
+			set
+			{
+				if ((this._Username != value))
+				{
+					this.OnUsernameChanging(value);
+					this.SendPropertyChanging();
+					this._Username = value;
+					this.SendPropertyChanged("Username");
+					this.OnUsernameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserPassword", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string UserPassword
+		{
+			get
+			{
+				return this._UserPassword;
+			}
+			set
+			{
+				if ((this._UserPassword != value))
+				{
+					this.OnUserPasswordChanging(value);
+					this.SendPropertyChanging();
+					this._UserPassword = value;
+					this.SendPropertyChanged("UserPassword");
+					this.OnUserPasswordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserType", DbType="VarChar(50)")]
+		public string UserType
+		{
+			get
+			{
+				return this._UserType;
+			}
+			set
+			{
+				if ((this._UserType != value))
+				{
+					this.OnUserTypeChanging(value);
+					this.SendPropertyChanging();
+					this._UserType = value;
+					this.SendPropertyChanged("UserType");
+					this.OnUserTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserStatus", DbType="VarChar(500)")]
+		public string UserStatus
+		{
+			get
+			{
+				return this._UserStatus;
+			}
+			set
+			{
+				if ((this._UserStatus != value))
+				{
+					this.OnUserStatusChanging(value);
+					this.SendPropertyChanging();
+					this._UserStatus = value;
+					this.SendPropertyChanged("UserStatus");
+					this.OnUserStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Admin", Storage="_Admins", ThisKey="ID_User", OtherKey="ID_User")]
+		public EntitySet<Admin> Admins
+		{
+			get
+			{
+				return this._Admins;
+			}
+			set
+			{
+				this._Admins.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Profesor", Storage="_Profesors", ThisKey="ID_User", OtherKey="ID_User")]
+		public EntitySet<Profesor> Profesors
+		{
+			get
+			{
+				return this._Profesors;
+			}
+			set
+			{
+				this._Profesors.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Student", Storage="_Students", ThisKey="ID_User", OtherKey="ID_User")]
+		public EntitySet<Student> Students
+		{
+			get
+			{
+				return this._Students;
+			}
+			set
+			{
+				this._Students.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Admins(Admin entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_Admins(Admin entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
+		private void attach_Profesors(Profesor entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_Profesors(Profesor entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
+		private void attach_Students(Student entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_Students(Student entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
 		}
 	}
 }

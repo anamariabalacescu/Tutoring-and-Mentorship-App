@@ -1,24 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Tutoring" Class="TutoringDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-SMPOF1T\SQLEXPRESS;Initial Catalog=Tutoring;Integrated Security=True" SettingsObjectName="app_login.Properties.Settings" SettingsPropertyName="TutoringConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=Tutoring;Integrated Security=True" SettingsObjectName="app_login.Properties.Settings" SettingsPropertyName="TutoringConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Admins" Member="Admins">
     <Type Name="Admin">
       <Column Name="ID_Admin" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Nume" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Prenume" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="ID_User" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="User_Admin" Member="User" ThisKey="ID_Admin" OtherKey="ID_User" Type="User" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Users" Member="Users">
-    <Type Name="User">
-      <Column Name="ID_User" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Username" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="UserPassword" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="UserType" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Email" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
-      <Association Name="User_Admin" Member="Admin" ThisKey="ID_User" OtherKey="ID_Admin" Type="Admin" Cardinality="One" />
-      <Association Name="User_Profesor" Member="Profesor" ThisKey="ID_User" OtherKey="ID_Prof" Type="Profesor" Cardinality="One" />
-      <Association Name="User_Student" Member="Student" ThisKey="ID_User" OtherKey="ID_Std" Type="Student" Cardinality="One" />
+      <Association Name="User_Admin" Member="User" ThisKey="ID_User" OtherKey="ID_User" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Enrolled_Subjects" Member="Enrolled_Subjects">
@@ -38,7 +26,7 @@
       <Column Name="ID_User" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Profesor_Scheduling" Member="Schedulings" ThisKey="ID_Prof" OtherKey="ID_Prof" Type="Scheduling" />
       <Association Name="Profesor_Taught_subject" Member="Taught_subjects" ThisKey="ID_Prof" OtherKey="ID_Prof" Type="Taught_subject" />
-      <Association Name="User_Profesor" Member="User" ThisKey="ID_Prof" OtherKey="ID_User" Type="User" IsForeignKey="true" />
+      <Association Name="User_Profesor" Member="User" ThisKey="ID_User" OtherKey="ID_User" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Schedulings" Member="Schedulings">
@@ -47,7 +35,7 @@
       <Column Name="ID_Prof" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ID_Std" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ID_Subj" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Member="Scheduled_Date" Type="System.String" CanBeNull="false" />
+      <Column Name="Scheduled_Date" Type="System.String" CanBeNull="false" />
       <Association Name="Profesor_Scheduling" Member="Profesor" ThisKey="ID_Prof" OtherKey="ID_Prof" Type="Profesor" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="Student_Scheduling" Member="Student" ThisKey="ID_Std" OtherKey="ID_Std" Type="Student" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="Subject_Scheduling" Member="Subject" ThisKey="ID_Subj" OtherKey="ID_Subj" Type="Subject" IsForeignKey="true" DeleteRule="CASCADE" />
@@ -62,7 +50,7 @@
       <Column Name="ID_User" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Student_Enrolled_Subject" Member="Enrolled_Subjects" ThisKey="ID_Std" OtherKey="ID_Std" Type="Enrolled_Subject" />
       <Association Name="Student_Scheduling" Member="Schedulings" ThisKey="ID_Std" OtherKey="ID_Std" Type="Scheduling" />
-      <Association Name="User_Student" Member="User" ThisKey="ID_Std" OtherKey="ID_User" Type="User" IsForeignKey="true" />
+      <Association Name="User_Student" Member="User" ThisKey="ID_User" OtherKey="ID_User" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Subjects" Member="Subjects">
@@ -80,6 +68,19 @@
       <Column Name="ID_Subj" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Profesor_Taught_subject" Member="Profesor" ThisKey="ID_Prof" OtherKey="ID_Prof" Type="Profesor" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="Subject_Taught_subject" Member="Subject" ThisKey="ID_Subj" OtherKey="ID_Subj" Type="Subject" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="ID_User" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="UserPassword" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="UserType" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="UserStatus" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Association Name="User_Admin" Member="Admins" ThisKey="ID_User" OtherKey="ID_User" Type="Admin" />
+      <Association Name="User_Profesor" Member="Profesors" ThisKey="ID_User" OtherKey="ID_User" Type="Profesor" />
+      <Association Name="User_Student" Member="Students" ThisKey="ID_User" OtherKey="ID_User" Type="Student" />
     </Type>
   </Table>
 </Database>

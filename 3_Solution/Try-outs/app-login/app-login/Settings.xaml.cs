@@ -29,6 +29,7 @@ namespace app_login
         private void Profile(object sender, RoutedEventArgs e)
         {
             var prof = new YourProfile();
+            prof.setId(id_user);
             prof.Show();
             Close();
         }
@@ -36,6 +37,7 @@ namespace app_login
         private void Lessons(object sender, RoutedEventArgs e)
         {
             var les = new YourLessons();
+            les.setId(id_user);
             les.Show();
             Close();
         }
@@ -83,6 +85,78 @@ namespace app_login
             ChangeUser changeUser = new ChangeUser();
             changeUser.SetID(id_user);
             Settings_type.Content = changeUser;
+        }
+
+        private void DeleteAcc(object sender, RoutedEventArgs e)
+        {
+            TutoringDataContext tut = new TutoringDataContext();
+
+            GeneralCmds gen = new GeneralCmds();
+
+            string type = gen.getUserType(id_user);
+
+            if (type == "student")
+            {
+                var stdlist = tut.Students.Where(s => s.ID_User == id_user).FirstOrDefault();
+
+                tut.Students.DeleteOnSubmit(stdlist);
+            }
+            else if (type == "profesor")
+            {
+                var proflist = tut.Profesors.Where(s => s.ID_User == id_user).FirstOrDefault();
+
+                tut.Profesors.DeleteOnSubmit(proflist);
+            }
+
+            var userDelete = tut.Users.Where(s=> s.ID_User == id_user).FirstOrDefault();
+            tut.Users.DeleteOnSubmit(userDelete);
+
+            try
+            {
+                // Submit changes to the database
+                tut.SubmitChanges();
+
+                // If no exception occurred, changes were successfully submitted
+                Done d = new Done();
+                d.SuccessMessage = "Account deleted successfully!";
+                d.Show();
+
+                MainWindow login = new MainWindow();
+                login.Show();
+                Close();
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions if any occur during the submission
+                Error er = new Error();
+                er.ErrorMessage = "Error deleting account";
+                er.Show();
+            }
+
+        }
+
+        private void Home(object sender, RoutedEventArgs e)
+        {
+            var home = new Window3();
+            home.setId(id_user);
+            home.Show();
+            Close();
+        }
+
+        private void SubjectsClick(object sender, RoutedEventArgs e)
+        {
+            var subj = new Subjects();
+            subj.setId(id_user);
+            subj.Show();
+            Close();
+        }
+
+        private void ProfsClick(object sender, RoutedEventArgs e)
+        {
+            var profs = new Profs();
+            profs.setId(id_user);
+            profs.Show();
+            Close();
         }
     }
 }

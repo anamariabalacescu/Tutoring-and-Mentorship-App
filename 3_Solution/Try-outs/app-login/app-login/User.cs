@@ -12,12 +12,14 @@ namespace app_login
         private string passWord { get; set; }
         private string type { get; set; }
         private string email { get; set; }
+        private string status { get; set; }
         public UserModel(string user, string pass, string mail, string type)
         {
             this.userName = user;
             this.passWord = pass;
             this.email = mail;
             this.type = type;
+            this.status = "active";
         }
         public UserModel(int userId)
         {
@@ -32,7 +34,7 @@ namespace app_login
             this.email = existingUser.Email;
             this.type = existingUser.UserType;
         }
-        private User toUser() => new User() { Username = userName, UserPassword = passWord, Email = email, UserType = type };
+        private User toUser() => new User() { Username = userName, UserPassword = passWord, Email = email, UserType = type, UserStatus = status };
         public int UserInsert(string userName, string pass, string mail)
         {
             TutoringDataContext tut = new TutoringDataContext();
