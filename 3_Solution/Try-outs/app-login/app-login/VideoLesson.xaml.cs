@@ -30,8 +30,8 @@ namespace app_login
 
         private bool isImage1 = true;
 
-        string destinatarIpAddress = "192.168.0.192";
-        int destinatarPort = 8080;
+        string destinatarIpAddress = "10.10.23.242";
+        int destinatarPort = 5000;
 
         private WaveInEvent waveIn;
         private BufferedWaveProvider waveProvider;
@@ -43,6 +43,7 @@ namespace app_login
             InitializeComponent();
             Loaded += MainWindow_Load;
             Closed += MainWindow_Closed;
+            StartCommunication();
         }
 
         private void WaveIn_DataAvailable(object sender, WaveInEventArgs e)
@@ -114,27 +115,32 @@ namespace app_login
             }
         }
 
-        private async Task SendImageToOtherPeerAsync(byte[] imageData)
+        private async Task SendImageToServerAsync(byte[] imageData, int serverPort)
         {
-
             try
             {
-                using (TcpClient client = new TcpClient(destinatarIpAddress, destinatarPort))
-                using (NetworkStream stream = client.GetStream())
+                using (TcpClient client = new TcpClient())
                 {
-                    await stream.WriteAsync(imageData, 0, imageData.Length);
+                    await client.ConnectAsync(destinatarIpAddress, serverPort);
+
+                    using (NetworkStream stream = client.GetStream())
+                    {
+                        await stream.WriteAsync(imageData, 0, imageData.Length);
+                    }
+
+                    Console.WriteLine("Datele imaginii au fost trimise la server.");
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Eroare la trimiterea datelor: {ex.Message}");
+                Console.WriteLine($"Eroare la trimiterea datelor imaginii la server: {ex.Message}");
             }
         }
 
-        private async Task<byte[]> ReceiveImageFromOtherPeerAsync()
+        private async Task<byte[]> ReceiveImageFromServerAsync(int serverPort)
         {
+            TcpListener listener = new TcpListener(IPAddress.Any, serverPort);
 
-            TcpListener listener = new TcpListener(IPAddress.Any, 8080);
             try
             {
                 listener.Start();
@@ -145,12 +151,13 @@ namespace app_login
                 using (MemoryStream memoryStream = new MemoryStream())
                 {
                     await stream.CopyToAsync(memoryStream);
+                    Console.WriteLine("Imagine primita");
                     return memoryStream.ToArray();
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Eroare la primirea datelor: {ex.Message}");
+                Console.WriteLine($"Eroare la primirea datelor imaginii de la server: {ex.Message}");
                 return new byte[0];
             }
             finally
@@ -158,6 +165,42 @@ namespace app_login
                 listener.Stop();
             }
         }
+
+        private async void StartCommunication()
+        {
+            while (true)
+            {
+                // Verifică dacă sursa imaginii nu este null
+                if (pic1.Source != null)
+                {
+                    // Trimitere imagine către server (după necesități)
+                    using (MemoryStream stream = new MemoryStream())
+                    {
+                        BitmapEncoder encoder = new JpegBitmapEncoder();
+                        encoder.Frames.Add(BitmapFrame.Create((BitmapSource)pic1.Source));
+                        encoder.Save(stream);
+
+                        byte[] imageData = stream.ToArray();
+
+                        // Trimite datele imaginii la server (înlocuiește destinatarPort cu portul corespunzător)
+                        await SendImageToServerAsync(imageData, destinatarPort);
+                    }
+                }
+
+                // Primire imagine de la server (după necesități)
+                byte[] receivedImageData = await ReceiveImageFromServerAsync(destinatarPort);
+                if (receivedImageData.Length > 0)
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        pic2.Source = BitmapToImageSource(ConvertToBitmap(receivedImageData));
+                    });
+                }
+
+                await Task.Delay(50); // Așteaptă o scurtă perioadă pentru a nu aglomera procesul
+            }
+        }
+
 
         private async void MainWindow_Load(object sender, RoutedEventArgs e)
         {
@@ -177,26 +220,13 @@ namespace app_login
             }
         }
 
-
-
-        private async Task ConnectToOtherPeerAsync(string ipAddress, int port)
+        private System.Drawing.Bitmap ConvertToBitmap(byte[] imageData)
         {
-            try
+            using (MemoryStream stream = new MemoryStream(imageData))
             {
-                TcpClient client = new TcpClient();
-                await client.ConnectAsync(ipAddress, port);
-                var audioPort = 5001; // Alegeți un alt port
-                otherPeerAudioClient = new TcpClient();
-                await otherPeerAudioClient.ConnectAsync(ipAddress, audioPort);
-
-                Console.WriteLine($"Conectat la {ipAddress}:{port}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Eroare la conectare: {ex.Message}");
+                return new System.Drawing.Bitmap(stream);
             }
         }
-
         private async void BtnStart_Click(object sender, RoutedEventArgs e)
         {
             if (cboCamera1.SelectedIndex >= 0)
@@ -204,29 +234,6 @@ namespace app_login
                 videoSource = new VideoCaptureDevice(filterInfoCollection[cboCamera1.SelectedIndex].MonikerString);
                 videoSource.NewFrame += VideoCaptureDevice_NewFrame;
                 videoSource.Start();
-
-                //await ConnectToOtherPeerAsync(destinatarIpAddress, destinatarPort);
-
-                //StartSending();
-            }
-        }
-
-
-        private async void StartSending()
-        {
-            while (isSending && videoSource.IsRunning)
-            {
-                using (MemoryStream stream = new MemoryStream())
-                {
-                    BitmapEncoder encoder = new JpegBitmapEncoder();
-                    encoder.Frames.Add(BitmapFrame.Create((BitmapSource)pic1.Source));
-                    encoder.Save(stream);
-
-                    byte[] imageData = stream.ToArray();
-                    await SendImageToOtherPeerAsync(imageData);
-                }
-
-                await Task.Delay(50);
             }
         }
 
@@ -252,6 +259,14 @@ namespace app_login
                 pic1.Source = BitmapToImageSource((System.Drawing.Bitmap)e.Frame.Clone());
 
             }); 
+        }
+
+        private void VideoCaptureDeviceReceiver_NewFrame(object sender, NewFrameEventArgs e)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                pic2.Source = BitmapToImageSource((System.Drawing.Bitmap)e.Frame.Clone());
+            });
         }
 
         private void StopSending()
