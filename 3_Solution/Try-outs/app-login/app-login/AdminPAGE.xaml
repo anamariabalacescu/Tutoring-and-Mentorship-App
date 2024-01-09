@@ -1,0 +1,64 @@
+﻿<Window x:Class="app_login.AdminPAGE"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:app_login"
+                mc:Ignorable="d"
+        Title="AdminPAGE" Height="800" Width="800" 
+        WindowStyle="none"
+        AllowsTransparency="true"
+        Foreground="#FF896DD7" 
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen">
+    <Border CornerRadius="52" BorderThickness="10" BorderBrush="LightSkyBlue">
+
+        <Border CornerRadius="35" BorderThickness="20">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="Blue" Offset="0.0"/>
+                    <GradientStop Color="RoyalBlue" Offset="0.35"/>
+                    <GradientStop Color="Aqua" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="AliceBlue" Offset="0.0"/>
+                        <GradientStop Color="RoyalBlue" Offset="0.35"/>
+                        <GradientStop Color="Aqua" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <DataGrid x:Name="Professors" Margin="10,50,420,455" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID_Prof" Binding="{Binding ID_Prof}" />
+                        <DataGridTextColumn Header="Nume" Binding="{Binding Nume}" />
+                        <DataGridTextColumn Header="Prenume" Binding="{Binding Prenume}" />
+                        <DataGridTextColumn Header="Profesie de baza" Binding="{Binding Profesie_de_baza}" Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <DataGrid x:Name="Students" Margin="420,50,10,455" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID_STUD" Binding="{Binding ID_Std}" />
+                        <DataGridTextColumn Header="Nume" Binding="{Binding Nume}" />
+                        <DataGridTextColumn Header="Prenume" Binding="{Binding Prenume}" />
+                        <DataGridTextColumn Header="Universitate" Binding="{Binding Universitate}" Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Label Content="DATABASE PROFESSORS" HorizontalAlignment="Left" Margin="10,19,0,0" VerticalAlignment="Top" FontFamily="Arial Black"/>
+                <Label Content="DATABASE STUDENTS" HorizontalAlignment="Left" Margin="420,19,0,0" VerticalAlignment="Top" FontFamily="Arial Black"/>
+                <DataGrid x:Name="accounts" Margin="10,390,10,50" MouseDoubleClick="accounts_MouseDoubleClick">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID_User" Binding="{Binding ID_User}" />
+                        <DataGridTextColumn Header="Username" Binding="{Binding Username}" />
+                        <DataGridTextColumn Header="UserPassword" Binding="{Binding UserPassword}" />
+                        <DataGridTextColumn Header="UserType" Binding="{Binding UserType}" />
+                        <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
+                        <DataGridTextColumn Header="UserStatus" Binding="{Binding UserStatus}" Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Border>
+    </Border>
+</Window>
+
