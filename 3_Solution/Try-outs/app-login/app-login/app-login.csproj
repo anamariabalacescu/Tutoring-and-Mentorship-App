@@ -244,6 +244,9 @@
       <DependentUpon>AdminForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="AdminModel.cs" />
+    <Compile Include="AdminPAGE.xaml.cs">
+      <DependentUpon>AdminPAGE.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AudioClient.cs" />
     <Compile Include="ChangeEmail.xaml.cs">
       <DependentUpon>ChangeEmail.xaml</DependentUpon>
@@ -320,6 +323,10 @@
       <DependentUpon>YourProfile.xaml</DependentUpon>
     </Compile>
     <Page Include="AdminForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminPAGE.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
