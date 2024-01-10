@@ -62,7 +62,7 @@ namespace app_login
                             .Where(sub => sub.ID_Subj == s.ID_Subj)
                             .Select(sub => sub.nume)
                             .FirstOrDefault(),
-                        Scheduled_Date = DateTime.Parse(s.Scheduled_Date)
+                        //Scheduled_Date = DateTime.Parse(s.Scheduled_Date)
                     })
                     .ToList();
 
@@ -87,7 +87,7 @@ namespace app_login
                             .Where(sub => sub.ID_Subj == s.ID_Subj)
                             .Select(sub => sub.nume)
                             .FirstOrDefault(),
-                        ScheduledDate = s.Scheduled_Date
+                        //ScheduledDate = s.Scheduled_Date
                     })
                     .ToList();
 

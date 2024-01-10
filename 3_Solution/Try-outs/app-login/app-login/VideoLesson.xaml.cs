@@ -30,8 +30,9 @@ namespace app_login
 
         private bool isImage1 = true;
 
-        string destinatarIpAddress = "10.10.23.242";
-        int destinatarPort = 5000;
+        string destinatarIpAddress = "192.168.84.42";
+        private int destinatarPortSend = 5000;
+        private int destinatarPortReceive = 5001;
 
         private WaveInEvent waveIn;
         private BufferedWaveProvider waveProvider;
@@ -168,12 +169,11 @@ namespace app_login
 
         private async void StartCommunication()
         {
+            await Task.Delay(5000);
             while (true)
             {
-                // Verifică dacă sursa imaginii nu este null
                 if (pic1.Source != null)
                 {
-                    // Trimitere imagine către server (după necesități)
                     using (MemoryStream stream = new MemoryStream())
                     {
                         BitmapEncoder encoder = new JpegBitmapEncoder();
@@ -182,26 +182,34 @@ namespace app_login
 
                         byte[] imageData = stream.ToArray();
 
-                        // Trimite datele imaginii la server (înlocuiește destinatarPort cu portul corespunzător)
-                        await SendImageToServerAsync(imageData, destinatarPort);
+                        await SendImageToServerAsync(imageData, destinatarPortSend);
                     }
                 }
 
-                // Primire imagine de la server (după necesități)
-                byte[] receivedImageData = await ReceiveImageFromServerAsync(destinatarPort);
+                byte[] receivedImageData = await ReceiveImageFromServerAsync(destinatarPortReceive);
                 if (receivedImageData.Length > 0)
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        pic2.Source = BitmapToImageSource(ConvertToBitmap(receivedImageData));
+                        BitmapImage bitmapImage = ConvertToBitmapImage(receivedImageData);
+                        pic2.Source = bitmapImage;
                     });
                 }
-
-                await Task.Delay(50); // Așteaptă o scurtă perioadă pentru a nu aglomera procesul
             }
         }
 
-
+        private BitmapImage ConvertToBitmapImage(byte[] imageData)
+        {
+            using (MemoryStream memoryStream = new MemoryStream(imageData))
+            {
+                BitmapImage bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.StreamSource = memoryStream;
+                bitmapImage.EndInit();
+                return bitmapImage;
+            }
+        }
         private async void MainWindow_Load(object sender, RoutedEventArgs e)
         {
             await LoadCameraInfoAsync();
