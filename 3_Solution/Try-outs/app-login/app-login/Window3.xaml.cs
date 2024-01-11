@@ -21,6 +21,7 @@ namespace app_login
     public partial class Window3 : Window
     {
         private int id_user { get; set; }
+        private string searchFor { get; set; }
         public void setId(int id) { this.id_user = id; }
         public Window3()
         {
@@ -189,6 +190,21 @@ namespace app_login
             subj.Show();
             subj.setId(this.id_user);
             Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if(SearchBar.Text!= null)
+            {
+                SearchPopUp s = new SearchPopUp(SearchBar.Text);
+                s.Show();
+
+            }
+        }
+
+        private void TextChange(object sender, TextChangedEventArgs e)
+        {
+            searchFor = SearchBar.Text;
         }
     }
 }

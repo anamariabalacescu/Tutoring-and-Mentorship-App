@@ -42,8 +42,8 @@
                             <MenuItem>
                                 <MenuItem.Header>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBox Width="200" Height="30" Text=""/>
-                                        <Button Content="Search" Width="80" Height="30"/>
+                                        <TextBox x:Name="SearchBar" Width="200" Height="30" Text="" TextChanged="TextChange"/>
+                                        <Button Content="Search" Width="80" Height="30" Click="Button_Click"/>
                                     </StackPanel>
                                 </MenuItem.Header>
                             </MenuItem>
