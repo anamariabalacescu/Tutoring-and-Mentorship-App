@@ -5,3 +5,5 @@ C:\Users\Ali Kiwe\source\repos\ApBAZE-P\Program\bin\Debug\Program.exe
 C:\Users\Ali Kiwe\source\repos\ApBAZE-P\Program\bin\Debug\Program.pdb
 C:\Users\Ali Kiwe\source\repos\ApBAZE-P\Program\obj\Debug\Program.exe
 C:\Users\Ali Kiwe\source\repos\ApBAZE-P\Program\obj\Debug\Program.pdb
+C:\Users\Ali Kiwe\source\repos\ApBAZE-P\Program\bin\Debug\System.Drawing.Common.dll
+C:\Users\Ali Kiwe\source\repos\ApBAZE-P\Program\obj\Debug\Program.csproj.CopyComplete

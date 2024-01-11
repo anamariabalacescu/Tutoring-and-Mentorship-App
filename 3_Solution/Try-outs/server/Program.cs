@@ -1,74 +1,94 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 
-class Program
+class Server
 {
-    private readonly List<TcpClient> clients = new List<TcpClient>();
-    private TcpListener tcpListener;
+    static List<TcpClient> connectedClients = new List<TcpClient>();
+    static object locker = new object();
 
-    static async Task Main(string[] args)
+    static async Task Main()
     {
-        Program server = new Program();
-        await server.StartServerAsync(5000); 
-    }
+        int receivePort = 5000;
 
-    public async Task StartServerAsync(int port)
-    {
-        tcpListener = new TcpListener(IPAddress.Any, port);
-        tcpListener.Start();
+        TcpListener receiveServer = new TcpListener(IPAddress.Any, receivePort);
 
-        Console.WriteLine($"Server started on port {port}");
+        receiveServer.Start();
+
+        Console.WriteLine($"Serverul a pornit pe portul {receivePort} (primire)");
 
         while (true)
         {
-            TcpClient client = await tcpListener.AcceptTcpClientAsync();
-            clients.Add(client);
-            _ = HandleClientAsync(client);
+            TcpClient receiveClient = await receiveServer.AcceptTcpClientAsync();
+
+            lock (locker)
+            {
+                connectedClients.Add(receiveClient);
+            }
+
+            _ = HandleClientAsync(receiveClient);
         }
     }
 
-    private async Task HandleClientAsync(TcpClient client)
+    static async Task HandleClientAsync(TcpClient receiveClient)
     {
         try
         {
-            NetworkStream stream = client.GetStream();
-            byte[] buffer = new byte[1024];
+            IPAddress clientIpAddress = ((IPEndPoint)receiveClient.Client.RemoteEndPoint).Address;
 
-            while (true)
+            TcpClient sendClient = new TcpClient(clientIpAddress.ToString(), 5001);
+
+            byte[] imageData;
+            using (NetworkStream receiveStream = receiveClient.GetStream())
+            using (MemoryStream memoryStream = new MemoryStream())
             {
-                int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
-
-                if (bytesRead == 0)
-                {
-                    break;
-                }
-
-                BroadcastAudioData(buffer, bytesRead, client);
+                await receiveStream.CopyToAsync(memoryStream);
+                imageData = memoryStream.ToArray();
             }
+
+            byte[] imageDataCopy;
+            lock (locker)
+            {
+                imageDataCopy = imageData.ToArray();
+            }
+
+            await Task.Run(async () =>
+            {
+                foreach (var client in connectedClients)
+                {
+                    if (client != receiveClient)
+                    {
+                        try
+                        {
+                            using (NetworkStream sendStream = client.GetStream())
+                            {
+                                await sendStream.WriteAsync(imageDataCopy, 0, imageDataCopy.Length).ConfigureAwait(false);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Eroare la trimiterea datelor catre client: {ex.Message}");
+                        }
+                    }
+                }
+            });
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error handling client: {ex.Message}");
+            Console.WriteLine($"Eroare la tratarea clientului: {ex.Message}");
         }
         finally
         {
-            clients.Remove(client);
-            client.Close();
+            lock (locker)
+            {
+                connectedClients.Remove(receiveClient);
+            }
+            receiveClient.Close();
         }
     }
 
-    private void BroadcastAudioData(byte[] audioData, int length, TcpClient senderClient)
-    {
-        foreach (TcpClient client in clients)
-        {
-            if (client != senderClient)
-            {
-                NetworkStream stream = client.GetStream();
-                stream.Write(audioData, 0, length);
-            }
-        }
-    }
 }
