@@ -41,16 +41,26 @@ namespace app_login
 
                 TutoringDataContext tu = new TutoringDataContext();
                 string stat = tu.Users.Where(x => x.Username == username).FirstOrDefault().UserStatus;
-
+                string tip = tu.Users.Where(x => x.Username == username).FirstOrDefault().UserType;
                 if (stat != "inactive")
                 {
-                    Window3 home = new Window3();  // Send to home page - Window3
+                    if (tip != "admin")
+                    {
+                        Window3 home = new Window3();  // Send to home page - Window3
 
-                    var usr = tu.Users.Where(x => x.Username == username).FirstOrDefault();
-                    home.setId(usr.ID_User);
+                        var usr = tu.Users.Where(x => x.Username == username).FirstOrDefault();
+                        home.setId(usr.ID_User);
 
-                    home.Show();  // Show Window3
-                    Close();  // Close the current window3
+                        home.Show();  // Show Window3
+                        Close();  // Close the current window3
+                    }
+                    else
+                    {
+                        var usr = tu.Users.Where(x => x.Username == username).FirstOrDefault();
+                        AdminPAGE adm = new AdminPAGE(usr.ID_User);
+                        adm.Show();
+                        Close();
+                    }
                 }
                 else
                 {

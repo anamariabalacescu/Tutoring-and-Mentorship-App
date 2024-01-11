@@ -22,6 +22,7 @@
                 </LinearGradientBrush>
             </Border.BorderBrush>
             <Grid>
+
                 <Grid.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                         <GradientStop Color="AliceBlue" Offset="0.0"/>
@@ -29,6 +30,7 @@
                         <GradientStop Color="Aqua" Offset="1.0"/>
                     </LinearGradientBrush>
                 </Grid.Background>
+                <Image Source="C:\Users\Ali Kiwe\Documents\GitHub\Tutoring-and-Mentorship-App\3_Solution\Try-outs\app-login\close.png" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top" MouseDown="CloseApp" RenderTransformOrigin="-0.25,-2.5" Margin="0,2,6,0"/>
                 <DataGrid x:Name="Professors" Margin="10,50,420,455" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ID_Prof" Binding="{Binding ID_Prof}" />
@@ -51,12 +53,12 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ID_User" Binding="{Binding ID_User}" />
                         <DataGridTextColumn Header="Username" Binding="{Binding Username}" />
-                        <DataGridTextColumn Header="UserPassword" Binding="{Binding UserPassword}" />
                         <DataGridTextColumn Header="UserType" Binding="{Binding UserType}" />
                         <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
-                        <DataGridTextColumn Header="UserStatus" Binding="{Binding UserStatus}" Width="*" />
+                        <DataGridTextColumn Header="UserStatus" Binding="{Binding UserStatus}" />
                     </DataGrid.Columns>
                 </DataGrid>
+                <Button Content="Reset Password" HorizontalAlignment="Center" Margin="0,710,0,0" VerticalAlignment="Top" Width="110" Click="Button_Click"/>
             </Grid>
         </Border>
     </Border>

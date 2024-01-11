@@ -186,6 +186,37 @@ namespace app_login
                 throw new ArgumentException("User not found.");
             }
         }
+        public void UpdateUserStatus(int userId, string status)
+        {
+            TutoringDataContext tut = new TutoringDataContext();
+
+        // Find the user by ID
+            User existingUser = tut.Users.SingleOrDefault(u => u.ID_User == userId);
+
+            if (existingUser != null)
+            {
+                // Update the password
+                existingUser.UserStatus = status;
+                try
+                {
+                    // Submit changes to the database
+                    tut.SubmitChanges();
+
+                    // If no exception occurred, changes were successfully submitted
+                    Done d = new Done();
+                    d.SuccessMessage = "Password changed successfully!";
+                    d.Show();
+                }
+                catch (Exception ex)
+                {
+                    // Handle exceptions if any occur during the submission
+                    Error er = new Error();
+                    er.ErrorMessage = "Error submitting password changes";
+                }
+            }
+            // Handle the case where the user with the provided ID was not found
+
+        }
         public void UpdateUsername(int userId, string oldUsername, string newUsername, string password)
         {
             TutoringDataContext tut = new TutoringDataContext();
