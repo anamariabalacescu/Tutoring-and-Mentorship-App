@@ -60,10 +60,50 @@ namespace app_login
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            GeneralCmds gen = new GeneralCmds();
             DateTime selectedDate = date.SelectedDate ?? DateTime.MinValue;
+            if (selectedDate != DateTime.MinValue && cboHour.SelectedItem != null)
+            {
+                string selectedHour = cboHour.SelectedItem.ToString();
+                int hour;
+                if (int.TryParse(selectedHour, out hour))
+                {
+                    DateTime selectedDateTime = new DateTime(selectedDate.Year, selectedDate.Month, selectedDate.Day, hour, 0, 0);
+                    Console.WriteLine("Data si ora selectate: " + selectedDateTime);
 
-            //string ora_selectata = cboHour.Selected;
+                    Scheduling newScheduling = new Scheduling
+                    {
+                        ID_Prof = id_prof,
+                        ID_Std = id_usr,
+                        ID_Subj = id_sub,
+                        Programare = selectedDateTime,
+                        StatusProgramare = "Pending",
+                        ProgresSTD = null,
+                        EVALProf = null
+                    };
+                    try
+                    {
+                        tut.Schedulings.InsertOnSubmit(newScheduling);
+                        tut.SubmitChanges();
+                    }
+                    catch
+                    {
+
+                        Done d = new Done();
+                        d.SuccessMessage = "Lesson added! Good luck learning!\n";
+                        d.Show();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Ora selectata nu este valida.");
+                }
+            }
+            else
+            {
+                Error er = new Error();
+                er.ErrorMessage = "Date not selected!\n";
+                er.Show();
+            }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -71,17 +111,17 @@ namespace app_login
             Close();
         }
 
-        //private void subSelect(object sender, RoutedEventArgs e)
-        //{
-        //    string numeSubj = cboSubject.Text;
-        //    id_sub = tut.Subjects.Where(s=> s.nume == numeSubj).FirstOrDefault().ID_Subj;
-        //    AddProfs();
-        //}
+        private void subSelect(object sender, SelectionChangedEventArgs e)
+        {
+            string numeSubj = cboSubject.Text;
+            id_sub = tut.Subjects.Where(s => s.nume == numeSubj).FirstOrDefault().ID_Subj;
+            AddProfs();
+        }
 
-        //private void profSelect(object sender, RoutedEventArgs e)
-        //{
-        //    string profName = cboTeacher.Text;
-        //    id_prof = tut.Profesors.Where(p => p.Nume + " " + p.Prenume == profName).FirstOrDefault().ID_Prof;
-        //}
+        private void profSelect(object sender, SelectionChangedEventArgs e)
+        {
+            string profName = cboTeacher.Text;
+            id_prof = tut.Profesors.Where(p => p.Nume + " " + p.Prenume == profName).FirstOrDefault().ID_Prof;
+        }
     }
 }
