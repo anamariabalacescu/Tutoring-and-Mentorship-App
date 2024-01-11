@@ -1,0 +1,80 @@
+﻿<Window x:Class="app_login.AddLessonSTD"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:app_login"
+        mc:Ignorable="d"
+        Title="AddLessonSTD"
+        WindowState="Maximized"
+        WindowStyle="none"
+        AllowsTransparency="true"
+        Foreground="#FF896DD7" 
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen">
+    <Border CornerRadius="30" BorderThickness="10" BorderBrush="LightSkyBlue" Height="575" Width="790">
+        <Border CornerRadius="15" BorderThickness="20">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="Blue" Offset="0.0"/>
+                    <GradientStop Color="RoyalBlue" Offset="0.35"/>
+                    <GradientStop Color="Aqua" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="LightSkyBlue" Offset="0.0"/>
+                        <GradientStop Color="SkyBlue" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+
+                <Menu VerticalAlignment="Top">
+                    <Menu.ItemContainerStyle>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="Foreground" Value="DarkBlue"/>
+                        </Style>
+                    </Menu.ItemContainerStyle>
+                    <MenuItem>
+                        <MenuItem.Header>
+                            <StackPanel Orientation="Horizontal"/>
+                        </MenuItem.Header>
+                    </MenuItem>
+
+                    <MenuItem HorizontalAlignment="Right"/>
+                </Menu>
+                <Label Content="New subject to study:" HorizontalAlignment="Left" Margin="85,31,0,0" VerticalAlignment="Top" Height="43" Width="184" FontSize="15" FontWeight="Bold" FontFamily="Book Antiqua"/>
+                <ComboBox x:Name="cboSubject" HorizontalAlignment="Left" Margin="269,34,0,0"  VerticalAlignment="Top" Width="345" Height="25" FontSize="15"  />
+                <Button Content="AddLesson" Background="Azure" HorizontalAlignment="Left" Margin="85,405,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.133,0.501" Height="40" Width="169" FontSize="10" FontFamily="Bookman Old Style" Click="Button_Click"/>
+                <Button Content="Quit" Background="Azure" HorizontalAlignment="Left" Margin="445,405,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.133,0.501" Height="40" Width="169" FontSize="10" FontFamily="Bookman Old Style" Click="Button_Click_1"/>
+                <Label Content="Desired teacher:" HorizontalAlignment="Left" Margin="85,88,0,0" VerticalAlignment="Top" Height="43" Width="184" FontSize="15" FontWeight="Bold" FontFamily="Book Antiqua"/>
+                <ComboBox x:Name="cboTeacher" HorizontalAlignment="Left" Margin="269,91,0,0"  VerticalAlignment="Top" Width="345" Height="25" FontSize="15"  />
+                <Calendar x:Name="date" HorizontalAlignment="Center" Margin="0,150,0,0" VerticalAlignment="Top"/>
+                <ComboBox HorizontalAlignment="Left" Margin="276,343,0,0" VerticalAlignment="Top" Width="120">
+                    <ComboBoxItem Content="08"/>
+                    <ComboBoxItem Content="09"/>
+                    <ComboBoxItem Content="10"/>
+                    <ComboBoxItem Content="11"/>
+                    <ComboBoxItem Content="12"/>
+                    <ComboBoxItem Content="13"/>
+                    <ComboBoxItem Content="14"/>
+                    <ComboBoxItem Content="15"/>
+                    <ComboBoxItem Content="16"/>
+                    <ComboBoxItem Content="17"/>
+                    <ComboBoxItem Content="18"/>
+                    <ComboBoxItem Content="19"/>
+                    <ComboBoxItem Content="20"/>
+                    <ComboBoxItem Content="21"/>
+                    <ComboBoxItem x:Name="cboHour" Content="22"/>
+                </ComboBox>
+                <Label Content="Desired date:" HorizontalAlignment="Left" Margin="85,152,0,0" VerticalAlignment="Top" Height="43" Width="184" FontSize="15" FontWeight="Bold" FontFamily="Book Antiqua"/>
+                <Label Content="Desired hour:" HorizontalAlignment="Left" Margin="85,335,0,0" VerticalAlignment="Top" Height="43" Width="184" FontSize="15" FontWeight="Bold" FontFamily="Book Antiqua"/>
+            </Grid>
+        </Border>
+    </Border>
+</Window>

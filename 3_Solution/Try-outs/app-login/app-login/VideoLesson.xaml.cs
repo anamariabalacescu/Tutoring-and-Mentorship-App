@@ -23,16 +23,17 @@ namespace app_login
 
         private FilterInfoCollection filterInfoCollection;
         private VideoCaptureDevice videoSource;
-
-        private VideoCaptureDevice videoSourceReceiver;
         
         private bool isSending = false;
-
+        private bool isMuted = false;
         private bool isImage1 = true;
 
-        string destinatarIpAddress = "192.168.84.42";
+        string destinatarIpAddress = "192.168.79.42";
         private int destinatarPortSend = 5000;
         private int destinatarPortReceive = 5001;
+
+        private int destinatarAudioPortSend = 8000;
+        private int destinatarAudioPortReceive = 8001;
 
         private WaveInEvent waveIn;
         private BufferedWaveProvider waveProvider;
@@ -47,124 +48,58 @@ namespace app_login
             StartCommunication();
         }
 
-        private void WaveIn_DataAvailable(object sender, WaveInEventArgs e)
-        {
-            try
-            {
-                if (otherPeerAudioClient != null && otherPeerAudioClient.Connected)
-                {
-                    otherPeerAudioClient.GetStream().Write(e.Buffer, 0, e.BytesRecorded);
-                }
-
-                waveProvider.AddSamples(e.Buffer, 0, e.BytesRecorded);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error sending audio data: " + ex.Message);
-            }
-        }
-
-        private void StartMicrophone()
-        {
-            try
-            {
-                waveIn = new WaveInEvent();
-                waveIn.DataAvailable += WaveIn_DataAvailable;
-                waveIn.WaveFormat = new WaveFormat(44100, 1); // 44.1 kHz, mono
-
-                waveProvider = new BufferedWaveProvider(waveIn.WaveFormat);
-                waveProvider.BufferDuration = TimeSpan.FromSeconds(10);
-                waveProvider.DiscardOnBufferOverflow = true;
-
-                waveOut = new WaveOut();
-                waveOut.Init(waveProvider);
-                waveOut.Play();
-
-                waveIn.StartRecording();
-                Console.WriteLine("Microphone started...");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error starting microphone: " + ex.Message);
-            }
-        }
-
-        private void StopMicrophone()
-        {
-            try
-            {
-                waveIn?.StopRecording();
-                waveIn?.Dispose();
-                waveIn = null;
-
-                waveOut?.Stop();
-                waveOut?.Dispose();
-                waveOut = null;
-
-                waveProvider = null;
-
-                if (otherPeerAudioClient != null)
-                {
-                    otherPeerAudioClient.Close();
-                }
-
-                Console.WriteLine("Microphone stopped...");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error stopping microphone: " + ex.Message);
-            }
-        }
-
         private async Task SendImageToServerAsync(byte[] imageData, int serverPort)
         {
-            try
+            await Task.Run(async () =>
             {
-                using (TcpClient client = new TcpClient())
+                try
                 {
-                    await client.ConnectAsync(destinatarIpAddress, serverPort);
-
-                    using (NetworkStream stream = client.GetStream())
+                    using (TcpClient client = new TcpClient())
                     {
-                        await stream.WriteAsync(imageData, 0, imageData.Length);
-                    }
+                        await client.ConnectAsync(destinatarIpAddress, serverPort);
 
-                    Console.WriteLine("Datele imaginii au fost trimise la server.");
+                        using (NetworkStream stream = client.GetStream())
+                        {
+                            await stream.WriteAsync(imageData, 0, imageData.Length);
+                        }
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Eroare la trimiterea datelor imaginii la server: {ex.Message}");
-            }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Eroare la trimiterea datelor imaginii la server: {ex.Message}");
+                }
+            });
         }
 
         private async Task<byte[]> ReceiveImageFromServerAsync(int serverPort)
         {
-            TcpListener listener = new TcpListener(IPAddress.Any, serverPort);
-
-            try
+            return await Task.Run(async () =>
             {
-                listener.Start();
+                TcpListener listener = new TcpListener(IPAddress.Any, serverPort);
 
-                TcpClient client = await listener.AcceptTcpClientAsync();
-                NetworkStream stream = client.GetStream();
-
-                using (MemoryStream memoryStream = new MemoryStream())
+                try
                 {
-                    await stream.CopyToAsync(memoryStream);
-                    Console.WriteLine("Imagine primita");
-                    return memoryStream.ToArray();
+                    listener.Start();
+
+                    TcpClient client = await listener.AcceptTcpClientAsync();
+                    NetworkStream stream = client.GetStream();
+
+                    using (MemoryStream memoryStream = new MemoryStream())
+                    {
+                        await stream.CopyToAsync(memoryStream);
+                        return memoryStream.ToArray();
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Eroare la primirea datelor imaginii de la server: {ex.Message}");
-                return new byte[0];
-            }
-            finally
-            {
-                listener.Stop();
-            }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Eroare la primirea datelor imaginii de la server: {ex.Message}");
+                    return new byte[0];
+                }
+                finally
+                {
+                    listener.Stop();
+                }
+            });
         }
 
         private async void StartCommunication()
@@ -210,6 +145,7 @@ namespace app_login
                 return bitmapImage;
             }
         }
+
         private async void MainWindow_Load(object sender, RoutedEventArgs e)
         {
             await LoadCameraInfoAsync();
@@ -228,14 +164,7 @@ namespace app_login
             }
         }
 
-        private System.Drawing.Bitmap ConvertToBitmap(byte[] imageData)
-        {
-            using (MemoryStream stream = new MemoryStream(imageData))
-            {
-                return new System.Drawing.Bitmap(stream);
-            }
-        }
-        private async void BtnStart_Click(object sender, RoutedEventArgs e)
+        private void BtnStart_Click(object sender, RoutedEventArgs e)
         {
             if (cboCamera1.SelectedIndex >= 0)
             {
@@ -310,11 +239,13 @@ namespace app_login
             {
                 if (isImage1)
                 {
+                    isMuted = false;
                     mic.Source = new BitmapImage(new Uri("C:\\Users\\Ali Kiwe\\Documents\\GitHub\\Tutoring-and-Mentorship-App\\3_Solution\\Try-outs\\app-login\\app-login\\mic_muted.png", UriKind.Absolute));
                     StopMicrophone();
                 }
                 else
                 {
+                    isMuted = true;
                     mic.Source = new BitmapImage(new Uri("C:\\Users\\Ali Kiwe\\Documents\\GitHub\\Tutoring-and-Mentorship-App\\3_Solution\\Try-outs\\app-login\\app-login\\mic_unmuted.png", UriKind.Absolute));
                     StartMicrophone();
                 }
@@ -339,6 +270,75 @@ namespace app_login
             feedback.setId(this.id_user);
             feedback.Show();
             Close();
+        }
+        private void WaveIn_DataAvailable(object sender, WaveInEventArgs e)
+        {
+            try
+            {
+                if (otherPeerAudioClient != null && otherPeerAudioClient.Connected)
+                {
+                    otherPeerAudioClient.GetStream().Write(e.Buffer, 0, e.BytesRecorded);
+                }
+
+                waveProvider.AddSamples(e.Buffer, 0, e.BytesRecorded);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error sending audio data: " + ex.Message);
+            }
+        }
+
+        private void StartMicrophone()
+        {
+            try
+            {
+
+                waveIn = new WaveInEvent();
+                waveIn.DataAvailable += WaveIn_DataAvailable;
+                waveIn.WaveFormat = new WaveFormat(44100, 1); // 44.1 kHz, mono
+
+                waveProvider = new BufferedWaveProvider(waveIn.WaveFormat);
+                waveProvider.BufferDuration = TimeSpan.FromSeconds(10);
+                waveProvider.DiscardOnBufferOverflow = true;
+
+                waveOut = new WaveOut();
+                waveOut.Init(waveProvider);
+                waveOut.Play();
+
+                waveIn.StartRecording();
+                Console.WriteLine("Microphone started...");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error starting microphone: " + ex.Message);
+            }
+        }
+
+        private void StopMicrophone()
+        {
+            try
+            {
+                waveIn?.StopRecording();
+                waveIn?.Dispose();
+                waveIn = null;
+
+                waveOut?.Stop();
+                waveOut?.Dispose();
+                waveOut = null;
+
+                waveProvider = null;
+
+                if (otherPeerAudioClient != null)
+                {
+                    otherPeerAudioClient.Close();
+                }
+
+                Console.WriteLine("Microphone stopped...");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error stopping microphone: " + ex.Message);
+            }
         }
     }
 }

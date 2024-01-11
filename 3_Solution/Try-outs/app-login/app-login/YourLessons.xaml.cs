@@ -76,7 +76,13 @@ namespace app_login
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-
+            GeneralCmds gen = new GeneralCmds();
+            string tip = gen.getUserType(id_user);
+            if(tip == "profesor")
+            {
+                AddLessonProf lp = new AddLessonProf(id_user);
+                lp.Show();
+            }
         }
     }
 }

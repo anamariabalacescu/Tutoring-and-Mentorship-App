@@ -48,6 +48,9 @@ namespace app_login
     partial void InsertScheduling(Scheduling instance);
     partial void UpdateScheduling(Scheduling instance);
     partial void DeleteScheduling(Scheduling instance);
+    partial void InsertTaught_subject(Taught_subject instance);
+    partial void UpdateTaught_subject(Taught_subject instance);
+    partial void DeleteTaught_subject(Taught_subject instance);
     #endregion
 		
 		public TutoringDataContext() : 
@@ -120,14 +123,6 @@ namespace app_login
 			}
 		}
 		
-		public System.Data.Linq.Table<Taught_subject> Taught_subjects
-		{
-			get
-			{
-				return this.GetTable<Taught_subject>();
-			}
-		}
-		
 		public System.Data.Linq.Table<User> Users
 		{
 			get
@@ -141,6 +136,14 @@ namespace app_login
 			get
 			{
 				return this.GetTable<Scheduling>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Taught_subject> Taught_subjects
+		{
+			get
+			{
+				return this.GetTable<Taught_subject>();
 			}
 		}
 	}
@@ -383,6 +386,8 @@ namespace app_login
 		
 		private EntitySet<Scheduling> _Schedulings;
 		
+		private EntitySet<Taught_subject> _Taught_subjects;
+		
 		private EntityRef<User> _User;
 		
     #region Extensibility Method Definitions
@@ -404,6 +409,7 @@ namespace app_login
 		public Profesor()
 		{
 			this._Schedulings = new EntitySet<Scheduling>(new Action<Scheduling>(this.attach_Schedulings), new Action<Scheduling>(this.detach_Schedulings));
+			this._Taught_subjects = new EntitySet<Taught_subject>(new Action<Taught_subject>(this.attach_Taught_subjects), new Action<Taught_subject>(this.detach_Taught_subjects));
 			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
@@ -525,6 +531,19 @@ namespace app_login
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Profesor_Taught_subject", Storage="_Taught_subjects", ThisKey="ID_Prof", OtherKey="ID_Prof")]
+		public EntitySet<Taught_subject> Taught_subjects
+		{
+			get
+			{
+				return this._Taught_subjects;
+			}
+			set
+			{
+				this._Taught_subjects.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Profesor", Storage="_User", ThisKey="ID_User", OtherKey="ID_User", IsForeignKey=true)]
 		public User User
 		{
@@ -586,6 +605,18 @@ namespace app_login
 		}
 		
 		private void detach_Schedulings(Scheduling entity)
+		{
+			this.SendPropertyChanging();
+			entity.Profesor = null;
+		}
+		
+		private void attach_Taught_subjects(Taught_subject entity)
+		{
+			this.SendPropertyChanging();
+			entity.Profesor = this;
+		}
+		
+		private void detach_Taught_subjects(Taught_subject entity)
 		{
 			this.SendPropertyChanging();
 			entity.Profesor = null;
@@ -831,6 +862,8 @@ namespace app_login
 		
 		private EntitySet<Scheduling> _Schedulings;
 		
+		private EntitySet<Taught_subject> _Taught_subjects;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -844,6 +877,7 @@ namespace app_login
 		public Subject()
 		{
 			this._Schedulings = new EntitySet<Scheduling>(new Action<Scheduling>(this.attach_Schedulings), new Action<Scheduling>(this.detach_Schedulings));
+			this._Taught_subjects = new EntitySet<Taught_subject>(new Action<Taught_subject>(this.attach_Taught_subjects), new Action<Taught_subject>(this.detach_Taught_subjects));
 			OnCreated();
 		}
 		
@@ -900,6 +934,19 @@ namespace app_login
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Subject_Taught_subject", Storage="_Taught_subjects", ThisKey="ID_Subj", OtherKey="ID_Subj")]
+		public EntitySet<Taught_subject> Taught_subjects
+		{
+			get
+			{
+				return this._Taught_subjects;
+			}
+			set
+			{
+				this._Taught_subjects.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -931,50 +978,17 @@ namespace app_login
 			this.SendPropertyChanging();
 			entity.Subject = null;
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Taught_subjects")]
-	public partial class Taught_subject
-	{
 		
-		private System.Nullable<int> _ID_Prof;
-		
-		private System.Nullable<int> _ID_Subj;
-		
-		public Taught_subject()
+		private void attach_Taught_subjects(Taught_subject entity)
 		{
+			this.SendPropertyChanging();
+			entity.Subject = this;
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Prof", DbType="Int")]
-		public System.Nullable<int> ID_Prof
+		private void detach_Taught_subjects(Taught_subject entity)
 		{
-			get
-			{
-				return this._ID_Prof;
-			}
-			set
-			{
-				if ((this._ID_Prof != value))
-				{
-					this._ID_Prof = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Subj", DbType="Int")]
-		public System.Nullable<int> ID_Subj
-		{
-			get
-			{
-				return this._ID_Subj;
-			}
-			set
-			{
-				if ((this._ID_Subj != value))
-				{
-					this._ID_Subj = value;
-				}
-			}
+			this.SendPropertyChanging();
+			entity.Subject = null;
 		}
 	}
 	
@@ -1570,6 +1584,174 @@ namespace app_login
 					else
 					{
 						this._ID_Subj = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Subject");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Taught_subjects")]
+	public partial class Taught_subject : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID_Prof;
+		
+		private int _ID_Subj;
+		
+		private EntityRef<Profesor> _Profesor;
+		
+		private EntityRef<Subject> _Subject;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnID_ProfChanging(int value);
+    partial void OnID_ProfChanged();
+    partial void OnID_SubjChanging(int value);
+    partial void OnID_SubjChanged();
+    #endregion
+		
+		public Taught_subject()
+		{
+			this._Profesor = default(EntityRef<Profesor>);
+			this._Subject = default(EntityRef<Subject>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Prof", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ID_Prof
+		{
+			get
+			{
+				return this._ID_Prof;
+			}
+			set
+			{
+				if ((this._ID_Prof != value))
+				{
+					if (this._Profesor.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_ProfChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Prof = value;
+					this.SendPropertyChanged("ID_Prof");
+					this.OnID_ProfChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Subj", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ID_Subj
+		{
+			get
+			{
+				return this._ID_Subj;
+			}
+			set
+			{
+				if ((this._ID_Subj != value))
+				{
+					if (this._Subject.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_SubjChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Subj = value;
+					this.SendPropertyChanged("ID_Subj");
+					this.OnID_SubjChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Profesor_Taught_subject", Storage="_Profesor", ThisKey="ID_Prof", OtherKey="ID_Prof", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public Profesor Profesor
+		{
+			get
+			{
+				return this._Profesor.Entity;
+			}
+			set
+			{
+				Profesor previousValue = this._Profesor.Entity;
+				if (((previousValue != value) 
+							|| (this._Profesor.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Profesor.Entity = null;
+						previousValue.Taught_subjects.Remove(this);
+					}
+					this._Profesor.Entity = value;
+					if ((value != null))
+					{
+						value.Taught_subjects.Add(this);
+						this._ID_Prof = value.ID_Prof;
+					}
+					else
+					{
+						this._ID_Prof = default(int);
+					}
+					this.SendPropertyChanged("Profesor");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Subject_Taught_subject", Storage="_Subject", ThisKey="ID_Subj", OtherKey="ID_Subj", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public Subject Subject
+		{
+			get
+			{
+				return this._Subject.Entity;
+			}
+			set
+			{
+				Subject previousValue = this._Subject.Entity;
+				if (((previousValue != value) 
+							|| (this._Subject.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Subject.Entity = null;
+						previousValue.Taught_subjects.Remove(this);
+					}
+					this._Subject.Entity = value;
+					if ((value != null))
+					{
+						value.Taught_subjects.Add(this);
+						this._ID_Subj = value.ID_Subj;
+					}
+					else
+					{
+						this._ID_Subj = default(int);
 					}
 					this.SendPropertyChanged("Subject");
 				}
