@@ -83,6 +83,11 @@ namespace app_login
                 AddLessonProf lp = new AddLessonProf(id_user);
                 lp.Show();
             }
+            else if(tip == "student")
+            {
+                AddLessonSTD ls = new AddLessonSTD(id_user);
+                ls.Show();
+            }
         }
     }
 }
