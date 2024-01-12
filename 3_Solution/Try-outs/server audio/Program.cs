@@ -1,82 +1,62 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 
 class ProgramAudio
 {
-    private readonly List<TcpClient> clients = new List<TcpClient>();
-    private TcpListener tcpListener;
-
-    private const int audioPort = 5001;
-
-    static async Task Main(string[] args)
+    static async Task Main()
     {
-        ProgramAudio server = new ProgramAudio();
-        await server.StartServerAsync(audioPort);
-    }
+        int audioReceivePort = 8000;
 
-    public async Task StartServerAsync(int audioPort)
-    {
-        tcpListener = new TcpListener(IPAddress.Any, audioPort);
+        TcpListener audioReceiveServer = new TcpListener(IPAddress.Any, audioReceivePort);
 
-        tcpListener.Start();
+        audioReceiveServer.Start();
 
-        Console.WriteLine($"Server started on audio port {audioPort}");
+        Console.WriteLine($"Serverul audio a pornit pe portul {audioReceivePort}");
 
         while (true)
         {
-            TcpClient audioClient = await tcpListener.AcceptTcpClientAsync();
+            TcpClient audioReceiveClient = await audioReceiveServer.AcceptTcpClientAsync();
 
-            clients.Add(audioClient);
+            Console.WriteLine("Un client s-a conectat pentru audio");
 
-            Console.WriteLine("Un client s-a conectat");
-            _ = HandleClientAsync(audioClient);
-
+            _ = HandleAudioClientAsync(audioReceiveClient);
         }
     }
 
-    private async Task HandleClientAsync(TcpClient audioClient)
+    static async Task HandleAudioClientAsync(TcpClient audioReceiveClient)
     {
         try
         {
-            NetworkStream audioStream = audioClient.GetStream();
+            // Obține adresa IP a clientului pentru audio
+            IPAddress clientIpAddress = ((IPEndPoint)audioReceiveClient.Client.RemoteEndPoint).Address;
 
-            byte[] audioBuffer = new byte[1024];
+            // Creează un TcpClient pentru trimiterea datelor audio la același client
+            TcpClient audioSendClient = new TcpClient(clientIpAddress.ToString(), 8001);
 
-            while (true)
+            using (NetworkStream audioReceiveStream = audioReceiveClient.GetStream())
+            using (MemoryStream memoryStream = new MemoryStream())
             {
-                int audioBytesRead = await audioStream.ReadAsync(audioBuffer, 0, audioBuffer.Length);
+                // Primește datele audio de la clientul pentru audio
+                await audioReceiveStream.CopyToAsync(memoryStream);
+                Console.WriteLine("Date audio primite");
 
-                if (audioBytesRead == 0)
+                byte[] audioData = memoryStream.ToArray();
+
+                // Trimite datele audio către clientul pentru trimitere audio
+                using (NetworkStream audioSendStream = audioSendClient.GetStream())
                 {
-                    break;
+                    await audioSendStream.WriteAsync(audioData, 0, audioData.Length);
+                    Console.WriteLine("Date audio trimise");
                 }
-
-                BroadcastAudioData(audioBuffer, audioBytesRead, audioClient);
             }
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error handling client: {ex.Message}");
-        }
-        finally
-        {
-            clients.Remove(audioClient);
-            audioClient.Close();
-        }
-    }
-
-    private void BroadcastAudioData(byte[] audioData, int length, TcpClient senderClient)
-    {
-        foreach (TcpClient client in clients)
-        {
-            //if (client != senderClient)
-            //{
-            NetworkStream stream = client.GetStream();
-            stream.Write(audioData, 0, length);
-            //}
+            Console.WriteLine($"Eroare la tratarea clientului audio: {ex.Message}");
         }
     }
 }
