@@ -158,5 +158,10 @@ namespace app_login
             profs.Show();
             Close();
         }
+
+        private void Setting(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

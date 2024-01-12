@@ -18,7 +18,7 @@ namespace app_login
     public partial class VideoLesson : Window
     {
         private int id_user { get; set; }
-
+        private MemoryStream audioStream = new MemoryStream();
         public void setId(int id) { this.id_user = id; }
 
         private FilterInfoCollection filterInfoCollection;
@@ -28,7 +28,7 @@ namespace app_login
         private bool isMuted = false;
         private bool isImage1 = true;
 
-        string destinatarIpAddress = "192.168.79.42";
+        string destinatarIpAddress = "172.16.41.125";
         private int destinatarPortSend = 5000;
         private int destinatarPortReceive = 5001;
 
@@ -38,6 +38,7 @@ namespace app_login
         private WaveInEvent waveIn;
         private BufferedWaveProvider waveProvider;
         private TcpClient otherPeerAudioClient;
+        private TcpClient imageClient;
         private WaveOut waveOut;
 
         public VideoLesson()
@@ -45,9 +46,49 @@ namespace app_login
             InitializeComponent();
             Loaded += MainWindow_Load;
             Closed += MainWindow_Closed;
+
+            // Așteaptă conexiunea la serverul audio și cel pentru imagine
+            Task.Run(async () => await ConnectToAudioServerAsync()).Wait();
+            Task.Run(async () => await ConnectToImageServerAsync()).Wait();
+
+            waveIn = new WaveInEvent();
+            waveIn.DataAvailable += WaveIn_DataAvailable;
+            waveIn.WaveFormat = new WaveFormat(44100, 1);
+
             StartCommunication();
         }
 
+        private async Task ConnectToAudioServerAsync()
+        {
+            try
+            {
+                using (TcpClient audioClient = new TcpClient())
+                {
+                    await audioClient.ConnectAsync(destinatarIpAddress, destinatarAudioPortSend);
+                    otherPeerAudioClient = audioClient;
+                    Console.WriteLine("Conexiune audio realizată.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Eroare la conectarea la serverul audio: {ex.Message}");
+            }
+        }
+        private async Task ConnectToImageServerAsync()
+        {
+            try
+            {
+                using (TcpClient imageClient = new TcpClient())
+                {
+                    await imageClient.ConnectAsync(destinatarIpAddress, destinatarPortSend);
+                    Console.WriteLine("Conexiune pentru imagine realizată.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Eroare la conectarea la serverul de imagine: {ex.Message}");
+            }
+        }
         private async Task SendImageToServerAsync(byte[] imageData, int serverPort)
         {
             await Task.Run(async () =>
@@ -129,6 +170,23 @@ namespace app_login
                         BitmapImage bitmapImage = ConvertToBitmapImage(receivedImageData);
                         pic2.Source = bitmapImage;
                     });
+                }
+
+                if (isSending)
+                {
+                    using (MemoryStream audioStream = new MemoryStream())
+                    {
+                        byte[] audioData = audioStream.ToArray();
+
+                        await SendAudioToServerAsync(audioData, destinatarAudioPortSend);
+                    }
+
+                    byte[] receivedAudioData = await ReceiveAudioFromServerAsync(destinatarAudioPortReceive);
+                    if (receivedAudioData.Length > 0)
+                    {
+                        // Redă datele audio primite
+                        PlayAudio(receivedAudioData);
+                    }
                 }
             }
         }
@@ -273,26 +331,14 @@ namespace app_login
         }
         private void WaveIn_DataAvailable(object sender, WaveInEventArgs e)
         {
-            try
-            {
-                if (otherPeerAudioClient != null && otherPeerAudioClient.Connected)
-                {
-                    otherPeerAudioClient.GetStream().Write(e.Buffer, 0, e.BytesRecorded);
-                }
-
-                waveProvider.AddSamples(e.Buffer, 0, e.BytesRecorded);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error sending audio data: " + ex.Message);
-            }
+            audioStream.Write(e.Buffer, 0, e.BytesRecorded);
         }
 
         private void StartMicrophone()
         {
             try
             {
-
+                isSending = true;
                 waveIn = new WaveInEvent();
                 waveIn.DataAvailable += WaveIn_DataAvailable;
                 waveIn.WaveFormat = new WaveFormat(44100, 1); // 44.1 kHz, mono
@@ -300,10 +346,6 @@ namespace app_login
                 waveProvider = new BufferedWaveProvider(waveIn.WaveFormat);
                 waveProvider.BufferDuration = TimeSpan.FromSeconds(10);
                 waveProvider.DiscardOnBufferOverflow = true;
-
-                waveOut = new WaveOut();
-                waveOut.Init(waveProvider);
-                waveOut.Play();
 
                 waveIn.StartRecording();
                 Console.WriteLine("Microphone started...");
@@ -313,6 +355,7 @@ namespace app_login
                 Console.WriteLine("Error starting microphone: " + ex.Message);
             }
         }
+
 
         private void StopMicrophone()
         {
@@ -340,6 +383,84 @@ namespace app_login
                 Console.WriteLine("Error stopping microphone: " + ex.Message);
             }
         }
+
+        private void PlayAudio(byte[] audioData)
+        {
+            try
+            {
+                using (MemoryStream audioStream = new MemoryStream(audioData))
+                {
+                    WaveOut waveOut = new WaveOut();
+                    WaveFileReader waveFileReader = new WaveFileReader(audioStream);
+                    waveOut.Init(waveFileReader);
+                    waveOut.Play();
+                    waveOut.PlaybackStopped += (sender, e) =>
+                    {
+                        waveFileReader.Dispose();
+                        waveOut.Dispose();
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error playing audio: {ex.Message}");
+            }
+        }
+
+        private async Task SendAudioToServerAsync(byte[] audioData, int serverPort)
+        {
+            await Task.Run(async () =>
+            {
+                try
+                {
+                    using (TcpClient client = new TcpClient())
+                    {
+                        await client.ConnectAsync(destinatarIpAddress, serverPort);
+
+                        using (NetworkStream stream = client.GetStream())
+                        {
+                            await stream.WriteAsync(audioData, 0, audioData.Length);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error sending audio data to server: {ex.Message}");
+                }
+            });
+        }
+
+        private async Task<byte[]> ReceiveAudioFromServerAsync(int serverPort)
+        {
+            return await Task.Run(async () =>
+            {
+                TcpListener listener = new TcpListener(IPAddress.Any, serverPort);
+
+                try
+                {
+                    listener.Start();
+
+                    TcpClient client = await listener.AcceptTcpClientAsync();
+                    NetworkStream stream = client.GetStream();
+
+                    using (MemoryStream memoryStream = new MemoryStream())
+                    {
+                        await stream.CopyToAsync(memoryStream);
+                        return memoryStream.ToArray();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error receiving audio data from server: {ex.Message}");
+                    return new byte[0];
+                }
+                finally
+                {
+                    listener.Stop();
+                }
+            });
+        }
+
     }
 }
 

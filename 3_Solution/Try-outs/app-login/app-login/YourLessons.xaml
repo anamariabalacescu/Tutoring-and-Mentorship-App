@@ -50,16 +50,16 @@
                                 </StackPanel>
                             </MenuItem.Header>
                         </MenuItem>
-                        <MenuItem HorizontalAlignment="Right" Header="Home">
+                        <MenuItem HorizontalAlignment="Stretch" Header="Home" Click="Home">
                         </MenuItem>
-                        <MenuItem HorizontalAlignment="Right" Header="Subjects">
+                        <MenuItem HorizontalAlignment="Stretch" Header="Subjects" Click="Subjects">
                         </MenuItem>
-                        <MenuItem Header="Professors">
+                        <MenuItem Header="Professors" HorizontalAlignment="Stretch" Click="Profs">
                         </MenuItem>
                         <MenuItem Header="Your account">
-                            <MenuItem Header="Profile"/>
-                            <MenuItem Header="Your lessons"/>
-                            <MenuItem Header="Settings"/>
+                            <MenuItem Header="Profile" Click="Profile"/>
+                            <MenuItem Header="Your lessons" Click="Lessons"/>
+                            <MenuItem Header="Settings" Click="Settings"/>
                             <MenuItem Header="Log out" Click="LogOut"/>
                         </MenuItem>
                         <MenuItem HorizontalAlignment="Right">

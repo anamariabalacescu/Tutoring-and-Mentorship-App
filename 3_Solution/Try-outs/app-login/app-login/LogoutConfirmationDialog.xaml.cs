@@ -32,15 +32,10 @@ namespace app_login
             Close();
         }
 
-        private void NoButton_Click(object sender, RoutedEventArgs e)
+        private void NoButton_Click(object sender, MouseButtonEventArgs e)
         {
             UserConfirmed = false;
             Close();
-        }
-
-        private void NoButton_Click(object sender, MouseButtonEventArgs e)
-        {
-
         }
     }
 

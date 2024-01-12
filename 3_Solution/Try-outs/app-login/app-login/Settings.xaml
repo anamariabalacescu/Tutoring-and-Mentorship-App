@@ -57,9 +57,9 @@
                         <MenuItem Header="Professors" Click="ProfsClick">
                         </MenuItem>
                         <MenuItem Header="Your account">
-                            <MenuItem Header="Profile"/>
-                            <MenuItem Header="Your lessons"/>
-                            <MenuItem Header="Settings"/>
+                            <MenuItem Header="Profile" Click="Profile"/>
+                            <MenuItem Header="Your lessons" Click="Lessons"/>
+                            <MenuItem Header="Settings" Click="Setting"/>
                             <MenuItem Header="Log out" Click="MenuItem_LogOut"/>
                         </MenuItem>
                         <MenuItem HorizontalAlignment="Right">
