@@ -284,12 +284,24 @@
     <Compile Include="LogoutConfirmationDialog.xaml.cs">
       <DependentUpon>LogoutConfirmationDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PageProgress.xaml.cs">
+      <DependentUpon>PageProgress.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageSchedule.xaml.cs">
+      <DependentUpon>PageSchedule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PendingLessonsPage.xaml.cs">
+      <DependentUpon>PendingLessonsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Professor.cs" />
     <Compile Include="ProfRegister.xaml.cs">
       <DependentUpon>ProfRegister.xaml</DependentUpon>
     </Compile>
     <Compile Include="Profs.xaml.cs">
       <DependentUpon>Profs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProgressPROF.xaml.cs">
+      <DependentUpon>ProgressPROF.xaml</DependentUpon>
     </Compile>
     <Compile Include="SchedulingsPage.xaml.cs">
       <DependentUpon>SchedulingsPage.xaml</DependentUpon>
@@ -395,11 +407,27 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PageProgress.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageSchedule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PendingLessonsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ProfRegister.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Profs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProgressPROF.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

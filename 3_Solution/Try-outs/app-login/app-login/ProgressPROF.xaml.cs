@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,11 @@ namespace app_login
         private int id_usr { get; set; }
         private int id_sub {  get; set; }
         private int id_prof { get; set; }
+        private int id_std { get; set; }
         private string type {  get; set; }
+        public int EvalProf { get; set; }
+        public int ProgresStd { get; set; }
+        public DateTime Programare { get; set; }
         public ProgressPROF(int id_usr)
         {
             InitializeComponent();
@@ -34,47 +39,82 @@ namespace app_login
             if (type == "student")
             {
                 lbl.Content = "Teacher";
+                id_std = gen.getStdID(id_usr);
+            }
+            else
+            {
+                id_prof = gen.getProfID(id_usr);
             }
 
             AddSubjs();
         }
         private void AddSubjs()
         {
-            var subjects = tut.Schedulings.ToList();
-            List<string> ss = new List<string>();
-            foreach (var subject in subjects)
+            List<string> list = new List<string>();
+            if(type == "profesor")
             {
-                var subj = tut.Subjects.Where(pr => pr.ID_Subj == subject.ID_Subj).FirstOrDefault();
-                ss.Add(subj.nume);
+                var subj = tut.Schedulings.Where(s => s.ID_Prof == id_prof).ToList(); // iau toate materiile predate de un profesor
+                foreach( var subj2 in subj)
+                {
+                    var ss2 = tut.Subjects.Where(sj => sj.ID_Subj == subj2.ID_Subj).FirstOrDefault();
+                    string subjectName = ss2.nume;
+
+                    // Verificați dacă elementul există deja în listă
+                    if (!list.Contains(subjectName))
+                    {
+                        list.Add(subjectName);
+                    }
+                }
             }
-            cboSubject.ItemsSource = ss;
+            else
+            {
+                var subj = tut.Schedulings.Where(s => s.ID_Std == id_std).ToList(); // iau toate materiile predate la un student
+                foreach (var subj2 in subj)
+                {
+                    var ss2 = tut.Subjects.Where(sj => sj.ID_Subj == subj2.ID_Subj).FirstOrDefault();
+                    string subjectName = ss2.nume;
+
+                    // Verificați dacă elementul există deja în listă
+                    if (!list.Contains(subjectName))
+                    {
+                        list.Add(subjectName);
+                    }
+                }
+            }
+            cboSubject.ItemsSource = list;
         }
+
         private void AddProfs_Studs()
         {
-
             List<string> list = new List<string>();
-            if (type == "student") 
+            if (type == "profesor") 
             {
-                int id_std = gen.getStdID(id_usr);
-
-                var profs = tut.Schedulings.Where(s => s.ID_Std == id_std);
+                var profs = tut.Schedulings.Where(s => s.ID_Prof == id_prof).ToList();
                 foreach (var idp in profs)
                 {
                     var studs = tut.Students.Where(pr => pr.ID_Std == idp.ID_Std).FirstOrDefault();
-                    list.Add(studs.Nume + ' ' + studs.Prenume);
+                    string professorName = studs.Nume + ' ' + studs.Prenume;
+
+                    // Verificați dacă elementul există deja în listă
+                    if (!list.Contains(professorName))
+                    {
+                        list.Add(professorName);
+                    }
                 }
 
             }
-            else if(type == "profesor")
+            else if(type == "student")
             {
-                int id_prof = gen.getProfID(id_usr);
-
-
-                var studs = tut.Schedulings.Where(s => s.ID_Prof == id_prof);
+                var studs = tut.Schedulings.Where(s => s.ID_Std == id_std).ToList();
                 foreach (var idp in studs)
                 {
                     var profs = tut.Profesors.Where(pr => pr.ID_Prof == idp.ID_Prof).FirstOrDefault();
-                    list.Add(profs.Nume + ' ' + profs.Prenume);
+                    string professorName = profs.Nume + ' ' + profs.Prenume;
+
+                    if (!list.Contains(professorName))
+                    {
+                        list.Add(professorName);
+                    }
                 }
             }
 
@@ -83,11 +123,44 @@ namespace app_login
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var subject = cboSubject.SelectedItem.ToString();
-            var colab = cboTeacher.SelectedItem.ToString();
+            var subject = cboSubject.SelectedItem?.ToString();
+            var collaborator = cboTeacher.SelectedItem?.ToString();
 
+            if (!string.IsNullOrEmpty(subject) && !string.IsNullOrEmpty(collaborator))
+            {
+                int id_subject = tut.Subjects.FirstOrDefault(s => s.nume == subject)?.ID_Subj ?? 0;
 
+                if (type == "student")
+                {
+                    var meetingsInfo = tut.Schedulings
+                        .Where(s => s.ID_Subj == id_subject && s.ID_Std == id_std)
+                        .Select(s => new
+                        {
+                            EvalProf = s.EVALProf ?? 0,
+                            ProgresStd = s.ProgresSTD ?? 0,
+                            Programare = (s.Programare >= SqlDateTime.MinValue.Value && s.Programare <= SqlDateTime.MaxValue.Value) ? s.Programare : SqlDateTime.MinValue.Value
+                        })
+                        .ToList();
+
+                    gridEvaluari.ItemsSource = meetingsInfo;
+                }
+                else if (type == "profesor")
+                {
+                    var meetingsInfo = tut.Schedulings
+                        .Where(s => s.ID_Subj == id_subject && s.ID_Prof == id_prof)
+                        .Select(s => new
+                        {
+                            EvalProf = s.EVALProf ?? 0,
+                            ProgresStd = s.ProgresSTD ?? 0,
+                            Programare = (s.Programare >= SqlDateTime.MinValue.Value && s.Programare <= SqlDateTime.MaxValue.Value) ? s.Programare : SqlDateTime.MinValue.Value
+                        })
+                        .ToList();
+
+                    gridEvaluari.ItemsSource = meetingsInfo;
+                }
+            }
         }
+
 
         private void subSelect(object sender, SelectionChangedEventArgs e)
         {
@@ -100,7 +173,10 @@ namespace app_login
         {
 
             string profName = cboTeacher.SelectedItem.ToString();
-            id_prof = tut.Profesors.Where(p => p.Nume + " " + p.Prenume == profName).FirstOrDefault().ID_Prof;
+            if (type == "student")
+                id_prof = tut.Profesors.Where(p => p.Nume + " " + p.Prenume == profName).FirstOrDefault().ID_Prof;
+            else if (type == "profesor")
+                id_std = tut.Students.Where(p => p.Nume + " " + p.Prenume == profName).FirstOrDefault().ID_Std;
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

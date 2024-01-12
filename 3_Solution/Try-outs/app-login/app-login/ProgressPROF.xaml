@@ -54,7 +54,13 @@
                 <Button Content="Quit" Background="Azure" HorizontalAlignment="Left" Margin="445,405,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.133,0.501" Height="40" Width="169" FontSize="10" FontFamily="Bookman Old Style" Click="Button_Click_1"/>
                 <Label x:Name="lbl" Content="Student:" HorizontalAlignment="Left" Margin="85,88,0,0" VerticalAlignment="Top" Height="43" Width="184" FontSize="15" FontWeight="Bold" FontFamily="Book Antiqua"/>
                 <ComboBox x:Name="cboTeacher" HorizontalAlignment="Left" Margin="269,91,0,0"  VerticalAlignment="Top" Width="345" Height="25" FontSize="15" SelectionChanged="studSelect"  />
-                <DataGrid x:Name="gridEvaluari" Background="Transparent" Margin="85,136,116,130"/>
+                <DataGrid x:Name="gridEvaluari" AutoGenerateColumns="False" Background="Transparent" Margin="85,136,116,130">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Programare" Binding="{Binding Programare}"/>
+                        <DataGridTextColumn Header="Progres Student" Binding="{Binding ProgresSTD}"/>
+                        <DataGridTextColumn Header="Evaluare Profesor" Binding="{Binding EVALProf}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
             </Grid>
         </Border>
     </Border>

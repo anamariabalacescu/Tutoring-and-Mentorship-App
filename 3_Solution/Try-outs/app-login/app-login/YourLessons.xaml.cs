@@ -71,7 +71,8 @@ namespace app_login
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            ProgressPROF prog = new ProgressPROF(id_user);
+            prog.Show();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
