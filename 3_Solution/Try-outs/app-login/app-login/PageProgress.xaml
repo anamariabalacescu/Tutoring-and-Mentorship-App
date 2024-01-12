@@ -1,0 +1,19 @@
+﻿<Page x:Class="app_login.PageProgress"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:app_login"
+      mc:Ignorable="d" Background="AliceBlue"
+      d:DesignHeight="400" d:DesignWidth="400"
+      Title="PageProgress">
+
+    <Grid>
+        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,90,10,10"/>
+        <Label Content="Select subject:" HorizontalAlignment="Left" Margin="14,19,0,0" VerticalAlignment="Top"/>
+        <Label Content="Select collaborator:" HorizontalAlignment="Left" Margin="14,47,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="subjects" HorizontalAlignment="Left" Margin="160,23,0,0" VerticalAlignment="Top" Width="225" RenderTransformOrigin="0.333,-0.091"/>
+        <ComboBox x:Name="collabs" HorizontalAlignment="Left" Margin="160,51,0,0" VerticalAlignment="Top" Width="225" RenderTransformOrigin="0.333,-0.091"/>
+
+    </Grid>
+</Page>

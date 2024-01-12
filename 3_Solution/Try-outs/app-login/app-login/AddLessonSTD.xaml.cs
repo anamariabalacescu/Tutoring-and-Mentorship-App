@@ -63,40 +63,39 @@ namespace app_login
             DateTime selectedDate = date.SelectedDate ?? DateTime.MinValue;
             if (selectedDate != DateTime.MinValue && cboHour.SelectedItem != null)
             {
-                string selectedHour = cboHour.SelectedItem.ToString();
-                int hour;
-                if (int.TryParse(selectedHour, out hour))
-                {
-                    DateTime selectedDateTime = new DateTime(selectedDate.Year, selectedDate.Month, selectedDate.Day, hour, 0, 0);
-                    Console.WriteLine("Data si ora selectate: " + selectedDateTime);
+                int selectedHour = Convert.ToInt32((cboHour.SelectedItem as ComboBoxItem)?.Content);
+                GeneralCmds gen = new GeneralCmds();
 
-                    Scheduling newScheduling = new Scheduling
-                    {
-                        ID_Prof = id_prof,
-                        ID_Std = id_usr,
-                        ID_Subj = id_sub,
-                        Programare = selectedDateTime,
-                        StatusProgramare = "Pending",
-                        ProgresSTD = null,
-                        EVALProf = null
-                    };
-                    try
-                    {
-                        tut.Schedulings.InsertOnSubmit(newScheduling);
-                        tut.SubmitChanges();
-                    }
-                    catch
-                    {
-
-                        Done d = new Done();
-                        d.SuccessMessage = "Lesson added! Good luck learning!\n";
-                        d.Show();
-                    }
-                }
-                else
+                DateTime selectedDateTime = new DateTime(selectedDate.Year, selectedDate.Month, selectedDate.Day, selectedHour, 0, 0);
+                Console.WriteLine("Data si ora selectate: " + selectedDateTime);
+                int id_std = gen.getStdID(id_usr);
+                Scheduling newScheduling = new Scheduling
                 {
-                    Console.WriteLine("Ora selectata nu este valida.");
+                    ID_Prof = id_prof,
+                    ID_Std = id_std,
+                    ID_Subj = id_sub,
+                    Programare = selectedDateTime,
+                    StatusProgramare = "Pending",
+                    ProgresSTD = null,
+                    EVALProf = null
+                };
+                try
+                {
+                    tut.Schedulings.InsertOnSubmit(newScheduling);
+                    tut.SubmitChanges();
+
+                    Done d = new Done();
+                    d.SuccessMessage = "Lesson added! Good luck learning!\n";
+                    d.Show();
                 }
+                catch
+                {
+                    Error er = new Error();
+                    er.ErrorMessage = "Lesson couldn't be added.";
+                    er.Show();
+
+                }
+
             }
             else
             {
@@ -113,14 +112,14 @@ namespace app_login
 
         private void subSelect(object sender, SelectionChangedEventArgs e)
         {
-            string numeSubj = cboSubject.Text;
+            string numeSubj = cboSubject.SelectedItem.ToString();
             id_sub = tut.Subjects.Where(s => s.nume == numeSubj).FirstOrDefault().ID_Subj;
             AddProfs();
         }
 
         private void profSelect(object sender, SelectionChangedEventArgs e)
         {
-            string profName = cboTeacher.Text;
+            string profName = cboTeacher.SelectedItem.ToString();
             id_prof = tut.Profesors.Where(p => p.Nume + " " + p.Prenume == profName).FirstOrDefault().ID_Prof;
         }
     }
