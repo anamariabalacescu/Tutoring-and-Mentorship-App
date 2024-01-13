@@ -21,13 +21,25 @@ namespace app_login
     public partial class PageSchedule : Page
     {
         private int id_sch { get; set; } //either student or prof - doesn't matter - will be uploaded in the Yourlessons
-        public PageSchedule()
+        private int id_user {  get; set; }
+        private int id_stud {  get; set; }
+        public PageSchedule(int id_user)
         {
+            this.id_user = id_user;
+            GeneralCmds gen = new GeneralCmds();
+
+            id_stud = gen.getStdID(this.id_user);
+
             InitializeComponent();
+            LoadData();
         }
         void LoadData()
         {
-            
+            TutoringDataContext tut = new TutoringDataContext();
+
+            var schdeules = tut.Schedulings.Where(s => s.ID_Std == id_stud && s.StatusProgramare == "Active").ToList();
+
+            schedulees.ItemsSource = schdeules;
         }
     }
 }

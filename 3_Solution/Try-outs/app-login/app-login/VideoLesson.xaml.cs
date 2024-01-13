@@ -28,7 +28,7 @@ namespace app_login
         private bool isMuted = false;
         private bool isImage1 = true;
 
-        string destinatarIpAddress = "172.16.41.125";
+        string destinatarIpAddress = "10.10.23.242";
         private int destinatarPortSend = 5000;
         private int destinatarPortReceive = 5001;
 
@@ -160,18 +160,25 @@ namespace app_login
 
                         await SendImageToServerAsync(imageData, destinatarPortSend);
                     }
-                }
+                
 
-                byte[] receivedImageData = await ReceiveImageFromServerAsync(destinatarPortReceive);
-                if (receivedImageData.Length > 0)
+                    byte[] receivedImageData = await ReceiveImageFromServerAsync(destinatarPortReceive);
+                    if (receivedImageData.Length > 0)
+                    {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            BitmapImage bitmapImage = ConvertToBitmapImage(receivedImageData);
+                            pic2.Source = bitmapImage;
+                        });
+                    }
+                }
+                else
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        BitmapImage bitmapImage = ConvertToBitmapImage(receivedImageData);
-                        pic2.Source = bitmapImage;
+                        pic2.Source = null;
                     });
                 }
-
                 if (isSending)
                 {
                     using (MemoryStream audioStream = new MemoryStream())
@@ -361,6 +368,7 @@ namespace app_login
         {
             try
             {
+                isSending = false;
                 waveIn?.StopRecording();
                 waveIn?.Dispose();
                 waveIn = null;

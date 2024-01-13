@@ -8,6 +8,6 @@
       d:DesignHeight="400" d:DesignWidth="400"
       Title="PageSchedule">
     <Grid>
-        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,10,10,10"/>
+        <DataGrid x:Name="schedulees" Margin="10,10,10,10"/>
     </Grid>
 </Page>

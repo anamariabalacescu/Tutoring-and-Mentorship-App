@@ -9,6 +9,6 @@
       Title="PendingLessonsPage">
 
     <Grid>
-        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,10,10,10"/>
+        <DataGrid x:Name="pending" Margin="10,10,10,10" MouseDoubleClick="Change"/>
     </Grid>
 </Page>
