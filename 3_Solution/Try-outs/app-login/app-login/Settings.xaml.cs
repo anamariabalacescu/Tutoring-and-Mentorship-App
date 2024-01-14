@@ -163,5 +163,15 @@ namespace app_login
         {
 
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            if (SearchBar.Text != null)
+            {
+                SearchPopUp s = new SearchPopUp(SearchBar.Text);
+                s.Show();
+
+            }
+        }
     }
 }

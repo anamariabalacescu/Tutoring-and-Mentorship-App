@@ -417,9 +417,9 @@ namespace app_login
 
         private async Task SendAudioToServerAsync(byte[] audioData, int serverPort)
         {
-            await Task.Run(async () =>
+            try
             {
-                try
+                using (MemoryStream playbackMemoryStream = new MemoryStream())
                 {
                     using (TcpClient client = new TcpClient())
                     {
@@ -427,16 +427,34 @@ namespace app_login
 
                         using (NetworkStream stream = client.GetStream())
                         {
+                            // Citeste datele audio trimise si le salveaza in memorie
                             await stream.WriteAsync(audioData, 0, audioData.Length);
+                            await stream.CopyToAsync(playbackMemoryStream);
+                        }
+                    }
+
+                    // Reda datele audio
+                    playbackMemoryStream.Seek(0, SeekOrigin.Begin);
+                    using (WaveStream waveStream = new WaveFileReader(playbackMemoryStream))
+                    using (WaveOutEvent waveOut = new WaveOutEvent())
+                    {
+                        waveOut.Init(waveStream);
+                        waveOut.Play();
+
+                        while (waveOut.PlaybackState == PlaybackState.Playing)
+                        {
+                            // Asteapta pana cand redarea se termina
+                            await Task.Delay(500);
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error sending audio data to server: {ex.Message}");
-                }
-            });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error sending audio data to server and playing: {ex.Message}");
+            }
         }
+
 
         private async Task<byte[]> ReceiveAudioFromServerAsync(int serverPort)
         {

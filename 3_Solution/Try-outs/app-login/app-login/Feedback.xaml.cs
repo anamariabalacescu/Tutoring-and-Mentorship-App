@@ -20,6 +20,7 @@ namespace app_login
     public partial class Feedback : Window
     {
         private int id_user { get; set; }
+        private int selected_star_index = -1;
         public void setId(int id) { this.id_user = id; }
 
         public Feedback()
@@ -71,12 +72,40 @@ namespace app_login
         }
         private void DontSendButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Feedback not sent.", "Feedback Not Sent");
+            Done d = new Done();
+            d.SuccessMessage = "Feedback not sent!\n";
+            d.Show();
             ResetStars();
         }
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Feedback sent.", "Feedback Sent");
+            Done d = new Done();
+            d.SuccessMessage = "Feedback sent!\n";
+            d.Show();
+
+            TutoringDataContext tut = new TutoringDataContext();
+
+            GeneralCmds gen = new GeneralCmds();
+
+            string type = gen.getUserType(id_user);
+            int id;
+            if(type == "profesor")
+            {
+                id = gen.getProfID(id_user);
+                var subj = tut.Schedulings.Where(s => s.ID_Prof == id && s.ProgresSTD != null).FirstOrDefault();
+                subj.ProgresSTD = selected_star_index;
+                tut.SubmitChanges();
+            }
+            else
+            {
+                id = gen.getStdID(id_user);
+                var subj = tut.Schedulings.Where(s => s.ID_Prof == id && s.EVALProf != null).FirstOrDefault();
+                subj.EVALProf = selected_star_index;
+                tut.SubmitChanges();
+            }
+
+
+
             ResetStars();
 
             var profile = new YourProfile();
@@ -107,7 +136,9 @@ namespace app_login
                         currentStar.Fill = Brushes.Yellow;
                     }
                 }
+                selected_star_index = currentIndex;
             }
+
         }
         private void ResetStars()
         {

@@ -119,5 +119,15 @@ namespace app_login
             subj.setId(this.id_user);
             Close();
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            if (SearchBar.Text != null)
+            {
+                SearchPopUp s = new SearchPopUp(SearchBar.Text);
+                s.Show();
+
+            }
+        }
     }
 }

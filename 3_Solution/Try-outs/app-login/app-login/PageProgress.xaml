@@ -12,8 +12,8 @@
         <DataGrid x:Name="progress" Margin="10,90,10,10"/>
         <Label Content="Select subject:" HorizontalAlignment="Left" Margin="14,19,0,0" VerticalAlignment="Top"/>
         <Label Content="Select collaborator:" HorizontalAlignment="Left" Margin="14,47,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="subjects" HorizontalAlignment="Left" Margin="160,23,0,0" VerticalAlignment="Top" Width="225" RenderTransformOrigin="0.333,-0.091"/>
-        <ComboBox x:Name="collabs" HorizontalAlignment="Left" Margin="160,51,0,0" VerticalAlignment="Top" Width="225" RenderTransformOrigin="0.333,-0.091"/>
+        <ComboBox x:Name="subjects" HorizontalAlignment="Left" Margin="160,23,0,0" VerticalAlignment="Top" Width="225" RenderTransformOrigin="0.333,-0.091" SelectionChanged="SubjectsSelection"/>
+        <ComboBox x:Name="collabs" HorizontalAlignment="Left" Margin="160,51,0,0" VerticalAlignment="Top" Width="225" RenderTransformOrigin="0.333,-0.091" SelectionChanged="collabs_SelectionChanged"/>
 
     </Grid>
 </Page>

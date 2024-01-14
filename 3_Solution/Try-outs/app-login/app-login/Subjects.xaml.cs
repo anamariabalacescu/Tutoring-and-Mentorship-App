@@ -108,5 +108,15 @@ namespace app_login
             home.setId(this.id_user);
             Close();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (SearchBar.Text != null)
+            {
+                SearchPopUp s = new SearchPopUp(SearchBar.Text);
+                s.Show();
+
+            }
+        }
     }
 }
