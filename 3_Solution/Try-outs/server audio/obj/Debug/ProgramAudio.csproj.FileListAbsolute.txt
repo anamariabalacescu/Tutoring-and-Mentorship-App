@@ -1,7 +1,0 @@
-C:\Users\Ali Kiwe\source\repos\ApBAZE-P\ProgramAudio\bin\Debug\ProgramAudio.exe.config
-C:\Users\Ali Kiwe\source\repos\ApBAZE-P\ProgramAudio\bin\Debug\ProgramAudio.exe
-C:\Users\Ali Kiwe\source\repos\ApBAZE-P\ProgramAudio\bin\Debug\ProgramAudio.pdb
-C:\Users\Ali Kiwe\source\repos\ApBAZE-P\ProgramAudio\obj\Debug\ProgramAudio.csproj.AssemblyReference.cache
-C:\Users\Ali Kiwe\source\repos\ApBAZE-P\ProgramAudio\obj\Debug\ProgramAudio.csproj.CoreCompileInputs.cache
-C:\Users\Ali Kiwe\source\repos\ApBAZE-P\ProgramAudio\obj\Debug\ProgramAudio.exe
-C:\Users\Ali Kiwe\source\repos\ApBAZE-P\ProgramAudio\obj\Debug\ProgramAudio.pdb

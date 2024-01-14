@@ -27,7 +27,6 @@ class Server
 
             lock (locker)
             {
-                Console.WriteLine("ClientConectat.");
                 connectedClients.Add(receiveClient);
             }
 
@@ -41,7 +40,6 @@ class Server
         {
             IPAddress clientIpAddress = ((IPEndPoint)receiveClient.Client.RemoteEndPoint).Address;
 
-            // Crează o nouă conexiune către același client pe portul 5001
             TcpClient sendClient = new TcpClient(clientIpAddress.ToString(), 5001);
 
             byte[] imageData;
@@ -52,15 +50,44 @@ class Server
                 imageData = memoryStream.ToArray();
             }
 
-            // Trimite datele înapoi către același client pe portul 5001
-            using (NetworkStream sendStream = sendClient.GetStream())
+            byte[] imageDataCopy;
+            lock (locker)
             {
-                await sendStream.WriteAsync(imageData, 0, imageData.Length).ConfigureAwait(false);
+                imageDataCopy = imageData.ToArray();
             }
+
+            await Task.Run(async () =>
+            {
+                foreach (var client in connectedClients)
+                {
+                    if (client != receiveClient)
+                    {
+                        try
+                        {
+                            using (NetworkStream sendStream = client.GetStream())
+                            {
+                                await sendStream.WriteAsync(imageDataCopy, 0, imageDataCopy.Length).ConfigureAwait(false);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Eroare la trimiterea datelor catre client: {ex.Message}");
+                        }
+                    }
+                }
+            });
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Eroare la tratarea clientului: {ex.Message}");
+        }
+        finally
+        {
+            lock (locker)
+            {
+                connectedClients.Remove(receiveClient);
+            }
+            receiveClient.Close();
         }
     }
 
