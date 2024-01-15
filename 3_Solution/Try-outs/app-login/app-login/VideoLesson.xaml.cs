@@ -172,13 +172,7 @@ namespace app_login
                         });
                     }
                 }
-                else
-                {
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        pic2.Source = null;
-                    });
-                }
+
                 if (isSending)
                 {
                     using (MemoryStream audioStream = new MemoryStream())
@@ -419,8 +413,7 @@ namespace app_login
         {
             try
             {
-                using (MemoryStream playbackMemoryStream = new MemoryStream())
-                {
+
                     using (TcpClient client = new TcpClient())
                     {
                         await client.ConnectAsync(destinatarIpAddress, serverPort);
@@ -429,25 +422,23 @@ namespace app_login
                         {
                             // Citeste datele audio trimise si le salveaza in memorie
                             await stream.WriteAsync(audioData, 0, audioData.Length);
-                            await stream.CopyToAsync(playbackMemoryStream);
                         }
                     }
 
                     // Reda datele audio
-                    playbackMemoryStream.Seek(0, SeekOrigin.Begin);
-                    using (WaveStream waveStream = new WaveFileReader(playbackMemoryStream))
-                    using (WaveOutEvent waveOut = new WaveOutEvent())
-                    {
-                        waveOut.Init(waveStream);
-                        waveOut.Play();
+                    //playbackMemoryStream.Seek(0, SeekOrigin.Begin);
+                    //using (WaveStream waveStream = new WaveFileReader(playbackMemoryStream))
+                    //using (WaveOutEvent waveOut = new WaveOutEvent())
+                    //{
+                    //    waveOut.Init(waveStream);
+                    //    waveOut.Play();
 
-                        while (waveOut.PlaybackState == PlaybackState.Playing)
-                        {
-                            // Asteapta pana cand redarea se termina
-                            await Task.Delay(500);
-                        }
-                    }
-                }
+                    //    while (waveOut.PlaybackState == PlaybackState.Playing)
+                    //    {
+                    //        // Asteapta pana cand redarea se termina
+                    //        await Task.Delay(500);
+                    //    }
+                    //}
             }
             catch (Exception ex)
             {
@@ -458,33 +449,31 @@ namespace app_login
 
         private async Task<byte[]> ReceiveAudioFromServerAsync(int serverPort)
         {
-            return await Task.Run(async () =>
+
+            TcpListener listener = new TcpListener(IPAddress.Any, serverPort);
+
+            try
             {
-                TcpListener listener = new TcpListener(IPAddress.Any, serverPort);
+                listener.Start();
 
-                try
-                {
-                    listener.Start();
+                TcpClient client = await listener.AcceptTcpClientAsync();
+                NetworkStream stream = client.GetStream();
 
-                    TcpClient client = await listener.AcceptTcpClientAsync();
-                    NetworkStream stream = client.GetStream();
-
-                    using (MemoryStream memoryStream = new MemoryStream())
-                    {
-                        await stream.CopyToAsync(memoryStream);
-                        return memoryStream.ToArray();
-                    }
-                }
-                catch (Exception ex)
+                using (MemoryStream memoryStream = new MemoryStream())
                 {
-                    Console.WriteLine($"Error receiving audio data from server: {ex.Message}");
-                    return new byte[0];
+                    await stream.CopyToAsync(memoryStream);
+                    return memoryStream.ToArray();
                 }
-                finally
-                {
-                    listener.Stop();
-                }
-            });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error receiving audio data from server: {ex.Message}");
+                return new byte[0];
+            }
+            finally
+            {
+                listener.Stop();
+            }
         }
 
     }

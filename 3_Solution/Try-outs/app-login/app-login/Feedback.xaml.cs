@@ -92,14 +92,14 @@ namespace app_login
             if(type == "profesor")
             {
                 id = gen.getProfID(id_user);
-                var subj = tut.Schedulings.Where(s => s.ID_Prof == id && s.ProgresSTD != null).FirstOrDefault();
+                var subj = tut.Schedulings.Where(s => s.ID_Prof == id && s.ProgresSTD == null).FirstOrDefault();
                 subj.ProgresSTD = selected_star_index;
                 tut.SubmitChanges();
             }
             else
             {
                 id = gen.getStdID(id_user);
-                var subj = tut.Schedulings.Where(s => s.ID_Prof == id && s.EVALProf != null).FirstOrDefault();
+                var subj = tut.Schedulings.Where(s => s.ID_Std == id && s.EVALProf == null).FirstOrDefault();
                 subj.EVALProf = selected_star_index;
                 tut.SubmitChanges();
             }
@@ -111,7 +111,6 @@ namespace app_login
             var profile = new YourProfile();
             profile.setId(this.id_user);
             profile.Show();
-            Close();
         }
 
         private void Star_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
