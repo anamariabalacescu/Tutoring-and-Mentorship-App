@@ -39,7 +39,7 @@ namespace app_login
             string encrpass = EncryptionMachine.Encrypt(userPass);
             if (FormValidationRules.IsValidUser(user.Text, encrpass)) {
 
-                TutoringDataContext tu = new TutoringDataContext();
+                TutoringEntities tu = new TutoringEntities();
                 string stat = tu.Users.Where(x => x.Username == username).FirstOrDefault().UserStatus;
                 string tip = tu.Users.Where(x => x.Username == username).FirstOrDefault().UserType;
                 if (stat != "inactive")

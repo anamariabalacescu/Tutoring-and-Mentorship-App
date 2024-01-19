@@ -28,7 +28,6 @@ namespace app_login
         private string fname = "";
         private string mail = "";
         private string prof = "";
-        SqlConnection conn;
         public ProfRegister()
         {
             InitializeComponent();

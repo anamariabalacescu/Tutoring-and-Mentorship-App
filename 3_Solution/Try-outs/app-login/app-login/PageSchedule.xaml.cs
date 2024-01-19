@@ -35,7 +35,7 @@ namespace app_login
         }
         void LoadData()
         {
-            TutoringDataContext tut = new TutoringDataContext();
+            TutoringEntities tut = new TutoringEntities();
 
             var schdeules = tut.Schedulings.Where(s => s.ID_Std == id_stud && s.StatusProgramare == "Active").ToList();
 

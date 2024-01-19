@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TutoringModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admins">
+    <Key>
+      <PropertyRef Name="ID_Admin" />
+    </Key>
+    <Property Name="ID_Admin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nume" Type="varchar" MaxLength="50" />
+    <Property Name="Prenume" Type="varchar" MaxLength="50" />
+    <Property Name="ID_User" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'Tutoring.dbo.Enrolled_Subjects' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Enrolled_Subjects">
+          <Property Name="ID_Std" Type="int" />
+          <Property Name="ID_Subj" Type="int" />
+          <Property Name="ceva" Type="int" />
+        </EntityType>-->
+  <EntityType Name="Profesors">
+    <Key>
+      <PropertyRef Name="ID_Prof" />
+    </Key>
+    <Property Name="ID_Prof" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nume" Type="varchar" MaxLength="255" />
+    <Property Name="Prenume" Type="varchar" MaxLength="255" />
+    <Property Name="Profesie_de_baza" Type="varchar" MaxLength="255" />
+    <Property Name="ID_User" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Schedulings">
+    <Key>
+      <PropertyRef Name="ID_Meeting" />
+    </Key>
+    <Property Name="ID_Meeting" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Prof" Type="int" />
+    <Property Name="ID_Std" Type="int" />
+    <Property Name="ID_Subj" Type="int" />
+    <Property Name="Programare" Type="datetime" />
+    <Property Name="StatusProgramare" Type="varchar" MaxLength="100" />
+    <Property Name="ProgresSTD" Type="int" />
+    <Property Name="EVALProf" Type="int" />
+  </EntityType>
+  <EntityType Name="Students">
+    <Key>
+      <PropertyRef Name="ID_Std" />
+    </Key>
+    <Property Name="ID_Std" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nume" Type="varchar" MaxLength="255" />
+    <Property Name="Prenume" Type="varchar" MaxLength="255" />
+    <Property Name="Universitate" Type="varchar" MaxLength="255" />
+    <Property Name="ID_User" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Subjects">
+    <Key>
+      <PropertyRef Name="ID_Subj" />
+    </Key>
+    <Property Name="ID_Subj" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nume" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Taught_subjects">
+    <Key>
+      <PropertyRef Name="ID_Prof" />
+      <PropertyRef Name="ID_Subj" />
+    </Key>
+    <Property Name="ID_Prof" Type="int" Nullable="false" />
+    <Property Name="ID_Subj" Type="int" Nullable="false" />
+    <Property Name="ceva" Type="int" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="ID_User" />
+    </Key>
+    <Property Name="ID_User" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="UserPassword" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="UserType" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="UserStatus" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <Association Name="FK_Admin_Usr">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Admins" Type="Self.Admins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID_User" />
+      </Principal>
+      <Dependent Role="Admins">
+        <PropertyRef Name="ID_User" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ID_Prof_Sched">
+    <End Role="Profesors" Type="Self.Profesors" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Schedulings" Type="Self.Schedulings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profesors">
+        <PropertyRef Name="ID_Prof" />
+      </Principal>
+      <Dependent Role="Schedulings">
+        <PropertyRef Name="ID_Prof" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ID_Prof_Subj">
+    <End Role="Profesors" Type="Self.Profesors" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Taught_subjects" Type="Self.Taught_subjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profesors">
+        <PropertyRef Name="ID_Prof" />
+      </Principal>
+      <Dependent Role="Taught_subjects">
+        <PropertyRef Name="ID_Prof" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ID_Std_Sched">
+    <End Role="Students" Type="Self.Students" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Schedulings" Type="Self.Schedulings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="ID_Std" />
+      </Principal>
+      <Dependent Role="Schedulings">
+        <PropertyRef Name="ID_Std" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+error 6004: The table 'Tutoring.dbo.Enrolled_Subjects' is referenced by a relationship, but cannot be found.
+        <Association Name="FK_ID_Std_Subj" />-->
+  <Association Name="FK_ID_Subj_Prof">
+    <End Role="Subjects" Type="Self.Subjects" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Taught_subjects" Type="Self.Taught_subjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subjects">
+        <PropertyRef Name="ID_Subj" />
+      </Principal>
+      <Dependent Role="Taught_subjects">
+        <PropertyRef Name="ID_Subj" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ID_Subj_Sched">
+    <End Role="Subjects" Type="Self.Subjects" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Schedulings" Type="Self.Schedulings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subjects">
+        <PropertyRef Name="ID_Subj" />
+      </Principal>
+      <Dependent Role="Schedulings">
+        <PropertyRef Name="ID_Subj" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+error 6004: The table 'Tutoring.dbo.Enrolled_Subjects' is referenced by a relationship, but cannot be found.
+        <Association Name="FK_ID_Subj_Std" />-->
+  <Association Name="FK_Prof_Usr">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Profesors" Type="Self.Profesors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID_User" />
+      </Principal>
+      <Dependent Role="Profesors">
+        <PropertyRef Name="ID_User" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Std_Usr">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Students" Type="Self.Students" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID_User" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="ID_User" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="TutoringModelStoreContainer">
+    <EntitySet Name="Admins" EntityType="Self.Admins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Profesors" EntityType="Self.Profesors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Schedulings" EntityType="Self.Schedulings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Taught_subjects" EntityType="Self.Taught_subjects" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Admin_Usr" Association="Self.FK_Admin_Usr">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Admins" EntitySet="Admins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ID_Prof_Sched" Association="Self.FK_ID_Prof_Sched">
+      <End Role="Profesors" EntitySet="Profesors" />
+      <End Role="Schedulings" EntitySet="Schedulings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ID_Prof_Subj" Association="Self.FK_ID_Prof_Subj">
+      <End Role="Profesors" EntitySet="Profesors" />
+      <End Role="Taught_subjects" EntitySet="Taught_subjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ID_Std_Sched" Association="Self.FK_ID_Std_Sched">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="Schedulings" EntitySet="Schedulings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ID_Subj_Prof" Association="Self.FK_ID_Subj_Prof">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="Taught_subjects" EntitySet="Taught_subjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ID_Subj_Sched" Association="Self.FK_ID_Subj_Sched">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="Schedulings" EntitySet="Schedulings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Prof_Usr" Association="Self.FK_Prof_Usr">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Profesors" EntitySet="Profesors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Std_Usr" Association="Self.FK_Std_Usr">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

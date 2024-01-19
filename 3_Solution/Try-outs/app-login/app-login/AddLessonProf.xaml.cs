@@ -19,7 +19,7 @@ namespace app_login
     /// </summary>
     public partial class AddLessonProf : Window
     {
-        TutoringDataContext tut = new TutoringDataContext();
+        TutoringEntities tut = new TutoringEntities();
         private string subj { get; set; }
         private int id_usr { get; set; }
         private int id_prof { get; set; }
@@ -37,15 +37,15 @@ namespace app_login
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //verif daca exista materia 
-            //verificam daca o are profesorul
-            var sub = tut.Subjects.Where(s => s.nume == subj).FirstOrDefault();
+            // Verificăm dacă există materia
+            // Verificăm dacă o are profesorul
+            var sub = tut.Subjects.FirstOrDefault(s => s.nume == subj);
             if (sub != null)
             {
-                //exista subiectul in baza de date fie de la prof actual fie de la un alt prof
-                //verificam daca are deja materia predata
-                var profS = tut.Taught_subjects.Where(t => t.ID_Subj == sub.ID_Subj && t.ID_Prof == id_prof).FirstOrDefault();
-                if(profS != null)
+                // Există subiectul în baza de date fie de la prof actual fie de la un alt prof
+                // Verificăm dacă are deja materia predată
+                var profS = tut.Taught_subjects.FirstOrDefault(t => t.ID_Subj == sub.ID_Subj && t.ID_Prof == id_prof);
+                if (profS != null)
                 {
                     Error er = new Error();
                     er.ErrorMessage = "You are teaching this subject already! Please choose a new one\n";
@@ -55,11 +55,14 @@ namespace app_login
                 {
                     try
                     {
-                        Taught_subject ts = new Taught_subject();
-                        ts.ID_Subj = sub.ID_Subj;
-                        ts.ID_Prof = id_prof;
-                        tut.Taught_subjects.InsertOnSubmit(ts);
-                        tut.SubmitChanges();
+                        Taught_subjects ts = new Taught_subjects
+                        {
+                            ID_Subj = sub.ID_Subj,
+                            ID_Prof = id_prof
+                        };
+
+                        tut.Taught_subjects.Add(ts);
+                        tut.SaveChanges();
 
                         Done d = new Done();
                         d.SuccessMessage = "Subject added! Good luck teaching!\n";
@@ -67,21 +70,18 @@ namespace app_login
                     }
                     catch
                     {
-                        Error er = new Error();
-                        er.ErrorMessage = "Could not upload your subject!\n";
-                        er.Show();
+                        HandleError();
                     }
                 }
             }
             else
             {
-                //subiectul este nou in baza de date =. se adauga in ambele tabele
-                Subject snew = new Subject();
-                snew.nume = subj;
+                // Subiectul este nou în baza de date. Se adaugă în ambele tabele
+                Subject snew = new Subject { nume = subj };
                 try
                 {
-                    tut.Subjects.InsertOnSubmit(snew);
-                    tut.SubmitChanges();
+                    tut.Subjects.Add(snew);
+                    tut.SaveChanges();
 
                     Done d = new Done();
                     d.SuccessMessage = "Subject added! Good luck teaching!\n";
@@ -89,18 +89,20 @@ namespace app_login
                 }
                 catch
                 {
-                    Error er = new Error();
-                    er.ErrorMessage = "Could not upload your subject!\n";
-                    er.Show();
+                    HandleError();
                 }
-                //adding to taight_subj
+
+                // Adăugăm în taught_subj
                 try
                 {
-                    Taught_subject ts = new Taught_subject();
-                    ts.ID_Subj = snew.ID_Subj;
-                    ts.ID_Prof = id_prof;
-                    tut.Taught_subjects.InsertOnSubmit(ts);
-                    tut.SubmitChanges();
+                    Taught_subjects ts = new Taught_subjects
+                    {
+                        ID_Subj = snew.ID_Subj,
+                        ID_Prof = id_prof
+                    };
+
+                    tut.Taught_subjects.Add(ts);
+                    tut.SaveChanges();
 
                     Done d = new Done();
                     d.SuccessMessage = "Subject added! Good luck teaching!\n";
@@ -108,11 +110,16 @@ namespace app_login
                 }
                 catch
                 {
-                    Error er = new Error();
-                    er.ErrorMessage = "Could not upload your subject!\n";
-                    er.Show();
+                    HandleError();
                 }
             }
+        }
+
+        private void HandleError()
+        {
+            Error er = new Error();
+            er.ErrorMessage = "Could not upload your subject!\n";
+            er.Show();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

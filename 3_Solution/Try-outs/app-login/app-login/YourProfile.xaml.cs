@@ -162,7 +162,7 @@ namespace app_login
         {
             if (SearchBar.Text != null)
             {
-                SearchPopUp s = new SearchPopUp(SearchBar.Text);
+                SearchPopUp s = new SearchPopUp(SearchBar.Text, id_user);
                 s.Show();
 
             }

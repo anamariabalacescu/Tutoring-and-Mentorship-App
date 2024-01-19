@@ -20,7 +20,7 @@ namespace app_login
 
         private void LoadData()
         {
-            TutoringDataContext tut = new TutoringDataContext();
+            TutoringEntities tut = new TutoringEntities();
 
             var professors = tut.Profesors.ToList();
             Professors.ItemsSource = professors;
@@ -38,30 +38,36 @@ namespace app_login
             {
                 User selectedUser = (User)accounts.SelectedItem;
                 selectedUser.UserStatus = (selectedUser.UserStatus != "active") ? "active" : "inactive";
-                TutoringDataContext tut = new TutoringDataContext();
-                var userInDb = tut.Users.FirstOrDefault(u => u.ID_User == selectedUser.ID_User);
-                if (userInDb != null)
-                {
-                    userInDb.UserStatus = selectedUser.UserStatus;
-                }
-                try
-                {
-                    // Submit changes to the database
-                    tut.SubmitChanges();
 
-                    // If no exception occurred, changes were successfully submitted
-                    Done d = new Done();
-                    d.SuccessMessage = "Status changed successfully!";
-                    d.Show();
-                }
-                catch (Exception ex)
+                using (var tut = new TutoringEntities())
                 {
-                    // Handle exceptions if any occur during the submission
-                    Error er = new Error();
-                    er.ErrorMessage = "Error submitting status changes";
+                    var userInDb = tut.Users.FirstOrDefault(u => u.ID_User == selectedUser.ID_User);
+
+                    if (userInDb != null)
+                    {
+                        userInDb.UserStatus = selectedUser.UserStatus;
+                    }
+
+                    try
+                    {
+                        // Submit changes to the database
+                        tut.SaveChanges();
+
+                        // If no exception occurred, changes were successfully submitted
+                        Done d = new Done();
+                        d.SuccessMessage = "Status changed successfully!";
+                        d.Show();
+                    }
+                    catch (Exception ex)
+                    {
+                        // Handle exceptions if any occur during the submission
+                        Error er = new Error();
+                        er.ErrorMessage = "Error submitting status changes";
+                    }
                 }
             }
         }
+
 
         private void CloseApp(object sender, MouseButtonEventArgs e)
         {
@@ -71,33 +77,40 @@ namespace app_login
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             string encrpass = EncryptionMachine.Encrypt("Licenta2023!");
+
             if (accounts.SelectedItem != null)
             {
                 User selectedUser = (User)accounts.SelectedItem;
                 selectedUser.UserPassword = encrpass;
-                TutoringDataContext tut = new TutoringDataContext();
-                var userInDb = tut.Users.FirstOrDefault(u => u.ID_User == selectedUser.ID_User);
-                if (userInDb != null)
-                {
-                    userInDb.UserPassword = selectedUser.UserPassword;
-                }
-                try
-                {
-                    // Submit changes to the database
-                    tut.SubmitChanges();
 
-                    // If no exception occurred, changes were successfully submitted
-                    Done d = new Done();
-                    d.SuccessMessage = "Status changed successfully!";
-                    d.Show();
-                }
-                catch (Exception ex)
+                using (var tut = new TutoringEntities())
                 {
-                    // Handle exceptions if any occur during the submission
-                    Error er = new Error();
-                    er.ErrorMessage = "Error submitting status changes";
+                    var userInDb = tut.Users.FirstOrDefault(u => u.ID_User == selectedUser.ID_User);
+
+                    if (userInDb != null)
+                    {
+                        userInDb.UserPassword = selectedUser.UserPassword;
+                    }
+
+                    try
+                    {
+                        // Submit changes to the database
+                        tut.SaveChanges();
+
+                        // If no exception occurred, changes were successfully submitted
+                        Done d = new Done();
+                        d.SuccessMessage = "Password changed successfully!";
+                        d.Show();
+                    }
+                    catch (Exception ex)
+                    {
+                        // Handle exceptions if any occur during the submission
+                        Error er = new Error();
+                        er.ErrorMessage = "Error submitting password changes";
+                    }
                 }
             }
         }
+
     }
 }

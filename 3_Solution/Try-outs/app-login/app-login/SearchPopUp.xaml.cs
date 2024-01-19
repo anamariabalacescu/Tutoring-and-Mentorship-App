@@ -19,16 +19,18 @@ namespace app_login
     /// </summary>
     public partial class SearchPopUp : Window
     {
+        private int id_user {  get; set; }
         private string profname { get; set; }
-        public SearchPopUp(string profname)
+        public SearchPopUp(string profname, int id)
         {
             InitializeComponent();
             this.profname = profname;
+            this.id_user = id;
             LoadData();
         }
         private void LoadData()
         {
-            TutoringDataContext tut = new TutoringDataContext();
+            TutoringEntities tut = new TutoringEntities();
             var prof = tut.Profesors.Where(p => p.Nume == profname || p.Prenume == profname || p.Nume + " " + p.Prenume == profname).FirstOrDefault();
             if(prof != null)
             {
@@ -46,7 +48,21 @@ namespace app_login
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            GeneralCmds gen = new GeneralCmds();
+            var type = gen.getUserType(id_user);
+            if (type == "student")
+            {
+                AddLessonSTD les = new AddLessonSTD(id_user);
+                les.Show();
+                Close();
 
+            }
+            else
+            {
+                Error er = new Error();
+                er.ErrorMessage = "You are not a student. Please create a student account to join lessons";
+                er.Show();
+            }
         }
 
         private void ClosePopup(object sender, RoutedEventArgs e)

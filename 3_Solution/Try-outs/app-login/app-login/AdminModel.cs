@@ -23,28 +23,25 @@ namespace app_login
 
         private Admin toAdmin() => new Admin() { Nume = this.nume, Prenume = this.prenume, ID_User = this.iduser };
 
-        public int insertAdmin(string sname, string fname, int id)
+        public int InsertAdmin(string sname, string fname, int id)
         {
-            using (TutoringDataContext tut = new TutoringDataContext())
+            using (var tut = new TutoringEntities())
             {
-                // Assuming you have an EncryptionMachine class for password encryption
-                // string encrPass = EncryptionMachine.Encrypt(pass);
                 AdminModel newAdmin = new AdminModel(sname, fname, id);
 
                 try
                 {
-                    // Insert the newStudentModel into the StudentModels table
-                    tut.Admins.InsertOnSubmit(newAdmin.toAdmin());
-                    tut.SubmitChanges();
+                    tut.Admins.Add(newAdmin.toAdmin()); // Assuming ToAdmin() returns an Admin instance
+                    tut.SaveChanges();
 
                     // Check if the insertion was successful
                     if (newAdmin.toAdmin().ID_Admin > 0)
                     {
-                        return 1; // Successfully inserted the new student
+                        return 1; // Successfully inserted the new admin
                     }
                     else
                     {
-                        return 0; // Failed to insert student
+                        return 0; // Failed to insert admin
                     }
                 }
                 catch (Exception ex)
@@ -57,5 +54,6 @@ namespace app_login
                 }
             }
         }
+
     }
 }

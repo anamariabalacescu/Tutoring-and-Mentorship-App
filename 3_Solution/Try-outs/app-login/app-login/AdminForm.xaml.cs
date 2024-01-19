@@ -161,7 +161,7 @@ namespace app_login
                             int id_a = u.UserInsert(userName, userPass, mail);
 
                             AdminModel adm = new AdminModel(sname, fname, id_a);
-                            int result = adm.insertAdmin(sname, fname, id_a);
+                            int result = adm.InsertAdmin(sname, fname, id_a);
 
                             if (result < 0)
                             {

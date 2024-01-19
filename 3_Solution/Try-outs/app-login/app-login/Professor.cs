@@ -26,7 +26,7 @@ namespace app_login
         private Profesor toProfesor() => new Profesor() { ID_User = this.id, Nume = this.nume, Prenume = this.prenume, Profesie_de_baza = this.profesie };
         public int InsertProfesor(int id_prof, string sname, string fname, string prof)
         {
-            using (TutoringDataContext tut = new TutoringDataContext())
+            using (var tut = new TutoringEntities())
             {
                 try
                 {
@@ -39,14 +39,12 @@ namespace app_login
                     };
 
                     // Insert the newProfesor into the Profesors table
-                    tut.Profesors.InsertOnSubmit(newProfesor.toProfesor());
-                    tut.SubmitChanges();
+                    tut.Profesors.Add(newProfesor.toProfesor());
+                    tut.SaveChanges();
 
                     // Check if the insertion was successful
-                    ChangeSet changes = tut.GetChangeSet();
-
-                    // Check if any entities were inserted
-                    if (changes.Inserts.Count > 0)
+                    int insertedProfId = newProfesor.id; // Assuming id is the generated ID in ProfessorModel
+                    if (insertedProfId > 0)
                     {
                         return 1; // Successfully inserted the new professor
                     }
@@ -64,5 +62,6 @@ namespace app_login
                 }
             }
         }
+
     }
 }

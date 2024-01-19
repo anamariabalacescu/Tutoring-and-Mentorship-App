@@ -83,35 +83,48 @@ namespace app_login
             d.SuccessMessage = "Feedback sent!\n";
             d.Show();
 
-            TutoringDataContext tut = new TutoringDataContext();
-
-            GeneralCmds gen = new GeneralCmds();
-
-            string type = gen.getUserType(id_user);
-            int id;
-            if(type == "profesor")
+            using (var tut = new TutoringEntities())
             {
-                id = gen.getProfID(id_user);
-                var subj = tut.Schedulings.Where(s => s.ID_Prof == id && s.ProgresSTD == null).FirstOrDefault();
-                subj.ProgresSTD = selected_star_index;
-                tut.SubmitChanges();
+                GeneralCmds gen = new GeneralCmds();
+
+                string type = gen.getUserType(id_user);
+                int id;
+
+                if (type == "profesor")
+                {
+                    id = gen.getProfID(id_user);
+                    var subj = tut.Schedulings
+                        .Where(s => s.ID_Prof == id && s.ProgresSTD == null)
+                        .FirstOrDefault();
+
+                    if (subj != null)
+                    {
+                        subj.ProgresSTD = selected_star_index;
+                        tut.SaveChanges();
+                    }
+                }
+                else
+                {
+                    id = gen.getStdID(id_user);
+                    var subj = tut.Schedulings
+                        .Where(s => s.ID_Std == id && s.EVALProf == null)
+                        .FirstOrDefault();
+
+                    if (subj != null)
+                    {
+                        subj.EVALProf = selected_star_index;
+                        tut.SaveChanges();
+                    }
+                }
+
+                ResetStars();
+
+                var profile = new YourProfile();
+                profile.setId(this.id_user);
+                profile.Show();
             }
-            else
-            {
-                id = gen.getStdID(id_user);
-                var subj = tut.Schedulings.Where(s => s.ID_Std == id && s.EVALProf == null).FirstOrDefault();
-                subj.EVALProf = selected_star_index;
-                tut.SubmitChanges();
-            }
-
-
-
-            ResetStars();
-
-            var profile = new YourProfile();
-            profile.setId(this.id_user);
-            profile.Show();
         }
+
 
         private void Star_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -137,8 +150,8 @@ namespace app_login
                 }
                 selected_star_index = currentIndex;
             }
-
         }
+
         private void ResetStars()
         {
             for (int i = 1; i <= 5; i++)

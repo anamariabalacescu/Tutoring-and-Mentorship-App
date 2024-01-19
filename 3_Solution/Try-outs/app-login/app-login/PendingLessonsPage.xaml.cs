@@ -20,7 +20,7 @@ namespace app_login
     /// </summary>
     public partial class PendingLessonsPage : Page
     {
-        TutoringDataContext tut = new TutoringDataContext();
+        TutoringEntities tut = new TutoringEntities();
         private int id_usr {  get; set; }
         public PendingLessonsPage(int id_usr)
         {

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="78fb93cba41f4e0ca3d3c1db31630d17" Name="Diagram1" ZoomLevel="94">
+        <EntityTypeShape EntityType="TutoringModel.Admin" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TutoringModel.Profesor" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TutoringModel.Scheduling" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TutoringModel.Student" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TutoringModel.Subject" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TutoringModel.sysdiagram" Width="1.5" PointX="5.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TutoringModel.Taught_subjects" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TutoringModel.User" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
+        <AssociationConnector Association="TutoringModel.FK_Admin_Usr" ManuallyRouted="false" />
+        <AssociationConnector Association="TutoringModel.FK_ID_Prof_Sched" ManuallyRouted="false" />
+        <AssociationConnector Association="TutoringModel.FK_ID_Prof_Subj" ManuallyRouted="false" />
+        <AssociationConnector Association="TutoringModel.FK_Prof_Usr" ManuallyRouted="false" />
+        <AssociationConnector Association="TutoringModel.FK_ID_Std_Sched" ManuallyRouted="false" />
+        <AssociationConnector Association="TutoringModel.FK_ID_Subj_Sched" ManuallyRouted="false" />
+        <AssociationConnector Association="TutoringModel.FK_Std_Usr" ManuallyRouted="false" />
+        <AssociationConnector Association="TutoringModel.FK_ID_Subj_Prof" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

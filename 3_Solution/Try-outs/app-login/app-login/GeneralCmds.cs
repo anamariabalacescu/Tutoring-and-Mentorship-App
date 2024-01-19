@@ -11,7 +11,7 @@ namespace app_login
 {
     public class GeneralCmds
     {
-        TutoringDataContext tu = new TutoringDataContext();
+        TutoringEntities tu = new TutoringEntities();
         public string getUsername(int id)
         {
             var user = tu.Users.Where(u => u.ID_User == id).FirstOrDefault();

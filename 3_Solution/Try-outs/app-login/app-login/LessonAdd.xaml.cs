@@ -29,7 +29,7 @@ namespace app_login
 
         private void LoadData()
         {
-            TutoringDataContext tut = new TutoringDataContext();
+            TutoringEntities tut = new TutoringEntities();
             GeneralCmds gen = new GeneralCmds();
             var type = gen.getUserType(id_user);
 
@@ -60,47 +60,49 @@ namespace app_login
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            TutoringDataContext tut = new TutoringDataContext();
-            GeneralCmds gen = new GeneralCmds();
-
-            var type = gen.getUserType(id_user);
-            if (cboPROF.SelectedItem != null && cboSUBJ.SelectedItem != null && calendar.SelectedDate != null)
+            using (TutoringEntities tut = new TutoringEntities())
             {
-                if (type == "profesor")
+                GeneralCmds gen = new GeneralCmds();
+
+                var type = gen.getUserType(id_user);
+                if (cboPROF.SelectedItem != null && cboSUBJ.SelectedItem != null && calendar.SelectedDate != null)
                 {
-                    int profId = gen.getProfID(id_user);
-
-                    Scheduling newScheduling = new Scheduling
+                    if (type == "profesor")
                     {
-                        ID_Prof = profId,
-                        ID_Std = ((Student)cboPROF.SelectedItem).ID_Std,
-                        ID_Subj = ((Subject)cboSUBJ.SelectedItem).ID_Subj,
-                        Programare = calendar.SelectedDate.Value,
-                        StatusProgramare = "Pending",
-                        ProgresSTD = 0
-                    };
+                        int profId = gen.getProfID(id_user);
 
-                    // Add the new scheduling to the Schedulings table
-                    tut.Schedulings.InsertOnSubmit(newScheduling);
-                    tut.SubmitChanges();
-                }
-                else if(type == "student")
-                {
-                    int stdId = gen.getProfID(id_user);
+                        Scheduling newScheduling = new Scheduling
+                        {
+                            ID_Prof = profId,
+                            ID_Std = ((Student)cboPROF.SelectedItem).ID_Std,
+                            ID_Subj = ((Subject)cboSUBJ.SelectedItem).ID_Subj,
+                            Programare = calendar.SelectedDate.Value,
+                            StatusProgramare = "Pending",
+                            ProgresSTD = 0
+                        };
 
-                    Scheduling newScheduling = new Scheduling
+                        // Add the new scheduling to the Schedulings table
+                        tut.Schedulings.Add(newScheduling);
+                        tut.SaveChanges();
+                    }
+                    else if (type == "student")
                     {
-                        ID_Std = stdId,
-                        ID_Prof = ((Student)cboPROF.SelectedItem).ID_Std,
-                        ID_Subj = ((Subject)cboSUBJ.SelectedItem).ID_Subj,
-                        Programare = calendar.SelectedDate.Value,
-                        StatusProgramare = "Pending",
-                        EVALProf = 0
-                    };
+                        int stdId = gen.getStdID(id_user);
 
-                    // Add the new scheduling to the Schedulings table
-                    tut.Schedulings.InsertOnSubmit(newScheduling);
-                    tut.SubmitChanges();
+                        Scheduling newScheduling = new Scheduling
+                        {
+                            ID_Std = stdId,
+                            ID_Prof = ((Student)cboPROF.SelectedItem).ID_Std,
+                            ID_Subj = ((Subject)cboSUBJ.SelectedItem).ID_Subj,
+                            Programare = calendar.SelectedDate.Value,
+                            StatusProgramare = "Pending",
+                            EVALProf = 0
+                        };
+
+                        // Add the new scheduling to the Schedulings table
+                        tut.Schedulings.Add(newScheduling);
+                        tut.SaveChanges();
+                    }
                 }
             }
         }

@@ -45,7 +45,7 @@ namespace app_login
             if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(pass))
                 return false;
 
-            using (TutoringDataContext tut = new TutoringDataContext())
+            using (TutoringEntities tut = new TutoringEntities())
             {
                 // Check if there is a user with the provided username and password
                 bool isValidUser = tut.Users.Any(u => u.Username == user && u.UserPassword == pass);
@@ -55,7 +55,7 @@ namespace app_login
         }
         public static bool IsValidUsername(string username)
         {
-            TutoringDataContext tut = new TutoringDataContext();
+            TutoringEntities tut = new TutoringEntities();
 
             var count = tut.Users.Count(s => s.Username == username);
 

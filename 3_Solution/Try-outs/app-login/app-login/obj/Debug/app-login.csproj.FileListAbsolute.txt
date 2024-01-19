@@ -242,3 +242,8 @@ C:\Users\Ali Kiwe\Documents\GitHub\Tutoring-and-Mentorship-App\3_Solution\Try-ou
 C:\Users\Ali Kiwe\Documents\GitHub\Tutoring-and-Mentorship-App\3_Solution\Try-outs\app-login\app-login\obj\Debug\PageSchedule.baml
 C:\Users\Ali Kiwe\Documents\GitHub\Tutoring-and-Mentorship-App\3_Solution\Try-outs\app-login\app-login\obj\Debug\PendingLessonsPage.baml
 C:\Users\Ali Kiwe\Documents\GitHub\Tutoring-and-Mentorship-App\3_Solution\Try-outs\app-login\app-login\obj\Debug\ProgressPROF.baml
+C:\Users\Ali Kiwe\Documents\GitHub\Tutoring-and-Mentorship-App\3_Solution\Try-outs\app-login\app-login\obj\Debug\app-login_Content.g.cs
+C:\Users\Ali Kiwe\Documents\GitHub\Tutoring-and-Mentorship-App\3_Solution\Try-outs\app-login\app-login\bin\Debug\EntityFramework.dll
+C:\Users\Ali Kiwe\Documents\GitHub\Tutoring-and-Mentorship-App\3_Solution\Try-outs\app-login\app-login\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Ali Kiwe\Documents\GitHub\Tutoring-and-Mentorship-App\3_Solution\Try-outs\app-login\app-login\bin\Debug\EntityFramework.xml
+C:\Users\Ali Kiwe\Documents\GitHub\Tutoring-and-Mentorship-App\3_Solution\Try-outs\app-login\app-login\bin\Debug\EntityFramework.SqlServer.xml

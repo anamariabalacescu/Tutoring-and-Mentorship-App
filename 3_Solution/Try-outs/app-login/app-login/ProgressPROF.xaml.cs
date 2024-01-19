@@ -20,7 +20,7 @@ namespace app_login
     /// </summary>
     public partial class ProgressPROF : Window
     {
-        TutoringDataContext tut = new TutoringDataContext();
+        TutoringEntities tut = new TutoringEntities();
         GeneralCmds gen = new GeneralCmds();
         private int id_usr { get; set; }
         private int id_sub {  get; set; }
@@ -136,7 +136,6 @@ namespace app_login
                         .Where(s => s.ID_Subj == id_subject && s.ID_Std == id_std)
                         .Select(s => new
                         {
-                            EvalProf = s.EVALProf ?? 0,
                             ProgresStd = s.ProgresSTD ?? 0,
                             Programare = (s.Programare >= SqlDateTime.MinValue.Value && s.Programare <= SqlDateTime.MaxValue.Value) ? s.Programare : SqlDateTime.MinValue.Value
                         })
@@ -151,7 +150,6 @@ namespace app_login
                         .Select(s => new
                         {
                             EvalProf = s.EVALProf ?? 0,
-                            ProgresStd = s.ProgresSTD ?? 0,
                             Programare = (s.Programare >= SqlDateTime.MinValue.Value && s.Programare <= SqlDateTime.MaxValue.Value) ? s.Programare : SqlDateTime.MinValue.Value
                         })
                         .ToList();

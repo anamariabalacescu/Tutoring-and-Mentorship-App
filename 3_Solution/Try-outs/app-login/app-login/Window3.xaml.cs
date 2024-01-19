@@ -33,7 +33,7 @@ namespace app_login
         
         private void LoadData()
         {
-            TutoringDataContext tut = new TutoringDataContext();
+            TutoringEntities tut = new TutoringEntities();
 
             GeneralCmds gen = new GeneralCmds();
             // Fetch Schedulings based on the provided id_std or id_prof
@@ -196,7 +196,7 @@ namespace app_login
         {
             if(SearchBar.Text!= null)
             {
-                SearchPopUp s = new SearchPopUp(SearchBar.Text);
+                SearchPopUp s = new SearchPopUp(SearchBar.Text, id_user);
                 s.Show();
 
             }

@@ -21,7 +21,7 @@ namespace app_login
     public partial class AddLessonSTD : Window
     {
 
-        TutoringDataContext tut = new TutoringDataContext();
+        TutoringEntities tut = new TutoringEntities();
         private int id_usr { get; set; }
         private int id_prof { get; set; }  
         private int id_sub { get; set; }
@@ -68,34 +68,37 @@ namespace app_login
 
                 DateTime selectedDateTime = new DateTime(selectedDate.Year, selectedDate.Month, selectedDate.Day, selectedHour, 0, 0);
                 Console.WriteLine("Data si ora selectate: " + selectedDateTime);
-                int id_std = gen.getStdID(id_usr);
-                Scheduling newScheduling = new Scheduling
-                {
-                    ID_Prof = id_prof,
-                    ID_Std = id_std,
-                    ID_Subj = id_sub,
-                    Programare = selectedDateTime,
-                    StatusProgramare = "Pending",
-                    ProgresSTD = null,
-                    EVALProf = null
-                };
-                try
-                {
-                    tut.Schedulings.InsertOnSubmit(newScheduling);
-                    tut.SubmitChanges();
 
-                    Done d = new Done();
-                    d.SuccessMessage = "Lesson added! Good luck learning!\n";
-                    d.Show();
+                using (var tut = new TutoringEntities())
+                {
+                    int id_std = gen.getStdID(id_usr);
+                    Scheduling newScheduling = new Scheduling
+                    {
+                        ID_Prof = id_prof,
+                        ID_Std = id_std,
+                        ID_Subj = id_sub,
+                        Programare = selectedDateTime,
+                        StatusProgramare = "Pending",
+                        ProgresSTD = null,
+                        EVALProf = null
+                    };
+
+                    try
+                    {
+                        tut.Schedulings.Add(newScheduling);
+                        tut.SaveChanges();
+
+                        Done d = new Done();
+                        d.SuccessMessage = "Lesson added! Good luck learning!\n";
+                        d.Show();
+                    }
+                    catch
+                    {
+                        Error er = new Error();
+                        er.ErrorMessage = "Lesson couldn't be added.";
+                        er.Show();
+                    }
                 }
-                catch
-                {
-                    Error er = new Error();
-                    er.ErrorMessage = "Lesson couldn't be added.";
-                    er.Show();
-
-                }
-
             }
             else
             {
@@ -104,6 +107,7 @@ namespace app_login
                 er.Show();
             }
         }
+
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {

@@ -28,7 +28,7 @@ namespace app_login
         private bool isMuted = false;
         private bool isImage1 = true;
 
-        string destinatarIpAddress = "10.10.23.242";
+        string destinatarIpAddress = "192.168.79.42";
         private int destinatarPortSend = 5000;
         private int destinatarPortReceive = 5001;
 
@@ -38,7 +38,6 @@ namespace app_login
         private WaveInEvent waveIn;
         private BufferedWaveProvider waveProvider;
         private TcpClient otherPeerAudioClient;
-        private TcpClient imageClient;
         private WaveOut waveOut;
 
         public VideoLesson()
@@ -356,7 +355,6 @@ namespace app_login
                 Console.WriteLine("Error starting microphone: " + ex.Message);
             }
         }
-
 
         private void StopMicrophone()
         {

@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TutoringModelStoreContainer" CdmEntityContainer="TutoringEntities">
+    <EntitySetMapping Name="Admins">
+      <EntityTypeMapping TypeName="TutoringModel.Admin">
+        <MappingFragment StoreEntitySet="Admins">
+          <ScalarProperty Name="ID_Admin" ColumnName="ID_Admin" />
+          <ScalarProperty Name="Nume" ColumnName="Nume" />
+          <ScalarProperty Name="Prenume" ColumnName="Prenume" />
+          <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Profesors">
+      <EntityTypeMapping TypeName="TutoringModel.Profesor">
+        <MappingFragment StoreEntitySet="Profesors">
+          <ScalarProperty Name="ID_Prof" ColumnName="ID_Prof" />
+          <ScalarProperty Name="Nume" ColumnName="Nume" />
+          <ScalarProperty Name="Prenume" ColumnName="Prenume" />
+          <ScalarProperty Name="Profesie_de_baza" ColumnName="Profesie_de_baza" />
+          <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Schedulings">
+      <EntityTypeMapping TypeName="TutoringModel.Scheduling">
+        <MappingFragment StoreEntitySet="Schedulings">
+          <ScalarProperty Name="ID_Meeting" ColumnName="ID_Meeting" />
+          <ScalarProperty Name="ID_Prof" ColumnName="ID_Prof" />
+          <ScalarProperty Name="ID_Std" ColumnName="ID_Std" />
+          <ScalarProperty Name="ID_Subj" ColumnName="ID_Subj" />
+          <ScalarProperty Name="Programare" ColumnName="Programare" />
+          <ScalarProperty Name="StatusProgramare" ColumnName="StatusProgramare" />
+          <ScalarProperty Name="ProgresSTD" ColumnName="ProgresSTD" />
+          <ScalarProperty Name="EVALProf" ColumnName="EVALProf" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="TutoringModel.Student">
+        <MappingFragment StoreEntitySet="Students">
+          <ScalarProperty Name="ID_Std" ColumnName="ID_Std" />
+          <ScalarProperty Name="Nume" ColumnName="Nume" />
+          <ScalarProperty Name="Prenume" ColumnName="Prenume" />
+          <ScalarProperty Name="Universitate" ColumnName="Universitate" />
+          <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Subjects">
+      <EntityTypeMapping TypeName="TutoringModel.Subject">
+        <MappingFragment StoreEntitySet="Subjects">
+          <ScalarProperty Name="ID_Subj" ColumnName="ID_Subj" />
+          <ScalarProperty Name="nume" ColumnName="nume" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="TutoringModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Taught_subjects">
+      <EntityTypeMapping TypeName="TutoringModel.Taught_subjects">
+        <MappingFragment StoreEntitySet="Taught_subjects">
+          <ScalarProperty Name="ID_Prof" ColumnName="ID_Prof" />
+          <ScalarProperty Name="ID_Subj" ColumnName="ID_Subj" />
+          <ScalarProperty Name="ceva" ColumnName="ceva" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="TutoringModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+          <ScalarProperty Name="UserType" ColumnName="UserType" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="UserStatus" ColumnName="UserStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="TutoringModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="TutoringModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="TutoringModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="TutoringModel.Store.sp_helpdiagramdefinition" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="TutoringModel.Store.sp_helpdiagrams" />
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="TutoringModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="TutoringModel.Store.sp_upgraddiagrams" />
+  </EntityContainerMapping>
+</Mapping>

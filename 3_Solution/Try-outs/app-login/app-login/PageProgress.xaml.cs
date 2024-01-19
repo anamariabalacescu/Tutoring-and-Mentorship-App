@@ -21,7 +21,7 @@ namespace app_login
     /// </summary>
     public partial class PageProgress : Page
     {
-        TutoringDataContext tut = new TutoringDataContext();
+        TutoringEntities tut = new TutoringEntities();
         GeneralCmds gen = new GeneralCmds();
         private int id_user {  get; set; }
         private int id_sub { get; set; }

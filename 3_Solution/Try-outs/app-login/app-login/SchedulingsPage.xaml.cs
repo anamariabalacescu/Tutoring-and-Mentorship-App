@@ -38,7 +38,7 @@ namespace app_login
         public void SetId(int id) { this.id_usr = id; }
         private void LoadData()
         {
-            TutoringDataContext tut = new TutoringDataContext();
+            TutoringEntities tut = new TutoringEntities();
 
             GeneralCmds gen = new GeneralCmds();
             string usertype = gen.getUserType(id_usr);

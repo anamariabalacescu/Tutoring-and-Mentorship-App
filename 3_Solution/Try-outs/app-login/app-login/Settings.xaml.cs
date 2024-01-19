@@ -89,48 +89,50 @@ namespace app_login
 
         private void DeleteAcc(object sender, RoutedEventArgs e)
         {
-            TutoringDataContext tut = new TutoringDataContext();
-
-            GeneralCmds gen = new GeneralCmds();
-
-            string type = gen.getUserType(id_user);
-
-            if (type == "student")
+            using (var tut = new TutoringEntities())
             {
-                var stdlist = tut.Students.Where(s => s.ID_User == id_user).FirstOrDefault();
+                GeneralCmds gen = new GeneralCmds();
 
-                tut.Students.DeleteOnSubmit(stdlist);
-            }
-            else if (type == "profesor")
-            {
-                var proflist = tut.Profesors.Where(s => s.ID_User == id_user).FirstOrDefault();
+                string type = gen.getUserType(id_user);
 
-                tut.Profesors.DeleteOnSubmit(proflist);
-            }
+                if (type == "student")
+                {
+                    var stdlist = tut.Students.FirstOrDefault(s => s.ID_User == id_user);
+                    if (stdlist != null)
+                        tut.Students.Remove(stdlist);
+                }
+                else if (type == "profesor")
+                {
+                    var proflist = tut.Profesors.FirstOrDefault(s => s.ID_User == id_user);
+                    if (proflist != null)
+                        tut.Profesors.Remove(proflist);
+                }
 
-            var userDelete = tut.Users.Where(s=> s.ID_User == id_user).FirstOrDefault();
-            tut.Users.DeleteOnSubmit(userDelete);
+                var userDelete = tut.Users.FirstOrDefault(s => s.ID_User == id_user);
+                if (userDelete != null)
+                    tut.Users.Remove(userDelete);
 
-            try
-            {
-                // Submit changes to the database
-                tut.SubmitChanges();
+                try
+                {
+                    // Submit changes to the database
+                    tut.SaveChanges();
 
-                // If no exception occurred, changes were successfully submitted
-                Done d = new Done();
-                d.SuccessMessage = "Account deleted successfully!";
-                d.Show();
+                    // If no exception occurred, changes were successfully submitted
+                    Done d = new Done();
+                    d.SuccessMessage = "Account deleted successfully!";
+                    d.Show();
 
-                MainWindow login = new MainWindow();
-                login.Show();
-                Close();
-            }
-            catch (Exception ex)
-            {
-                // Handle exceptions if any occur during the submission
-                Error er = new Error();
-                er.ErrorMessage = "Error deleting account";
-                er.Show();
+                    MainWindow login = new MainWindow();
+                    login.Show();
+                    Close();
+                }
+                catch (Exception ex)
+                {
+                    // Handle exceptions if any occur during the submission
+                    Error er = new Error();
+                    er.ErrorMessage = "Error deleting account";
+                    er.Show();
+                }
             }
 
         }
@@ -168,7 +170,7 @@ namespace app_login
         {
             if (SearchBar.Text != null)
             {
-                SearchPopUp s = new SearchPopUp(SearchBar.Text);
+                SearchPopUp s = new SearchPopUp(SearchBar.Text, id_user);
                 s.Show();
 
             }

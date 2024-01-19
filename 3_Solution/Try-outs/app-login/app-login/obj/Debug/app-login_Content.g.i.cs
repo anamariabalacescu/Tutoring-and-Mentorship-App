@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("newfile1.txt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("tutoring.context.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("tutoring.tt")]
 
 

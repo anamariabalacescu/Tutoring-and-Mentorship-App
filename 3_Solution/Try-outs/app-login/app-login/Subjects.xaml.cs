@@ -30,7 +30,7 @@ namespace app_login
 
         private void LoadData()
         {
-            TutoringDataContext tut = new TutoringDataContext();
+            TutoringEntities tut = new TutoringEntities();
 
             // Fetch all entries from the Subjects table
             var allSubjects = tut.Subjects.ToList();
@@ -113,7 +113,7 @@ namespace app_login
         {
             if (SearchBar.Text != null)
             {
-                SearchPopUp s = new SearchPopUp(SearchBar.Text);
+                SearchPopUp s = new SearchPopUp(SearchBar.Text, id_user);
                 s.Show();
 
             }
