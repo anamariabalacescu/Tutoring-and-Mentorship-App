@@ -20,9 +20,11 @@
             <Polygon x:Name="star3" Points="250,0 260,40 300,40 265,65 275,100 250,75 225,100 235,65 200,40 240,40" Fill="White" Stroke="Black" Canvas.Left="149" Canvas.Top="166" MouseEnter="Star_MouseEnter" MouseLeave="Star_MouseLeave" MouseLeftButtonDown="Star_MouseLeftButtonDown"/>
             <Polygon x:Name="star4" Points="350,0 360,40 400,40 365,65 375,100 350,75 325,100 335,65 300,40 340,40" Fill="White" Stroke="Black" Canvas.Left="149" Canvas.Top="166" MouseEnter="Star_MouseEnter" MouseLeave="Star_MouseLeave" MouseLeftButtonDown="Star_MouseLeftButtonDown"/>
             <Polygon x:Name="star5" Points="450,0 460,40 500,40 465,65 475,100 450,75 425,100 435,65 400,40 440,40" Fill="White" Stroke="Black" Canvas.Left="149" Canvas.Top="166" MouseEnter="Star_MouseEnter" MouseLeave="Star_MouseLeave" MouseLeftButtonDown="Star_MouseLeftButtonDown"/>
+            <TextBox x:Name="txt" Canvas.Left="149" TextWrapping="Wrap" Background="Azure" Canvas.Top="309" Width="502" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Label Content="Mesaj catre colaborator" Canvas.Left="270" Canvas.Top="275" FontFamily="Algerian" FontSize="18"/>
         </Canvas>
-        <Button Name="Btn_SEND" Content="Send Feedback" Click="SendButton_Click" Margin="435,320,160,70"/>
-        <Button x:Name="Btn_DONT" Content="Don't Send Feedback" Click="DontSendButton_Click" Margin="160,320,455,70"/>
+        <Button Name="Btn_SEND" Content="Send Feedback" Click="SendButton_Click" Margin="435,359,160,31"/>
+        <Button x:Name="Btn_DONT" Content="Don't Send Feedback" Click="DontSendButton_Click" Margin="160,359,435,31"/>
 
     </Grid>
 </Window>

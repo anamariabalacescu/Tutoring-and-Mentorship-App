@@ -100,6 +100,7 @@ namespace app_login
                     if (subj != null)
                     {
                         subj.ProgresSTD = selected_star_index;
+                        subj.Message = txt.Text;
                         tut.SaveChanges();
                     }
                 }

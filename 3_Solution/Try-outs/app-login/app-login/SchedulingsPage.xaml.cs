@@ -48,6 +48,7 @@ namespace app_login
                 int idToFetch = gen.getStdID(id_usr);
                 var schedulings = tut.Schedulings
                     .Where(s => s.ID_Std == idToFetch)
+                    .ToList()  // Aduce datele în memorie
                     .Select(s => new
                     {
                         ProfessorName = tut.Profesors
@@ -66,6 +67,7 @@ namespace app_login
                     })
                     .ToList();
 
+
                 myDataGrid.ItemsSource = schedulings;
             }
             else if (usertype == "profesor")
@@ -73,15 +75,16 @@ namespace app_login
                 int idToFetch = gen.getProfID(id_usr);
                 var schedulings = tut.Schedulings
                     .Where(s => s.ID_Prof == idToFetch)
+                    .ToList()  // Aduce datele în memorie
                     .Select(s => new
                     {
                         ProfessorName = tut.Profesors
                             .Where(p => p.ID_Prof == s.ID_Prof)
-                            .Select(p => p.Nume + ' ' + p.Prenume)
+                            .Select(p => p.Nume + " " + p.Prenume)
                             .FirstOrDefault(),
                         StudentName = tut.Students
                             .Where(st => st.ID_Std == s.ID_Std)
-                            .Select(st => st.Nume + ' ' + st.Prenume)
+                            .Select(st => st.Nume + " " + st.Prenume)
                             .FirstOrDefault(),
                         SubjectName = tut.Subjects
                             .Where(sub => sub.ID_Subj == s.ID_Subj)
@@ -90,6 +93,9 @@ namespace app_login
                         //ScheduledDate = s.Scheduled_Date
                     })
                     .ToList();
+
+
+
 
                 myDataGrid.ItemsSource = schedulings;
             }

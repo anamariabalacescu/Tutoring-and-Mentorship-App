@@ -35,6 +35,7 @@
     <Property Name="StatusProgramare" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="ProgresSTD" Type="Int32" />
     <Property Name="EVALProf" Type="Int32" />
+    <Property Name="Message" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Profesor" Relationship="Self.FK_ID_Prof_Sched" FromRole="Schedulings" ToRole="Profesors" />
     <NavigationProperty Name="Student" Relationship="Self.FK_ID_Std_Sched" FromRole="Schedulings" ToRole="Students" />
     <NavigationProperty Name="Subject" Relationship="Self.FK_ID_Subj_Sched" FromRole="Schedulings" ToRole="Subjects" />
@@ -242,35 +243,5 @@
       <End Role="Subjects" EntitySet="Subjects" />
       <End Role="Taught_subjects" EntitySet="Taught_subjects" />
     </AssociationSet>
-    <FunctionImport Name="sp_alterdiagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="version" Mode="In" Type="Int32" />
-      <Parameter Name="definition" Mode="In" Type="Binary" />
-    </FunctionImport>
-    <FunctionImport Name="sp_creatediagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="version" Mode="In" Type="Int32" />
-      <Parameter Name="definition" Mode="In" Type="Binary" />
-    </FunctionImport>
-    <FunctionImport Name="sp_dropdiagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_helpdiagramdefinition">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_helpdiagrams">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_renamediagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="new_diagramname" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="sp_upgraddiagrams" />
   </EntityContainer>
 </Schema>

@@ -22,6 +22,7 @@ namespace app_login
         public string StatusProgramare { get; set; }
         public Nullable<int> ProgresSTD { get; set; }
         public Nullable<int> EVALProf { get; set; }
+        public string Message { get; set; }
     
         public virtual Profesor Profesor { get; set; }
         public virtual Student Student { get; set; }

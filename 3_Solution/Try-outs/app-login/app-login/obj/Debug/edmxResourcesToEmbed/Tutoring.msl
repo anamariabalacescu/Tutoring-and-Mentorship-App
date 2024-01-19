@@ -33,6 +33,7 @@
           <ScalarProperty Name="StatusProgramare" ColumnName="StatusProgramare" />
           <ScalarProperty Name="ProgresSTD" ColumnName="ProgresSTD" />
           <ScalarProperty Name="EVALProf" ColumnName="EVALProf" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -87,12 +88,5 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="TutoringModel.Store.sp_alterdiagram" />
-    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="TutoringModel.Store.sp_creatediagram" />
-    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="TutoringModel.Store.sp_dropdiagram" />
-    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="TutoringModel.Store.sp_helpdiagramdefinition" />
-    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="TutoringModel.Store.sp_helpdiagrams" />
-    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="TutoringModel.Store.sp_renamediagram" />
-    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="TutoringModel.Store.sp_upgraddiagrams" />
   </EntityContainerMapping>
 </Mapping>
