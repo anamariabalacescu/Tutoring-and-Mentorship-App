@@ -137,7 +137,8 @@ namespace app_login
                         .Select(s => new
                         {
                             ProgresStd = s.ProgresSTD ?? 0,
-                            Programare = (s.Programare >= SqlDateTime.MinValue.Value && s.Programare <= SqlDateTime.MaxValue.Value) ? s.Programare : SqlDateTime.MinValue.Value
+                            Programare = (s.Programare >= SqlDateTime.MinValue.Value && s.Programare <= SqlDateTime.MaxValue.Value) ? s.Programare : SqlDateTime.MinValue.Value,
+                            Mesaj = s.MessageStd ?? ""
                         })
                         .ToList();
 
@@ -150,7 +151,8 @@ namespace app_login
                         .Select(s => new
                         {
                             EvalProf = s.EVALProf ?? 0,
-                            Programare = (s.Programare >= SqlDateTime.MinValue.Value && s.Programare <= SqlDateTime.MaxValue.Value) ? s.Programare : SqlDateTime.MinValue.Value
+                            Programare = (s.Programare >= SqlDateTime.MinValue.Value && s.Programare <= SqlDateTime.MaxValue.Value) ? s.Programare : SqlDateTime.MinValue.Value,
+                            Mesaj = s.MessageProf ?? ""
                         })
                         .ToList();
 

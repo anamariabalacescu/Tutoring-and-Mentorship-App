@@ -28,7 +28,7 @@ namespace app_login
         private bool isMuted = false;
         private bool isImage1 = true;
 
-        string destinatarIpAddress = "192.168.79.42";
+        string destinatarIpAddress = "192.168.35.42";
         private int destinatarPortSend = 5000;
         private int destinatarPortReceive = 5001;
 

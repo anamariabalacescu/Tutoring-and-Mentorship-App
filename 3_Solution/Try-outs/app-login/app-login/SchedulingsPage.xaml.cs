@@ -48,27 +48,38 @@ namespace app_login
                 int idToFetch = gen.getStdID(id_usr);
                 var schedulings = tut.Schedulings
                     .Where(s => s.ID_Std == idToFetch)
-                    .ToList()  // Aduce datele în memorie
+                    .ToList()  // Bring the data into memory
                     .Select(s => new
                     {
-                        ProfessorName = tut.Profesors
-                            .Where(p => p.ID_Prof == s.ID_Prof)
-                            .Select(p => p.Nume + ' ' + p.Prenume)
-                            .FirstOrDefault(),
-                        StudentName = tut.Students
-                            .Where(st => st.ID_Std == s.ID_Std)
-                            .Select(st => st.Nume + ' ' + st.Prenume)
-                            .FirstOrDefault(),
-                        SubjectName = tut.Subjects
-                            .Where(sub => sub.ID_Subj == s.ID_Subj)
-                            .Select(sub => sub.nume)
-                            .FirstOrDefault(),
+                        ProfessorId = s.ID_Prof,
+                        StudentId = s.ID_Std,
+                        SubjectId = s.ID_Subj,
                         //Scheduled_Date = DateTime.Parse(s.Scheduled_Date)
                     })
                     .ToList();
 
+                var result = schedulings.Select(s => new
+                {
+                    ProfessorName = tut.Profesors
+                        .Where(p => p.ID_Prof == s.ProfessorId)
+                        .Select(p => p.Nume + " " + p.Prenume)  // Use double quotes for string concatenation
+                        .FirstOrDefault(),
+                    StudentName = tut.Students
+                        .Where(st => st.ID_Std == s.StudentId)
+                        .Select(st => st.Nume + " " + st.Prenume)  // Use double quotes for string concatenation
+                        .FirstOrDefault(),
+                    SubjectName = tut.Subjects
+                        .Where(sub => sub.ID_Subj == s.SubjectId)
+                        .Select(sub => sub.nume)
+                        .FirstOrDefault(),
+                    //Scheduled_Date = DateTime.Parse(s.Scheduled_Date)
+                })
+                .ToList();
 
-                myDataGrid.ItemsSource = schedulings;
+
+
+
+                myDataGrid.ItemsSource = result;
             }
             else if (usertype == "profesor")
             {

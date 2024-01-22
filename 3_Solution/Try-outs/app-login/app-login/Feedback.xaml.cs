@@ -100,7 +100,7 @@ namespace app_login
                     if (subj != null)
                     {
                         subj.ProgresSTD = selected_star_index;
-                        subj.Message = txt.Text;
+                        subj.MessageStd = txt.Text;
                         tut.SaveChanges();
                     }
                 }
@@ -114,6 +114,7 @@ namespace app_login
                     if (subj != null)
                     {
                         subj.EVALProf = selected_star_index;
+                        subj.MessageProf = txt.Text;
                         tut.SaveChanges();
                     }
                 }
