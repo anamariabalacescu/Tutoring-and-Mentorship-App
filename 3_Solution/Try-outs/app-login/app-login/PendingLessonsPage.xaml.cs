@@ -26,7 +26,7 @@ namespace app_login
         {
             this.id_usr = id_usr;
             InitializeComponent();
-
+            DataContext = this;
             LoadData();
         }
 
@@ -34,27 +34,70 @@ namespace app_login
         {
             GeneralCmds gen = new GeneralCmds();
 
-            int prog_id = gen.getProfID(id_usr);
+            string userType = gen.getUserType(id_usr);
+            if (userType == "profesor")
+            {
 
-            var sched = tut.Schedulings.Where(s => s.ID_Prof == prog_id && s.StatusProgramare == "Pending").ToList();
+                int prog_id = gen.getProfID(id_usr);
 
-            pending.ItemsSource = sched;
+                var sched = tut.Schedulings.Where(s => s.ID_Prof == prog_id & s.StatusProgramare == "pending").Take(10).ToList();
+
+                myDataGrid.ItemsSource = sched;
+            }
+            else
+            {
+
+                int prog_id = gen.getStdID(id_usr);
+
+                var sched = tut.Schedulings
+                    .Where(s => s.ID_Std == prog_id & s.StatusProgramare == "pending")
+                    .Take(10)
+                    .ToList();
+
+                myDataGrid.ItemsSource = sched;
+            }
         }
 
-        private void Change(object sender, MouseButtonEventArgs e)
-        {
-            if (pending.SelectedItem != null && pending.SelectedItem is Scheduling scheduling)
-            {
-                if (scheduling.StatusProgramare == "Denied")
-                {
-                    scheduling.StatusProgramare = "Accepted";
-                }
-                else if (scheduling.StatusProgramare == "Accepted")
-                {
-                    scheduling.StatusProgramare = "Denied";
-                }
 
-                pending.Items.Refresh();
+        private void doubleclick(object sender, MouseButtonEventArgs e)
+        {
+            if (myDataGrid.SelectedItem != null)
+            {
+                GeneralCmds gen = new GeneralCmds();
+                string userType = gen.getUserType(id_usr);
+                if (userType == "profesor")
+                {
+                    Scheduling selectedScheduling = (Scheduling)myDataGrid.SelectedItem;
+                    selectedScheduling.StatusProgramare = (selectedScheduling.StatusProgramare != "active") ? "active" : "pending";
+
+                    using (var tut = new TutoringEntities())
+                    {
+
+                        var userInDb = tut.Schedulings.FirstOrDefault(u => u.ID_Meeting == selectedScheduling.ID_Meeting);
+
+                        if (userInDb != null)
+                        {
+                            userInDb.StatusProgramare = selectedScheduling.StatusProgramare;
+                        }
+
+                        try
+                        {
+                            // Submit changes to the database
+                            tut.SaveChanges();
+
+                            // If no exception occurred, changes were successfully submitted
+                            Done d = new Done();
+                            d.SuccessMessage = "Status changed successfully!";
+                            d.Show();
+                        }
+                        catch (Exception ex)
+                        {
+                            // Handle exceptions if any occur during the submission
+                            Error er = new Error();
+                            er.ErrorMessage = "Error submitting status changes";
+                        }
+                    }
+                }
             }
         }
     }

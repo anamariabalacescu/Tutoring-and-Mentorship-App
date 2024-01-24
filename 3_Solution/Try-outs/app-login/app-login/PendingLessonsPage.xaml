@@ -9,6 +9,14 @@
       Title="PendingLessonsPage">
 
     <Grid>
-        <DataGrid x:Name="pending" Margin="10,10,10,10" MouseDoubleClick="Change"/>
+        <DataGrid x:Name="myDataGrid" AutoGenerateColumns="False" Background="Transparent" MouseDoubleClick="doubleclick">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Professor" Binding="{Binding ID_Prof}" />
+                <DataGridTextColumn Header="Student" Binding="{Binding ID_Std}" />
+                <DataGridTextColumn Header="Subject" Binding="{Binding ID_Subj}" />
+                <DataGridTextColumn Header="Scheduled Date" Binding="{Binding Programare}" />
+                <DataGridTextColumn Header="Status" Binding="{Binding StatusProgramare}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

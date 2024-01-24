@@ -78,7 +78,7 @@ namespace app_login
                         ID_Std = id_std,
                         ID_Subj = id_sub,
                         Programare = selectedDateTime,
-                        StatusProgramare = "Pending",
+                        StatusProgramare = "pending",
                         ProgresSTD = null,
                         EVALProf = null
                     };

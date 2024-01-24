@@ -89,7 +89,7 @@ namespace app_login
             List<string> list = new List<string>();
             if (type == "profesor") 
             {
-                var profs = tut.Schedulings.Where(s => s.ID_Prof == id_prof).ToList();
+                var profs = tut.Schedulings.Where(s => s.ID_Prof == id_prof && s.StatusProgramare=="active").ToList();
                 foreach (var idp in profs)
                 {
                     var studs = tut.Students.Where(pr => pr.ID_Std == idp.ID_Std).FirstOrDefault();
@@ -105,7 +105,7 @@ namespace app_login
             }
             else if(type == "student")
             {
-                var studs = tut.Schedulings.Where(s => s.ID_Std == id_std).ToList();
+                var studs = tut.Schedulings.Where(s => s.ID_Std == id_std && s.StatusProgramare == "active").ToList();
                 foreach (var idp in studs)
                 {
                     var profs = tut.Profesors.Where(pr => pr.ID_Prof == idp.ID_Prof).FirstOrDefault();

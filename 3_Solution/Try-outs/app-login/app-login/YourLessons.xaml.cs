@@ -77,6 +77,8 @@ namespace app_login
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            PendingLessonsPage pends = new PendingLessonsPage(id_user);
+            Lessons_cmd.Content = pends;
             GeneralCmds gen = new GeneralCmds();
             string tip = gen.getUserType(id_user);
             if(tip == "profesor")

@@ -47,7 +47,7 @@ namespace app_login
             {
                 int idToFetch = gen.getStdID(id_usr);
                 var schedulings = tut.Schedulings
-                    .Where(s => s.ID_Std == idToFetch)
+                    .Where(s => s.ID_Std == idToFetch && s.StatusProgramare == "active")
                     .ToList()  // Bring the data into memory
                     .Select(s => new
                     {
@@ -85,7 +85,7 @@ namespace app_login
             {
                 int idToFetch = gen.getProfID(id_usr);
                 var schedulings = tut.Schedulings
-                    .Where(s => s.ID_Prof == idToFetch)
+                    .Where(s => s.ID_Prof == idToFetch && s.StatusProgramare == "active")
                     .ToList()  // Aduce datele în memorie
                     .Select(s => new
                     {
